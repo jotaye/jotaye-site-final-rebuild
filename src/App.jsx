@@ -4,67 +4,23 @@ import flyer from "./assets/flayer-jotaye.jpg";
 import { FiMenu, FiX } from "react-icons/fi";
 import ServiceModal from "./components/ServiceModal";
 
-const services = [
-  {
-    title: "Plomería",
-    image: "./assets/plomería.jpg",
-    description: "Instalación y reparación de sistemas de agua y desagüe.",
-  },
-  {
-    title: "Electricidad",
-    image: "./assets/electricidad.jpg",
-    description: "Servicios eléctricos residenciales y comerciales.",
-  },
-  {
-    title: "Framing",
-    image: "./assets/framing.jpg",
-    description: "Estructuras de madera y metal para edificaciones.",
-  },
-  {
-    title: "Drywall",
-    image: "./assets/drywall.jpg",
-    description: "Instalación y reparación de paneles de yeso.",
-  },
-  {
-    title: "Pintura",
-    image: "./assets/pintura.jpg",
-    description: "Pintura interior y exterior con acabados profesionales.",
-  },
-  {
-    title: "Finish",
-    image: "./assets/finish.jpg",
-    description: "Detalles y terminaciones de alta calidad en interiores.",
-  },
-  {
-    title: "Baseboard",
-    image: "./assets/baseboard.jpg",
-    description: "Instalación de zócalos y molduras decorativas.",
-  },
-  {
-    title: "Demolición",
-    image: "./assets/demolición.jpg",
-    description: "Demoliciones seguras y limpias para remodelaciones.",
-  },
-  {
-    title: "Pisos",
-    image: "./assets/pisos.jpg",
-    description: "Instalación de pisos cerámicos, de madera, y más.",
-  },
-  {
-    title: "Baños",
-    image: "./assets/baños.jpg",
-    description: "Remodelación completa de baños.",
-  },
-  {
-    title: "Cocinas",
-    image: "./assets/cocinas.jpg",
-    description: "Diseño y remodelación de cocinas modernas.",
-  },
-];
-
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
+
+  const services = [
+    { title: "Plomería", image: "./assets/plomería.jpg" },
+    { title: "Electricidad", image: "./assets/electricidad.jpg" },
+    { title: "Framing", image: "./assets/framing.jpg" },
+    { title: "Drywall", image: "./assets/drywall.jpg" },
+    { title: "Pintura", image: "./assets/pintura.jpg" },
+    { title: "Finish", image: "./assets/finish.jpg" },
+    { title: "Baseboard", image: "./assets/baseboard.jpg" },
+    { title: "Demolición", image: "./assets/demolición.jpg" },
+    { title: "Pisos", image: "./assets/pisos.jpg" },
+    { title: "Baños", image: "./assets/baños.jpg" },
+    { title: "Cocinas", image: "./assets/cocinas.jpg" },
+  ];
 
   return (
     <div className="bg-white text-gray-800 font-sans">
@@ -109,34 +65,52 @@ export default function App() {
           <h3 className="text-3xl font-bold text-center mb-12">Nuestros Servicios</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {services.map((service, i) => (
-              <div key={i} className="bg-white rounded-xl shadow hover:shadow-md overflow-hidden transition-all">
+              <div
+                key={i}
+                className="bg-white rounded-xl shadow hover:shadow-md overflow-hidden transition-all cursor-pointer"
+                onClick={() => setSelectedService(service)}
+              >
                 <img src={service.image} alt={service.title} className="w-full h-48 object-cover" />
                 <div className="p-4 text-center">
                   <h4 className="text-lg font-semibold mb-2">{service.title}</h4>
-                  <button
-                    onClick={() => setSelectedService(service)}
-                    className="mt-2 text-sm text-orange-500 hover:underline"
-                  >
-                    Ver más
-                  </button>
+                  <p className="text-sm text-gray-600">Calidad garantizada y atención profesional.</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {selectedService && (
-          <ServiceModal
-            service={selectedService}
-            onClose={() => setSelectedService(null)}
-          />
-        )}
-
         <section className="py-16 text-center">
           <h3 className="text-3xl font-bold mb-8">Flyer Promocional</h3>
           <img src={flyer} alt="Flyer Promocional" className="w-full max-w-3xl mx-auto rounded-lg shadow-md" />
         </section>
+
+        <section className="py-16">
+          <h3 className="text-3xl font-bold text-center mb-8">Misión, Visión y Objetivos</h3>
+          <div className="grid md:grid-cols-3 gap-6 text-center">
+            <div className="bg-gray-100 p-6 rounded-lg shadow hover:shadow-md transition">
+              <h4 className="font-semibold text-xl mb-2">Misión</h4>
+              <p className="text-sm text-gray-600">Brindar servicios de construcción con altos estándares de calidad.</p>
+            </div>
+            <div className="bg-gray-100 p-6 rounded-lg shadow hover:shadow-md transition">
+              <h4 className="font-semibold text-xl mb-2">Visión</h4>
+              <p className="text-sm text-gray-600">Ser líderes en remodelación y construcción en South Florida.</p>
+            </div>
+            <div className="bg-gray-100 p-6 rounded-lg shadow hover:shadow-md transition">
+              <h4 className="font-semibold text-xl mb-2">Objetivos</h4>
+              <p className="text-sm text-gray-600">Cumplir expectativas, plazos y calidad en cada proyecto.</p>
+            </div>
+          </div>
+        </section>
       </main>
+
+      {/* Modal de Servicio */}
+      <ServiceModal
+        isOpen={!!selectedService}
+        onClose={() => setSelectedService(null)}
+        service={selectedService}
+      />
     </div>
   );
 }
+
