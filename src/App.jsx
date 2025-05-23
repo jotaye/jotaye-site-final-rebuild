@@ -1,26 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./assets/logo-header.png";
 import flyer from "./assets/flayer-jotaye.jpg";
 import { FiMenu, FiX } from "react-icons/fi";
+import { FaWhatsapp, FaInstagram, FaEnvelope, FaFacebook } from "react-icons/fa";
 import ServiceModal from "./components/ServiceModal";
 
 const services = [
-  { title: "Plomería", image: "./assets/plomería.jpg", description: "Instalaciones y reparaciones de tuberías, grifería y más." },
-  { title: "Electricidad", image: "./assets/electricidad.jpg", description: "Instalaciones eléctricas residenciales y comerciales seguras." },
-  { title: "Framing", image: "./assets/framing.jpg", description: "Estructuras sólidas para muros, techos y ampliaciones." },
-  { title: "Drywall", image: "./assets/drywall.jpg", description: "Montaje de paredes y cielos rasos en drywall con acabados finos." },
-  { title: "Pintura", image: "./assets/pintura.jpg", description: "Acabados profesionales en interiores y exteriores." },
-  { title: "Finish", image: "./assets/finish.jpg", description: "Detalles finales de alta calidad en construcción y remodelación." },
-  { title: "Baseboard", image: "./assets/baseboard.jpg", description: "Instalación de zócalos modernos y decorativos." },
-  { title: "Demolición", image: "./assets/demolición.jpg", description: "Remoción eficiente y segura de estructuras." },
+  { title: "Plomería", image: "./assets/plomería.jpg", description: "Instalaciones y reparaciones de tuberías." },
+  { title: "Electricidad", image: "./assets/electricidad.jpg", description: "Instalaciones eléctricas residenciales y comerciales." },
+  { title: "Framing", image: "./assets/framing.jpg", description: "Estructuras sólidas para muros y techos." },
+  { title: "Drywall", image: "./assets/drywall.jpg", description: "Paredes y cielos rasos con acabados finos." },
+  { title: "Pintura", image: "./assets/pintura.jpg", description: "Pintura profesional en interiores y exteriores." },
+  { title: "Finish", image: "./assets/finish.jpg", description: "Detalles finales de alta calidad." },
+  { title: "Baseboard", image: "./assets/baseboard.jpg", description: "Instalación de zócalos decorativos." },
+  { title: "Demolición", image: "./assets/demolición.jpg", description: "Remoción segura de estructuras." },
   { title: "Pisos", image: "./assets/pisos.jpg", description: "Instalación de baldosas, madera y vinilo." },
-  { title: "Baños", image: "./assets/baños.jpg", description: "Remodelación completa de baños modernos y funcionales." },
-  { title: "Cocinas", image: "./assets/cocinas.jpg", description: "Cocinas personalizadas y funcionales con diseño de vanguardia." },
+  { title: "Baños", image: "./assets/baños.jpg", description: "Remodelación de baños modernos." },
+  { title: "Cocinas", image: "./assets/cocinas.jpg", description: "Diseño y renovación de cocinas completas." },
 ];
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
+
+  // 🧠 Cargar el script de Tawk.to una vez
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://embed.tawk.to/682fe87c49aeec190d3b075e/1irti89vo";
+    script.async = true;
+    script.charset = "UTF-8";
+    script.setAttribute("crossorigin", "*");
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <div className="bg-white text-gray-800 font-sans">
@@ -56,14 +70,12 @@ export default function App() {
       </header>
 
       <main className="max-w-6xl mx-auto px-4 py-8">
-        {/* Bienvenida */}
         <section className="text-center py-16">
           <h2 className="text-4xl font-bold mb-4">Construcción y Remodelación Profesional</h2>
-          <p className="text-gray-600 mb-6">Transformamos espacios con calidad, puntualidad y compromiso.</p>
+          <p className="text-gray-600 mb-6">Transformamos espacios con calidad y compromiso.</p>
           <a href="#formulario" className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full">Solicita tu cotización</a>
         </section>
 
-        {/* Servicios */}
         <section id="servicios" className="py-16 bg-gray-50">
           <h3 className="text-3xl font-bold text-center mb-12">Nuestros Servicios</h3>
           <div className="grid md:grid-cols-3 gap-6">
@@ -79,18 +91,15 @@ export default function App() {
           </div>
         </section>
 
-        {/* Modal Servicio */}
         {selectedService && (
           <ServiceModal service={selectedService} onClose={() => setSelectedService(null)} />
         )}
 
-        {/* Flyer */}
         <section className="py-16 text-center">
           <h3 className="text-3xl font-bold mb-8">Flyer Promocional</h3>
           <img src={flyer} alt="Flyer" className="max-w-3xl mx-auto shadow rounded-lg" />
         </section>
 
-        {/* Formulario */}
         <section id="formulario" className="py-16 bg-gray-100">
           <h3 className="text-3xl font-bold text-center mb-8">Solicita tu Cotización</h3>
           <form action="https://formsubmit.co/jotayegroupllc@gmail.com" method="POST" className="max-w-xl mx-auto space-y-4">
@@ -102,6 +111,18 @@ export default function App() {
           </form>
         </section>
       </main>
+
+      <footer id="contacto" className="bg-[#1e293b] text-white py-6">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-sm">
+          <p>&copy; {new Date().getFullYear()} Jotaye Group LLC</p>
+          <div className="flex gap-4 mt-2 md:mt-0 text-lg">
+            <a href="https://wa.me/13054172681" className="hover:text-green-400"><FaWhatsapp /></a>
+            <a href="mailto:jotayegroupllc@gmail.com" className="hover:text-blue-400"><FaEnvelope /></a>
+            <a href="https://instagram.com" className="hover:text-pink-400"><FaInstagram /></a>
+            <a href="https://facebook.com" className="hover:text-blue-500"><FaFacebook /></a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
