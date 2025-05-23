@@ -4,6 +4,7 @@ import flyer from "./assets/flayer-jotaye.jpg";
 import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
 import ServiceModal from "./components/ServiceModal";
+import ContactForm from "./components/ContactForm";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
