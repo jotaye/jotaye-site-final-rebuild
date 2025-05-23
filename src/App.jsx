@@ -1,6 +1,9 @@
 
 import React from "react";
 import Services from "./Services";
+import BookForm from "./BookForm";
+import BudgetEstimator from "./BudgetEstimator";
+import TawkChat from "./TawkChat";
 
 export default function App() {
   return (
@@ -10,28 +13,36 @@ export default function App() {
           <h1 className="text-xl font-bold">Jotaye Group LLC</h1>
           <nav className="space-x-4 hidden md:block">
             <a href="#servicios" className="hover:text-orange-400 transition">Servicios</a>
-            <a href="https://wa.me/13054172681" className="hover:text-green-400 transition">WhatsApp</a>
+            <a href="#presupuesto" className="hover:text-orange-400 transition">Estimador</a>
+            <a href="#reservas" className="hover:text-orange-400 transition">Reservas</a>
+            <a href="https://wa.me/13054172681" className="hover:text-green-400">WhatsApp</a>
           </nav>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 py-16 text-center">
-        <h2 className="text-4xl font-bold mb-4 text-orange-600">Bienvenido a Jotaye Group LLC</h2>
-        <p className="text-gray-700 text-lg mb-6">
-          Servicios de construcción y remodelación en South Florida.
-        </p>
-        <a href="https://wa.me/13054172681" className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full">
-          Contáctanos por WhatsApp
-        </a>
-      </main>
+      <main className="max-w-6xl mx-auto px-4 py-8">
+        <section className="text-center py-16">
+          <h2 className="text-4xl font-bold mb-4 text-orange-600">Bienvenido a Jotaye Group LLC</h2>
+          <p className="text-gray-700 text-lg mb-6">
+            Soluciones de construcción y remodelación de alta calidad en South Florida.
+          </p>
+          <a href="https://wa.me/13054172681" className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full">
+            Contáctanos por WhatsApp
+          </a>
+        </section>
 
-      <Services />
+        <Services />
+        <BudgetEstimator />
+        <BookForm />
+      </main>
 
       <footer className="bg-[#1e293b] text-white py-6 mt-12">
         <div className="max-w-6xl mx-auto px-4 text-sm text-center">
           © {new Date().getFullYear()} Jotaye Group LLC. Todos los derechos reservados.
         </div>
       </footer>
+
+      <TawkChat />
     </div>
   );
 }
