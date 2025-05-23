@@ -1,62 +1,29 @@
 import React, { useState } from "react";
 
-// Lista de servicios con imágenes y descripciones
+import plomeriaImg from "./assets/plomería.jpg";
+import electricidadImg from "./assets/electricidad.jpg";
+import framingImg from "./assets/framing.jpg";
+import drywallImg from "./assets/drywall.jpg";
+import pinturaImg from "./assets/pintura.jpg";
+import finishImg from "./assets/finish.jpg";
+import baseboardImg from "./assets/baseboard.jpg";
+import demolicionImg from "./assets/demolición.jpg";
+import pisosImg from "./assets/pisos.jpg";
+import banosImg from "./assets/baños.jpg";
+import cocinasImg from "./assets/cocinas.jpg";
+
 const serviceList = [
-  {
-    title: "Plomería",
-    image: "/assets/plomería.jpg",
-    description: "Instalaciones, reparaciones y mantenimiento de sistemas hidráulicos y sanitarios.",
-  },
-  {
-    title: "Electricidad",
-    image: "/assets/electricidad.jpg",
-    description: "Instalación y mantenimiento de redes eléctricas para proyectos residenciales y comerciales.",
-  },
-  {
-    title: "Framing",
-    image: "/assets/framing.jpg",
-    description: "Estructuración profesional con materiales resistentes para soporte de edificaciones.",
-  },
-  {
-    title: "Drywall",
-    image: "/assets/drywall.jpg",
-    description: "Montaje de tabiques y techos con acabados lisos y duraderos.",
-  },
-  {
-    title: "Pintura",
-    image: "/assets/pintura.jpg",
-    description: "Acabados decorativos y protectores para interiores y exteriores.",
-  },
-  {
-    title: "Finish",
-    image: "/assets/finish.jpg",
-    description: "Detalles finales y remates estéticos de calidad superior.",
-  },
-  {
-    title: "Baseboard",
-    image: "/assets/baseboard.jpg",
-    description: "Instalación de molduras de zócalo para un acabado elegante.",
-  },
-  {
-    title: "Demolición",
-    image: "/assets/demolición.jpg",
-    description: "Remoción segura y eficiente de estructuras o elementos interiores.",
-  },
-  {
-    title: "Pisos",
-    image: "/assets/pisos.jpg",
-    description: "Colocación de pisos cerámicos, vinílicos o de madera.",
-  },
-  {
-    title: "Baños",
-    image: "/assets/baños.jpg",
-    description: "Diseño y remodelación integral de baños modernos y funcionales.",
-  },
-  {
-    title: "Cocinas",
-    image: "/assets/cocinas.jpg",
-    description: "Renovación de cocinas con diseño personalizado y acabados premium.",
-  },
+  { title: "Plomería", image: plomeriaImg, description: "Instalaciones y mantenimiento de sistemas hidráulicos." },
+  { title: "Electricidad", image: electricidadImg, description: "Redes eléctricas confiables y seguras." },
+  { title: "Framing", image: framingImg, description: "Estructuras firmes y funcionales." },
+  { title: "Drywall", image: drywallImg, description: "Instalación profesional de muros y cielos rasos." },
+  { title: "Pintura", image: pinturaImg, description: "Acabados duraderos y estéticos." },
+  { title: "Finish", image: finishImg, description: "Detalles finales que marcan la diferencia." },
+  { title: "Baseboard", image: baseboardImg, description: "Zócalos decorativos y de protección." },
+  { title: "Demolición", image: demolicionImg, description: "Demolición eficiente y segura." },
+  { title: "Pisos", image: pisosImg, description: "Instalación de pisos de todo tipo." },
+  { title: "Baños", image: banosImg, description: "Remodelación completa de baños." },
+  { title: "Cocinas", image: cocinasImg, description: "Cocinas personalizadas y funcionales." }
 ];
 
 export default function Services() {
@@ -114,4 +81,3 @@ export default function Services() {
     </section>
   );
 }
-
