@@ -1,56 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import ServiceModal from "./components/ServiceModal";
+import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook } from "react-icons/fa";
+import { FiMenu, FiX } from "react-icons/fi";
+
+// Importación de imágenes
 import logo from "./assets/logo-header.png";
 import flyer from "./assets/flayer-jotaye.jpg";
-import { FiMenu, FiX } from "react-icons/fi";
-import { FaWhatsapp, FaInstagram, FaEnvelope, FaFacebook } from "react-icons/fa";
-import ServiceModal from "./components/ServiceModal";
-
-const services = [
-  { title: "Plomería", image: "./assets/plomería.jpg", description: "Instalaciones y reparaciones de tuberías." },
-  { title: "Electricidad", image: "./assets/electricidad.jpg", description: "Instalaciones eléctricas residenciales y comerciales." },
-  { title: "Framing", image: "./assets/framing.jpg", description: "Estructuras sólidas para muros y techos." },
-  { title: "Drywall", image: "./assets/drywall.jpg", description: "Paredes y cielos rasos con acabados finos." },
-  { title: "Pintura", image: "./assets/pintura.jpg", description: "Pintura profesional en interiores y exteriores." },
-  { title: "Finish", image: "./assets/finish.jpg", description: "Detalles finales de alta calidad." },
-  { title: "Baseboard", image: "./assets/baseboard.jpg", description: "Instalación de zócalos decorativos." },
-  { title: "Demolición", image: "./assets/demolición.jpg", description: "Remoción segura de estructuras." },
-  { title: "Pisos", image: "./assets/pisos.jpg", description: "Instalación de baldosas, madera y vinilo." },
-  { title: "Baños", image: "./assets/baños.jpg", description: "Remodelación de baños modernos." },
-  { title: "Cocinas", image: "./assets/cocinas.jpg", description: "Diseño y renovación de cocinas completas." },
-];
+import plumbingImg from "./assets/plomería.jpg";
+import electricImg from "./assets/electricidad.jpg";
+import framingImg from "./assets/framing.jpg";
+import drywallImg from "./assets/drywall.jpg";
+import paintingImg from "./assets/pintura.jpg";
+import finishImg from "./assets/finish.jpg";
+import baseboardImg from "./assets/baseboard.jpg";
+import demolitionImg from "./assets/demolición.jpg";
+import flooringImg from "./assets/pisos.jpg";
+import bathroomImg from "./assets/baños.jpg";
+import kitchenImg from "./assets/cocinas.jpg";
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
 
-  // 🧠 Cargar el script de Tawk.to una vez
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://embed.tawk.to/682fe87c49aeec190d3b075e/1irti89vo";
-    script.async = true;
-    script.charset = "UTF-8";
-    script.setAttribute("crossorigin", "*");
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  const services = [
+    { title: "Plomería", image: plumbingImg, description: "Instalaciones y reparaciones de tuberías." },
+    { title: "Electricidad", image: electricImg, description: "Instalaciones eléctricas residenciales y comerciales." },
+    { title: "Framing", image: framingImg, description: "Estructuras sólidas para muros y techos." },
+    { title: "Drywall", image: drywallImg, description: "Instalación y reparación de paneles de yeso." },
+    { title: "Pintura", image: paintingImg, description: "Pintura interior y exterior con acabados profesionales." },
+    { title: "Finish", image: finishImg, description: "Detalles finales para un acabado perfecto." },
+    { title: "Baseboard", image: baseboardImg, description: "Instalación de zócalos decorativos." },
+    { title: "Demolición", image: demolitionImg, description: "Remoción segura y eficiente de estructuras." },
+    { title: "Pisos", image: flooringImg, description: "Instalación de pisos de madera, cerámica y más." },
+    { title: "Baños", image: bathroomImg, description: "Remodelación y construcción de baños modernos." },
+    { title: "Cocinas", image: kitchenImg, description: "Diseño e instalación de cocinas funcionales." }
+  ];
 
   return (
     <div className="bg-white text-gray-800 font-sans">
       {/* Header */}
-      <header className="bg-[#1e293b] text-white sticky top-0 z-50 shadow">
+      <header className="bg-[#1e293b] text-white shadow sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <img src={logo} alt="Logo" className="h-10 bg-white p-1 rounded" />
             <h1 className="text-lg font-bold">Jotaye Group LLC</h1>
           </div>
           <nav className="space-x-4 hidden md:block">
-            <a href="#servicios" className="hover:text-orange-400">Servicios</a>
-            <a href="#formulario" className="hover:text-orange-400">Cotización</a>
-            <a href="#galeria" className="hover:text-orange-400">Galería</a>
-            <a href="#faq" className="hover:text-orange-400">FAQ</a>
-            <a href="#contacto" className="hover:text-orange-400">Contacto</a>
+            <a href="#servicios" className="hover:text-orange-400 transition">Servicios</a>
+            <a href="#presupuesto" className="hover:text-orange-400 transition">Estimador</a>
+            <a href="#reservas" className="hover:text-orange-400 transition">Reservas</a>
+            <a href="#faq" className="hover:text-orange-400 transition">FAQ</a>
           </nav>
           <div className="md:hidden">
             <button onClick={() => setMenuOpen(!menuOpen)}>
@@ -61,175 +60,54 @@ export default function App() {
         {menuOpen && (
           <div className="md:hidden px-4 pb-4 space-y-2">
             <a href="#servicios" className="block text-orange-300">Servicios</a>
-            <a href="#formulario" className="block text-orange-300">Cotización</a>
-            <a href="#galeria" className="block text-orange-300">Galería</a>
+            <a href="#presupuesto" className="block text-orange-300">Estimador</a>
+            <a href="#reservas" className="block text-orange-300">Reservas</a>
             <a href="#faq" className="block text-orange-300">FAQ</a>
-            <a href="#contacto" className="block text-orange-300">Contacto</a>
           </div>
         )}
       </header>
 
+      {/* Servicios */}
       <main className="max-w-6xl mx-auto px-4 py-8">
-        <section className="text-center py-16">
-          <h2 className="text-4xl font-bold mb-4">Construcción y Remodelación Profesional</h2>
-          <p className="text-gray-600 mb-6">Transformamos espacios con calidad y compromiso.</p>
-          <a href="#formulario" className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full">Solicita tu cotización</a>
-        </section>
-
-        <section id="servicios" className="py-16 bg-gray-50">
+        <section id="servicios" className="py-16">
           <h3 className="text-3xl font-bold text-center mb-12">Nuestros Servicios</h3>
           <div className="grid md:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <div key={index} className="bg-white rounded-xl shadow hover:shadow-md overflow-hidden transition-all cursor-pointer" onClick={() => setSelectedService(service)}>
+            {services.map((service, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-xl shadow hover:shadow-md overflow-hidden transition-all cursor-pointer"
+                onClick={() => setSelectedService(service)}
+              >
                 <img src={service.image} alt={service.title} className="w-full h-48 object-cover" />
                 <div className="p-4">
                   <h4 className="text-lg font-semibold text-center mb-2">{service.title}</h4>
-                  <p className="text-sm text-gray-600 text-center">Haz clic para más información</p>
+                  <p className="text-sm text-gray-600 text-center">Haz clic para más información.</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
+        {/* Modal */}
         {selectedService && (
-          <ServiceModal service={selectedService} onClose={() => setSelectedService(null)} />
+          <ServiceModal
+            service={selectedService}
+            onClose={() => setSelectedService(null)}
+          />
         )}
 
+        {/* Flyer */}
         <section className="py-16 text-center">
           <h3 className="text-3xl font-bold mb-8">Flyer Promocional</h3>
-          <img src={flyer} alt="Flyer" className="max-w-3xl mx-auto shadow rounded-lg" />
-        </section>
-
-        <section id="formulario" className="py-16 bg-gray-100">
-          <h3 className="text-3xl font-bold text-center mb-8">Solicita tu Cotización</h3>
-          <form action="https://formsubmit.co/jotayegroupllc@gmail.com" method="POST" className="max-w-xl mx-auto space-y-4">
-            <input type="text" name="nombre" required className="w-full border px-3 py-2 rounded" placeholder="Nombre" />
-            <input type="email" name="email" required className="w-full border px-3 py-2 rounded" placeholder="Correo" />
-            <input type="tel" name="telefono" className="w-full border px-3 py-2 rounded" placeholder="Teléfono" />
-            <textarea name="mensaje" required rows="4" className="w-full border px-3 py-2 rounded" placeholder="Describe tu proyecto o necesidad..."></textarea>
-            <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition">Enviar solicitud</button>
-          </form>
+          <img src={flyer} alt="Flyer Promocional" className="w-full max-w-3xl mx-auto rounded-lg shadow-md" />
         </section>
       </main>
 
-      import React, { useEffect, useState } from "react";
-import logo from "./assets/logo-header.png";
-import flyer from "./assets/flayer-jotaye.jpg";
-import { FiMenu, FiX } from "react-icons/fi";
-import { FaWhatsapp, FaInstagram, FaEnvelope, FaFacebook } from "react-icons/fa";
-import ServiceModal from "./components/ServiceModal";
-
-const services = [
-  { title: "Plomería", image: "./assets/plomería.jpg", description: "Instalaciones y reparaciones de tuberías." },
-  { title: "Electricidad", image: "./assets/electricidad.jpg", description: "Instalaciones eléctricas residenciales y comerciales." },
-  { title: "Framing", image: "./assets/framing.jpg", description: "Estructuras sólidas para muros y techos." },
-  { title: "Drywall", image: "./assets/drywall.jpg", description: "Paredes y cielos rasos con acabados finos." },
-  { title: "Pintura", image: "./assets/pintura.jpg", description: "Pintura profesional en interiores y exteriores." },
-  { title: "Finish", image: "./assets/finish.jpg", description: "Detalles finales de alta calidad." },
-  { title: "Baseboard", image: "./assets/baseboard.jpg", description: "Instalación de zócalos decorativos." },
-  { title: "Demolición", image: "./assets/demolición.jpg", description: "Remoción segura de estructuras." },
-  { title: "Pisos", image: "./assets/pisos.jpg", description: "Instalación de baldosas, madera y vinilo." },
-  { title: "Baños", image: "./assets/baños.jpg", description: "Remodelación de baños modernos." },
-  { title: "Cocinas", image: "./assets/cocinas.jpg", description: "Diseño y renovación de cocinas completas." },
-];
-
-export default function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState(null);
-
-  // 🧠 Cargar el script de Tawk.to una vez
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://embed.tawk.to/682fe87c49aeec190d3b075e/1irti89vo";
-    script.async = true;
-    script.charset = "UTF-8";
-    script.setAttribute("crossorigin", "*");
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  return (
-    <div className="bg-white text-gray-800 font-sans">
-      {/* Header */}
-      <header className="bg-[#1e293b] text-white sticky top-0 z-50 shadow">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <img src={logo} alt="Logo" className="h-10 bg-white p-1 rounded" />
-            <h1 className="text-lg font-bold">Jotaye Group LLC</h1>
-          </div>
-          <nav className="space-x-4 hidden md:block">
-            <a href="#servicios" className="hover:text-orange-400">Servicios</a>
-            <a href="#formulario" className="hover:text-orange-400">Cotización</a>
-            <a href="#galeria" className="hover:text-orange-400">Galería</a>
-            <a href="#faq" className="hover:text-orange-400">FAQ</a>
-            <a href="#contacto" className="hover:text-orange-400">Contacto</a>
-          </nav>
-          <div className="md:hidden">
-            <button onClick={() => setMenuOpen(!menuOpen)}>
-              {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-            </button>
-          </div>
-        </div>
-        {menuOpen && (
-          <div className="md:hidden px-4 pb-4 space-y-2">
-            <a href="#servicios" className="block text-orange-300">Servicios</a>
-            <a href="#formulario" className="block text-orange-300">Cotización</a>
-            <a href="#galeria" className="block text-orange-300">Galería</a>
-            <a href="#faq" className="block text-orange-300">FAQ</a>
-            <a href="#contacto" className="block text-orange-300">Contacto</a>
-          </div>
-        )}
-      </header>
-
-      <main className="max-w-6xl mx-auto px-4 py-8">
-        <section className="text-center py-16">
-          <h2 className="text-4xl font-bold mb-4">Construcción y Remodelación Profesional</h2>
-          <p className="text-gray-600 mb-6">Transformamos espacios con calidad y compromiso.</p>
-          <a href="#formulario" className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full">Solicita tu cotización</a>
-        </section>
-
-        <section id="servicios" className="py-16 bg-gray-50">
-          <h3 className="text-3xl font-bold text-center mb-12">Nuestros Servicios</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <div key={index} className="bg-white rounded-xl shadow hover:shadow-md overflow-hidden transition-all cursor-pointer" onClick={() => setSelectedService(service)}>
-                <img src={service.image} alt={service.title} className="w-full h-48 object-cover" />
-                <div className="p-4">
-                  <h4 className="text-lg font-semibold text-center mb-2">{service.title}</h4>
-                  <p className="text-sm text-gray-600 text-center">Haz clic para más información</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {selectedService && (
-          <ServiceModal service={selectedService} onClose={() => setSelectedService(null)} />
-        )}
-
-        <section className="py-16 text-center">
-          <h3 className="text-3xl font-bold mb-8">Flyer Promocional</h3>
-          <img src={flyer} alt="Flyer" className="max-w-3xl mx-auto shadow rounded-lg" />
-        </section>
-
-        <section id="formulario" className="py-16 bg-gray-100">
-          <h3 className="text-3xl font-bold text-center mb-8">Solicita tu Cotización</h3>
-          <form action="https://formsubmit.co/jotayegroupllc@gmail.com" method="POST" className="max-w-xl mx-auto space-y-4">
-            <input type="text" name="nombre" required className="w-full border px-3 py-2 rounded" placeholder="Nombre" />
-            <input type="email" name="email" required className="w-full border px-3 py-2 rounded" placeholder="Correo" />
-            <input type="tel" name="telefono" className="w-full border px-3 py-2 rounded" placeholder="Teléfono" />
-            <textarea name="mensaje" required rows="4" className="w-full border px-3 py-2 rounded" placeholder="Describe tu proyecto o necesidad..."></textarea>
-            <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition">Enviar solicitud</button>
-          </form>
-        </section>
-      </main>
-
-      <footer id="contacto" className="bg-[#1e293b] text-white py-6">
+      {/* Footer */}
+      <footer className="bg-[#1e293b] text-white py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-sm">
           <p>&copy; {new Date().getFullYear()} Jotaye Group LLC</p>
-          <div className="flex gap-4 mt-2 md:mt-0 text-lg">
+          <div className="flex gap-4 mt-2 md:mt-0">
             <a href="https://wa.me/13054172681" className="hover:text-green-400"><FaWhatsapp /></a>
             <a href="mailto:jotayegroupllc@gmail.com" className="hover:text-blue-400"><FaEnvelope /></a>
             <a href="https://instagram.com" className="hover:text-pink-400"><FaInstagram /></a>
@@ -237,10 +115,23 @@ export default function App() {
           </div>
         </div>
       </footer>
-    </div>
-  );
-}
 
+      {/* Tawk.to Chat */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+          var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+          (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/682fe87c49aeec190d3b075e/1irti89vo';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+          })();
+        `,
+        }}
+      />
     </div>
   );
 }
