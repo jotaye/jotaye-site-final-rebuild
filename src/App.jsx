@@ -6,6 +6,19 @@ import { FiMenu, FiX } from "react-icons/fi";
 import ServiceModal from "./components/ServiceModal";
 import ContactForm from "./components/ContactForm";
 
+// Importación correcta de imágenes de servicios
+import plomeriaImg from "./assets/plomería.jpg";
+import electricidadImg from "./assets/electricidad.jpg";
+import framingImg from "./assets/framing.jpg";
+import drywallImg from "./assets/drywall.jpg";
+import pinturaImg from "./assets/pintura.jpg";
+import finishImg from "./assets/finish.jpg";
+import baseboardImg from "./assets/baseboard.jpg";
+import demolicionImg from "./assets/demolición.jpg";
+import pisosImg from "./assets/pisos.jpg";
+import banosImg from "./assets/baños.jpg";
+import cocinasImg from "./assets/cocinas.jpg";
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
@@ -20,17 +33,17 @@ function App() {
   }, []);
 
   const services = [
-    { title: "Plomería", image: "./assets/plomería.jpg", description: "Instalaciones y reparaciones de tuberías." },
-    { title: "Electricidad", image: "./assets/electricidad.jpg", description: "Instalaciones eléctricas residenciales y comerciales." },
-    { title: "Framing", image: "./assets/framing.jpg", description: "Estructuras sólidas para muros y techos." },
-    { title: "Drywall", image: "./assets/drywall.jpg", description: "Instalación y acabado de paneles de yeso." },
-    { title: "Pintura", image: "./assets/pintura.jpg", description: "Aplicación de pintura interior y exterior." },
-    { title: "Finish", image: "./assets/finish.jpg", description: "Acabados profesionales para detalles finos." },
-    { title: "Baseboard", image: "./assets/baseboard.jpg", description: "Instalación de zócalos decorativos." },
-    { title: "Demolición", image: "./assets/demolición.jpg", description: "Demoliciones controladas y limpias." },
-    { title: "Pisos", image: "./assets/pisos.jpg", description: "Instalación de cerámica, porcelanato y vinil." },
-    { title: "Baños", image: "./assets/baños.jpg", description: "Remodelación completa de baños." },
-    { title: "Cocinas", image: "./assets/cocinas.jpg", description: "Diseño e instalación de cocinas modernas." },
+    { title: "Plomería", image: plomeriaImg, description: "Instalaciones y reparaciones de tuberías." },
+    { title: "Electricidad", image: electricidadImg, description: "Instalaciones eléctricas residenciales y comerciales." },
+    { title: "Framing", image: framingImg, description: "Estructuras sólidas para muros y techos." },
+    { title: "Drywall", image: drywallImg, description: "Instalación y acabado de paneles de yeso." },
+    { title: "Pintura", image: pinturaImg, description: "Aplicación de pintura interior y exterior." },
+    { title: "Finish", image: finishImg, description: "Acabados profesionales para detalles finos." },
+    { title: "Baseboard", image: baseboardImg, description: "Instalación de zócalos decorativos." },
+    { title: "Demolición", image: demolicionImg, description: "Demoliciones controladas y limpias." },
+    { title: "Pisos", image: pisosImg, description: "Instalación de cerámica, porcelanato y vinil." },
+    { title: "Baños", image: banosImg, description: "Remodelación completa de baños." },
+    { title: "Cocinas", image: cocinasImg, description: "Diseño e instalación de cocinas modernas." },
   ];
 
   return (
@@ -108,6 +121,11 @@ function App() {
               <p className="text-sm text-gray-600">Cumplir expectativas, plazos y calidad en cada proyecto.</p>
             </div>
           </div>
+        </section>
+
+        <section className="py-16" id="reservas">
+          <h3 className="text-3xl font-bold text-center mb-8">Reserva una Cotización</h3>
+          <ContactForm />
         </section>
       </main>
 
