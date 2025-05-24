@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+// App.jsx actualizado
+import React, { useState, useEffect } from "react";
 import logo from "./assets/logo-header.png";
 import flyer from "./assets/flayer-jotaye.jpg";
-import { FiMenu, FiX } from "react-icons/fi";
 import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook } from "react-icons/fa";
+import { FiMenu, FiX } from "react-icons/fi";
 import ServiceModal from "./components/ServiceModal";
 import ContactForm from "./components/ContactForm";
 import Gallery from "./components/Gallery";
+import Estimator from "./components/Estimator";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -44,9 +46,8 @@ function App() {
           </div>
           <nav className="space-x-4 hidden md:block">
             <a href="#servicios" className="hover:text-orange-400 transition">Servicios</a>
-            <a href="#galeria" className="hover:text-orange-400 transition">Galería</a>
             <a href="#presupuesto" className="hover:text-orange-400 transition">Estimador</a>
-            <a href="#testimonios" className="hover:text-orange-400 transition">Testimonios</a>
+            <a href="#galeria" className="hover:text-orange-400 transition">Galería</a>
             <a href="#reservas" className="hover:text-orange-400 transition">Reservas</a>
             <a href="#faq" className="hover:text-orange-400 transition">FAQ</a>
           </nav>
@@ -59,9 +60,8 @@ function App() {
         {menuOpen && (
           <div className="md:hidden px-4 pb-4 space-y-2">
             <a href="#servicios" className="block text-orange-300">Servicios</a>
-            <a href="#galeria" className="block text-orange-300">Galería</a>
             <a href="#presupuesto" className="block text-orange-300">Estimador</a>
-            <a href="#testimonios" className="block text-orange-300">Testimonios</a>
+            <a href="#galeria" className="block text-orange-300">Galería</a>
             <a href="#reservas" className="block text-orange-300">Reservas</a>
             <a href="#faq" className="block text-orange-300">FAQ</a>
           </div>
@@ -79,11 +79,7 @@ function App() {
           <h3 className="text-3xl font-bold text-center mb-12">Nuestros Servicios</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {services.map((service, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-xl shadow hover:shadow-md overflow-hidden transition-all cursor-pointer"
-                onClick={() => setSelectedService(service)}
-              >
+              <div key={i} className="bg-white rounded-xl shadow hover:shadow-md overflow-hidden transition-all cursor-pointer" onClick={() => setSelectedService(service)}>
                 <img src={service.image} alt={service.title} className="w-full h-48 object-cover" />
                 <div className="p-4 text-center">
                   <h4 className="text-lg font-semibold mb-1">{service.title}</h4>
@@ -94,11 +90,16 @@ function App() {
           </div>
         </section>
 
-        <Gallery />
+        <section className="py-16 bg-white" id="presupuesto">
+          <Estimator />
+        </section>
 
-        <section className="py-16 text-center">
-          <h3 className="text-3xl font-bold mb-8">Flyer Promocional</h3>
-          <img src={flyer} alt="Flyer Promocional" className="w-full max-w-3xl mx-auto rounded-lg shadow-md" />
+        <section className="py-16 bg-gray-50" id="galeria">
+          <Gallery />
+        </section>
+
+        <section className="py-16" id="reservas">
+          <ContactForm />
         </section>
 
         <section className="py-16" id="faq">
