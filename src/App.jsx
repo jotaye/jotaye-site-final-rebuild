@@ -5,6 +5,7 @@ import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook } from "react-icons/fa"
 import { FiMenu, FiX } from "react-icons/fi";
 import ServiceModal from "./components/ServiceModal";
 import ContactForm from "./components/ContactForm";
+import Estimator from "./components/Estimator";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -87,27 +88,31 @@ function App() {
           </div>
         </section>
 
+        <section id="presupuesto" className="py-16">
+          <Estimator />
+        </section>
+
         <section className="py-16 text-center">
           <h3 className="text-3xl font-bold mb-8">Flyer Promocional</h3>
           <img src={flyer} alt="Flyer Promocional" className="w-full max-w-3xl mx-auto rounded-lg shadow-md" />
         </section>
 
-        <section id="reservas" className="py-16 bg-gray-100">
+        <section id="reservas" className="py-16">
           <ContactForm />
         </section>
 
         <section className="py-16" id="faq">
           <h3 className="text-3xl font-bold text-center mb-8">Misión, Visión y Objetivos</h3>
           <div className="grid md:grid-cols-3 gap-6 text-center">
-            <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+            <div className="bg-gray-100 p-6 rounded-lg shadow hover:shadow-md transition">
               <h4 className="font-semibold text-xl mb-2">Misión</h4>
               <p className="text-sm text-gray-600">Brindar servicios de construcción con altos estándares de calidad.</p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+            <div className="bg-gray-100 p-6 rounded-lg shadow hover:shadow-md transition">
               <h4 className="font-semibold text-xl mb-2">Visión</h4>
               <p className="text-sm text-gray-600">Ser líderes en remodelación y construcción en South Florida.</p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+            <div className="bg-gray-100 p-6 rounded-lg shadow hover:shadow-md transition">
               <h4 className="font-semibold text-xl mb-2">Objetivos</h4>
               <p className="text-sm text-gray-600">Cumplir expectativas, plazos y calidad en cada proyecto.</p>
             </div>
@@ -138,4 +143,3 @@ function App() {
 }
 
 export default App;
-
