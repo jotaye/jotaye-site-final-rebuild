@@ -6,19 +6,6 @@ import { FiMenu, FiX } from "react-icons/fi";
 import ServiceModal from "./components/ServiceModal";
 import ContactForm from "./components/ContactForm";
 
-// Importación correcta de imágenes de servicios
-import plomeriaImg from "./assets/plomería.jpg";
-import electricidadImg from "./assets/electricidad.jpg";
-import framingImg from "./assets/framing.jpg";
-import drywallImg from "./assets/drywall.jpg";
-import pinturaImg from "./assets/pintura.jpg";
-import finishImg from "./assets/finish.jpg";
-import baseboardImg from "./assets/baseboard.jpg";
-import demolicionImg from "./assets/demolición.jpg";
-import pisosImg from "./assets/pisos.jpg";
-import banosImg from "./assets/baños.jpg";
-import cocinasImg from "./assets/cocinas.jpg";
-
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
@@ -33,21 +20,22 @@ function App() {
   }, []);
 
   const services = [
-    { title: "Plomería", image: plomeriaImg, description: "Instalaciones y reparaciones de tuberías." },
-    { title: "Electricidad", image: electricidadImg, description: "Instalaciones eléctricas residenciales y comerciales." },
-    { title: "Framing", image: framingImg, description: "Estructuras sólidas para muros y techos." },
-    { title: "Drywall", image: drywallImg, description: "Instalación y acabado de paneles de yeso." },
-    { title: "Pintura", image: pinturaImg, description: "Aplicación de pintura interior y exterior." },
-    { title: "Finish", image: finishImg, description: "Acabados profesionales para detalles finos." },
-    { title: "Baseboard", image: baseboardImg, description: "Instalación de zócalos decorativos." },
-    { title: "Demolición", image: demolicionImg, description: "Demoliciones controladas y limpias." },
-    { title: "Pisos", image: pisosImg, description: "Instalación de cerámica, porcelanato y vinil." },
-    { title: "Baños", image: banosImg, description: "Remodelación completa de baños." },
-    { title: "Cocinas", image: cocinasImg, description: "Diseño e instalación de cocinas modernas." },
+    { title: "Plomería", image: "./assets/plomería.jpg", description: "Instalaciones y reparaciones de tuberías." },
+    { title: "Electricidad", image: "./assets/electricidad.jpg", description: "Instalaciones eléctricas residenciales y comerciales." },
+    { title: "Framing", image: "./assets/framing.jpg", description: "Estructuras sólidas para muros y techos." },
+    { title: "Drywall", image: "./assets/drywall.jpg", description: "Instalación y acabado de paneles de yeso." },
+    { title: "Pintura", image: "./assets/pintura.jpg", description: "Aplicación de pintura interior y exterior." },
+    { title: "Finish", image: "./assets/finish.jpg", description: "Acabados profesionales para detalles finos." },
+    { title: "Baseboard", image: "./assets/baseboard.jpg", description: "Instalación de zócalos decorativos." },
+    { title: "Demolición", image: "./assets/demolición.jpg", description: "Demoliciones controladas y limpias." },
+    { title: "Pisos", image: "./assets/pisos.jpg", description: "Instalación de cerámica, porcelanato y vinil." },
+    { title: "Baños", image: "./assets/baños.jpg", description: "Remodelación completa de baños." },
+    { title: "Cocinas", image: "./assets/cocinas.jpg", description: "Diseño e instalación de cocinas modernas." },
   ];
 
   return (
     <div className="bg-white text-gray-800 font-sans">
+      {/* HEADER */}
       <header className="bg-[#1e293b] text-white shadow sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -78,6 +66,7 @@ function App() {
         )}
       </header>
 
+      {/* HERO */}
       <main className="max-w-6xl mx-auto px-4 py-8">
         <section className="text-center py-16">
           <h2 className="text-4xl font-bold mb-4">Construcción y Remodelación Profesional</h2>
@@ -85,6 +74,7 @@ function App() {
           <a href="#reservas" className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full">Solicita tu estimado</a>
         </section>
 
+        {/* SERVICIOS */}
         <section className="py-16 bg-gray-50" id="servicios">
           <h3 className="text-3xl font-bold text-center mb-12">Nuestros Servicios</h3>
           <div className="grid md:grid-cols-3 gap-6">
@@ -100,11 +90,19 @@ function App() {
           </div>
         </section>
 
+        {/* FLYER */}
         <section className="py-16 text-center">
           <h3 className="text-3xl font-bold mb-8">Flyer Promocional</h3>
           <img src={flyer} alt="Flyer Promocional" className="w-full max-w-3xl mx-auto rounded-lg shadow-md" />
         </section>
 
+        {/* RESERVAS */}
+        <section className="py-16" id="reservas">
+          <h3 className="text-3xl font-bold text-center mb-8">Reservas y Cotizaciones</h3>
+          <ContactForm />
+        </section>
+
+        {/* MISION/VISION/OBJETIVOS */}
         <section className="py-16" id="faq">
           <h3 className="text-3xl font-bold text-center mb-8">Misión, Visión y Objetivos</h3>
           <div className="grid md:grid-cols-3 gap-6 text-center">
@@ -122,25 +120,22 @@ function App() {
             </div>
           </div>
         </section>
-
-        <section className="py-16" id="reservas">
-          <h3 className="text-3xl font-bold text-center mb-8">Reserva una Cotización</h3>
-          <ContactForm />
-        </section>
       </main>
 
+      {/* FOOTER */}
       <footer className="bg-[#1e293b] text-white py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-sm">
           <p>&copy; {new Date().getFullYear()} Jotaye Group LLC</p>
           <div className="flex gap-4 mt-2 md:mt-0 text-lg">
-            <a href="https://wa.me/13054172681" className="hover:text-green-400"><FaWhatsapp /></a>
+            <a href="https://wa.me/13054172681" className="hover:text-green-400" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
             <a href="mailto:jotayegroupllc@gmail.com" className="hover:text-blue-400"><FaEnvelope /></a>
-            <a href="https://instagram.com" className="hover:text-pink-400"><FaInstagram /></a>
-            <a href="https://facebook.com" className="hover:text-blue-500"><FaFacebook /></a>
+            <a href="https://instagram.com" className="hover:text-pink-400" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+            <a href="https://facebook.com" className="hover:text-blue-500" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
           </div>
         </div>
       </footer>
 
+      {/* MODAL */}
       {selectedService && (
         <ServiceModal
           service={selectedService}
