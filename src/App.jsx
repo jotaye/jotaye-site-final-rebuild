@@ -35,7 +35,6 @@ function App() {
 
   return (
     <div className="bg-white text-gray-800 font-sans">
-      {/* HEADER */}
       <header className="bg-[#1e293b] text-white shadow sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -66,7 +65,6 @@ function App() {
         )}
       </header>
 
-      {/* HERO */}
       <main className="max-w-6xl mx-auto px-4 py-8">
         <section className="text-center py-16">
           <h2 className="text-4xl font-bold mb-4">Construcción y Remodelación Profesional</h2>
@@ -74,7 +72,6 @@ function App() {
           <a href="#reservas" className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full">Solicita tu estimado</a>
         </section>
 
-        {/* SERVICIOS */}
         <section className="py-16 bg-gray-50" id="servicios">
           <h3 className="text-3xl font-bold text-center mb-12">Nuestros Servicios</h3>
           <div className="grid md:grid-cols-3 gap-6">
@@ -90,31 +87,27 @@ function App() {
           </div>
         </section>
 
-        {/* FLYER */}
         <section className="py-16 text-center">
           <h3 className="text-3xl font-bold mb-8">Flyer Promocional</h3>
           <img src={flyer} alt="Flyer Promocional" className="w-full max-w-3xl mx-auto rounded-lg shadow-md" />
         </section>
 
-        {/* RESERVAS */}
-        <section className="py-16" id="reservas">
-          <h3 className="text-3xl font-bold text-center mb-8">Reservas y Cotizaciones</h3>
+        <section id="reservas" className="py-16 bg-gray-100">
           <ContactForm />
         </section>
 
-        {/* MISION/VISION/OBJETIVOS */}
         <section className="py-16" id="faq">
           <h3 className="text-3xl font-bold text-center mb-8">Misión, Visión y Objetivos</h3>
           <div className="grid md:grid-cols-3 gap-6 text-center">
-            <div className="bg-gray-100 p-6 rounded-lg shadow hover:shadow-md transition">
+            <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
               <h4 className="font-semibold text-xl mb-2">Misión</h4>
               <p className="text-sm text-gray-600">Brindar servicios de construcción con altos estándares de calidad.</p>
             </div>
-            <div className="bg-gray-100 p-6 rounded-lg shadow hover:shadow-md transition">
+            <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
               <h4 className="font-semibold text-xl mb-2">Visión</h4>
               <p className="text-sm text-gray-600">Ser líderes en remodelación y construcción en South Florida.</p>
             </div>
-            <div className="bg-gray-100 p-6 rounded-lg shadow hover:shadow-md transition">
+            <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
               <h4 className="font-semibold text-xl mb-2">Objetivos</h4>
               <p className="text-sm text-gray-600">Cumplir expectativas, plazos y calidad en cada proyecto.</p>
             </div>
@@ -122,20 +115,18 @@ function App() {
         </section>
       </main>
 
-      {/* FOOTER */}
       <footer className="bg-[#1e293b] text-white py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-sm">
           <p>&copy; {new Date().getFullYear()} Jotaye Group LLC</p>
           <div className="flex gap-4 mt-2 md:mt-0 text-lg">
-            <a href="https://wa.me/13054172681" className="hover:text-green-400" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
+            <a href="https://wa.me/13054172681" className="hover:text-green-400"><FaWhatsapp /></a>
             <a href="mailto:jotayegroupllc@gmail.com" className="hover:text-blue-400"><FaEnvelope /></a>
-            <a href="https://instagram.com" className="hover:text-pink-400" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-            <a href="https://facebook.com" className="hover:text-blue-500" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+            <a href="https://instagram.com" className="hover:text-pink-400"><FaInstagram /></a>
+            <a href="https://facebook.com" className="hover:text-blue-500"><FaFacebook /></a>
           </div>
         </div>
       </footer>
 
-      {/* MODAL */}
       {selectedService && (
         <ServiceModal
           service={selectedService}
@@ -147,3 +138,4 @@ function App() {
 }
 
 export default App;
+
