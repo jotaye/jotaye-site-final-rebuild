@@ -1,8 +1,160 @@
 /* src/MainApp.css */
 
-/* ======================================================
-   Animaciones suaves para entrada de secciones y tarjetas
-   ====================================================== */
+/* =====================
+   RESET Y BASICS
+   ===================== */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+/* =====================
+   HEADER (app-header)
+   ===================== */
+.app-header {
+  background-color: #ffffff;
+  /* sombra suave */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor general del header */
+.container-header {
+  max-width: 1120px;       /* equivale a max-w-7xl */
+  margin: 0 auto;          /* centrar horizontal*/
+  padding: 1rem 1rem;      /* px-4 py-4 */
+  display: flex;
+  flex-direction: column;  /* por defecto columna en mobile */
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* En pantallas medianas para arriba, pasamos a fila */
+@media (min-width: 768px) {
+  .container-header {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* =====================
+   LOGO
+   ===================== */
+.logo-container {
+  display: inline-block;
+}
+
+/* Altura fija del logo, ancho automático */
+.logo-img {
+  height: 4rem; /* h-16 */
+  width: auto;
+}
+
+/* =====================
+   FRASE / ESLOGAN
+   ===================== */
+.motto {
+  margin: 0.5rem 0;             /* mb-2, mt-? */
+  font-style: italic;
+  color: #4b5563;               /* gray-600 */
+  text-align: center;
+}
+
+/* En desktop, mantenemos la frase en la misma fila que el logo y el menú */
+@media (min-width: 768px) {
+  .motto {
+    margin: 0;                  /* quitar márgenes verticales extra */
+    margin-left: 1rem;          /* espacio entre logo y frase */
+    margin-right: 1rem;         /* espacio antes del menú */
+    text-align: left;
+    flex: 1;                    /* que ocupe espacio “fluido” */
+    white-space: nowrap;        /* que no quiebre línea */
+    overflow: hidden;           
+    text-overflow: ellipsis;    /* si se hace muy larga, corta con “…” */
+  }
+}
+
+/* =====================
+   MENÚ DE NAVEGACIÓN
+   ===================== */
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;      /* gap-2 */
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  justify-content: center;
+}
+
+/* En desktop, el menú ocupa su ancho justo, no hace wrap forzado */
+@media (min-width: 768px) {
+  .main-nav {
+    margin-top: 0;
+    margin-bottom: 0;
+    justify-content: flex-start;
+  }
+}
+
+/* Cada enlace del menú */
+.nav-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;        /* px-4 py-2 */
+  background-color: #f3f4f6;    /* gray-100 */
+  border-radius: 0.375rem;      /* rounded */
+  font-size: 0.875rem;          /* text-sm */
+  color: #1f2937;               /* gray-800 */
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  background-color: #f97316;    /* orange-500 */
+  color: #ffffff;
+}
+
+/* =====================
+   BOTONES DE CAMBIO DE IDIOMA
+   ===================== */
+.lang-switcher {
+  display: flex;
+  gap: 0.5rem;       /* espacio entre botones EN y ES */
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* En pantallas grandes, ponemos los botones al final en la misma fila */
+@media (min-width: 768px) {
+  .lang-switcher {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 1rem;  /* separarlos un poco del menú */
+  }
+}
+
+.btn-lang {
+  padding: 0.375rem 0.75rem; /* px-3 py-1 */
+  border-radius: 0.375rem;   /* rounded */
+  border: none;
+  font-size: 0.875rem;       /* text-sm */
+  cursor: pointer;
+  background-color: #e5e7eb; /* gray-200 */
+  color: #1f2937;            /* gray-800 */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-lang.active-lang {
+  background-color: #f97316; /* orange-500 */
+  color: #ffffff;
+}
+
+/* =====================
+   AÑADIDOS GENERALES (no relacionados con HEADER)
+   ===================== */
+
+/* Fade-in general (se usa en componentes Section / Cards) */
 .fade-in {
   animation: fadeIn 1s ease-in-out both;
 }
@@ -18,142 +170,37 @@
   }
 }
 
-/* ======================================================
-   Sombra y transición suave en tarjetas (card-hover)
-   ====================================================== */
+/* Cards con sombra y elevación suave */
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .card-hover:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* ======================================================
-   Botones con bordes totalmente redondeados
-   ====================================================== */
+/* Botones redondeados “full” */
 .button-rounded {
   border-radius: 9999px;
 }
 
-/* ======================================================
-   Texto destacado (para uso puntual)
-   ====================================================== */
+/* Texto destacado */
 .text-highlight {
-  color: #f97316; /* Tailwind orange-500 */
+  color: #f97316; /* orange-500 */
   font-weight: 600;
 }
 
-/* ======================================================
-   Ajustes responsivos y específicos del HEADER
-   ====================================================== */
-
-/*
-  1) En móviles (<768px): 
-     - El contenedor del header (.header-wrapper) está en columna.
-     - Cada bloque (logo, lema, idiomas, menú) se apila verticalmente.
-     - Ajustamos márgenes para que no queden muy apiñados.
-  2) En escritorios (>=768px):
-     - El contenedor del header se convierte en fila horizontal.
-     - El logo queda alineado a la izquierda, el lema centrado, el menú a la derecha,
-       y los botones de idioma al final (lo “empujamos” con margin-left: auto).
-     - Reducimos márgenes para que todo quepa en una línea.
-*/
-
-/* — Clases “globales” para el header — */
-
-/* 
-  Asignamos una clase de ayuda al contenedor principal del header 
-  para distinguirlo de otros <header> que pudiera haber. 
-  App.jsx no la tenía, así que la detectamos con un selector directo 
-  (header > .container-flex). 
-  Asegúrate de que en tu JSX la primera <div> dentro de <header> 
-  tenga la clase utilitaria “container-flex”, tal como en el ejemplo.
-*/
-.container-flex {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Márgenes verticales “base” para la versión móvil */
-.container-flex > .logo-container {
-  margin-bottom: 0.5rem;
-}
-.container-flex > .motto-container {
-  margin-bottom: 0.5rem;
-}
-.container-flex > .lang-buttons {
-  margin-bottom: 0.5rem;
-}
-.container-flex > nav {
-  margin-bottom: 0.5rem;
-}
-
-/* Estilo genérico para los links del menú (solo como respaldo) */
-.container-flex nav a {
-  font-size: 0.875rem; /* text-sm */
-}
-
-/* =========================
-   Estilos para pantallas >=768px
-   ========================= */
-@media (min-width: 768px) {
-  /* Convertimos el header en fila */
-  .container-flex {
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    width: 100%;
-  }
-
-  /* Ajustamos márgenes para cada bloque en desktop */
-  .container-flex > .logo-container {
-    margin-bottom: 0;       /* eliminamos margen inferior */
-    margin-right: 1rem;     /* separa logo del lema */
-  }
-  .container-flex > .motto-container {
-    margin-bottom: 0;
-    margin-right: auto;     /* el lema “centra” y empuja el menú a la derecha */
-  }
-  .container-flex > .lang-buttons {
-    margin-bottom: 0;
-    margin-left: 1rem;      /* separa idiomas del menú */
-    margin-right: 1rem;     /* separación con el menú */
-  }
-  .container-flex > nav {
-    margin-bottom: 0;
-    margin-left: 0;         /* en desktop, el menú ya no necesita margen izquierdo */
-    display: flex;          /* para asegurarnos de que sea horizontal */
-    gap: 0.5rem;            /* espacio pequeño entre botones del menú */
-  }
-
-  /* Reducimos ligeramente el padding de los links del menú para que quepan */
-  .container-flex nav a {
-    padding: 0.5rem 0.75rem; /* aprox px-3 py-2 */
-    font-size: 0.875rem;     /* text-sm */
+/* Ajustes responsivos puntuales (por si en otras secciones se necesitara) */
+@media (max-width: 768px) {
+  .mobile-center {
+    text-align: center;
   }
 }
 
-/* ======================================================
-   Ajuste de separaciones verticales para secciones “flat”
-   ====================================================== */
+/* Margen extra en secciones en desktop */
 @media (min-width: 768px) {
   section {
     margin-top: 1rem;
     margin-bottom: 1rem;
-  }
-}
-
-/* ======================================================
-   (Opcional) Ajustes adicionales para móviles pequeños
-   ====================================================== */
-@media (max-width: 640px) {
-  /* Si notas que los botones de idioma se solapan en pantallas muy angostas,
-     les damos un padding extra para separarlos un poco */
-  .lang-buttons > button {
-    padding-left: 1rem;
-    padding-right: 1rem;
   }
 }
