@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState } from "react";
 import "./MainApp.css";
 import logo from "./assets/logo-header.png";
@@ -104,72 +103,45 @@ export default function App() {
 
   return (
     <div id="top" className="bg-white text-gray-800 font-sans relative">
-      {/* ============================================
-           HEADER
-         ============================================ */}
-      <header className={`bg-white shadow sticky top-0 z-50 ${menuOpen ? "open" : ""}`}>
-        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between">
+      {/* =====================
+         HEADER (reemplazado)
+         ===================== */}
+      <header className="bg-white shadow sticky top-0 z-50">
+        <div className="header-container max-w-7xl mx-auto px-4 py-4">
           {/* 1) LOGO */}
-          <div className="flex-shrink-0">
+          <div className="logo-container flex-shrink-0">
             <a href="/" onClick={() => window.scrollTo(0, 0)}>
               <img
                 src={logo}
                 alt="Jotaye Group LLC"
-                className="h-20 w-auto"  /* Hicimos un poco más grande el logo en desktop */
+                className="h-20 w-auto" /* ajustado altura en desktop */
               />
             </a>
           </div>
 
-          {/* 2) FRASE (centrada horizontalmente cuando sea desktop; en móvil se mueve abajo) */}
-          <div className="header-phrase mt-2 md:mt-0 md:mx-8 flex-grow text-center md:text-left">
+          {/* 2) FRASE */}
+          <div className="phrase-container">
             <p className="italic text-gray-600">{t.motto}</p>
           </div>
 
-          {/* 3) BOTONES DE IDIOMA (en desktop van a la derecha, en móvil quedan debajo de la frase) */}
-          <div className="flex-shrink-0 mt-2 md:mt-0">
-            <button
-              onClick={() => setLang("en")}
-              className={`lang-button mx-1 rounded ${
-                lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"
-              }`}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => setLang("es")}
-              className={`lang-button mx-1 rounded ${
-                lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"
-              }`}
-            >
-              ES
-            </button>
-          </div>
-
-          {/* 4) HAMBURGUESA (sólo se muestra en móvil para abrir/cerrar el menú) */}
-          <div className="md:hidden flex-shrink-0 ml-2">
-            <button onClick={() => setMenuOpen((prev) => !prev)}>
-              {menuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
-            </button>
-          </div>
-
-          {/* 5) NAVEGACIÓN (en desktop va siempre visible; en móvil, sólo si menuOpen === true) */}
-          <nav className={`mt-4 md:mt-0 md:flex flex-shrink-0 ${menuOpen ? "block" : "hidden"} md:block`}>
-            <ul className="md:flex md:items-center">
+          {/* 3) MENÚ */}
+          <nav className={`md:block ${menuOpen ? "block" : "hidden"}`}>
+            <ul>
               {[
-                { href: "#top", label: t.home },
-                { href: "#servicios", label: t.services },
+                { href: "#top", label: t.home, external: false },
+                { href: "#servicios", label: t.services, external: false },
                 {
                   href: "https://instagram.com",
                   label: t.gallery,
                   icon: <FaInstagram className="inline-block mr-1" />,
                   external: true,
                 },
-                { href: "#testimonios", label: t.testimonials },
-                { href: "#contacto", label: t.contact },
-                { href: "#cotizacion", label: t.visit },
-              ].map((link, i) =>
-                link.external ? (
-                  <li key={i}>
+                { href: "#testimonios", label: t.testimonials, external: false },
+                { href: "#contacto", label: t.contact, external: false },
+                { href: "#cotizacion", label: t.visit, external: false },
+              ].map((link, i) => (
+                <li key={i}>
+                  {link.external ? (
                     <a
                       href={link.href}
                       target="_blank"
@@ -178,21 +150,46 @@ export default function App() {
                       {link.icon}
                       {link.label}
                     </a>
-                  </li>
-                ) : (
-                  <li key={i}>
+                  ) : (
                     <a href={link.href}>{link.label}</a>
-                  </li>
-                )
-              )}
+                  )}
+                </li>
+              ))}
             </ul>
           </nav>
+
+          {/* 4) BOTONES DE IDIOMA */}
+          <div className="lang-container flex-shrink-0">
+            <button
+              onClick={() => setLang("en")}
+              className={`lang-button rounded ${
+                lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              EN
+            </button>
+            <button
+              onClick={() => setLang("es")}
+              className={`lang-button rounded ${
+                lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              ES
+            </button>
+          </div>
+
+          {/* 5) HAMBURGUESA (solo en móvil) */}
+          <div className="hamburger-button md:hidden flex-shrink-0 ml-2">
+            <button onClick={() => setMenuOpen((prev) => !prev)}>
+              {menuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* ============================================
-          MISIÓN – VISIÓN – OBJETIVOS
-        ============================================ */}
+      {/* ===========================================
+         MISIÓN – VISIÓN – OBJETIVOS (MISIÓN/SECCIÓN)
+         =========================================== */}
       <section className="py-16 text-center">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-gray-100 rounded-lg shadow">
@@ -210,9 +207,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ============================================
+      {/* ====================
          SOBRE NOSOTROS
-        ============================================ */}
+         ==================== */}
       <section className="bg-white py-16">
         <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow text-left">
           <h3 className="text-2xl font-bold mb-4">{t.aboutTitle}</h3>
@@ -223,16 +220,16 @@ export default function App() {
         </div>
       </section>
 
-      {/* ============================================
-        NUESTROS SERVICIOS
-        ============================================ */}
+      {/* ====================
+         NUESTROS SERVICIOS
+         ==================== */}
       <main className="max-w-6xl mx-auto px-4 py-16" id="servicios">
         <h3 className="text-3xl font-bold text-center mb-12">{t.services}</h3>
         <div className="grid md:grid-cols-3 gap-6">
           {services.map((service, i) => (
             <div
               key={i}
-              className="bg-white rounded-lg shadow card-hover overflow-hidden cursor-pointer"
+              className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden cursor-pointer card-hover"
               onClick={() => setSelectedService(service)}
             >
               <img
@@ -245,7 +242,6 @@ export default function App() {
               </div>
             </div>
           ))}
-
           {/* Promoción especial */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <img
@@ -261,16 +257,16 @@ export default function App() {
         </div>
       </main>
 
-      {/* ============================================
-        FORMULARIO DE CONTACTO
-        ============================================ */}
+      {/* ====================
+         FORMULARIO DE CONTACTO
+         ==================== */}
       <section id="cotizacion" className="py-16 bg-gray-50">
         <ContactForm language={lang} />
       </section>
 
-      {/* ============================================
-        CONTACTO RÁPIDO
-        ============================================ */}
+      {/* ====================
+         CONTACTO RÁPIDO
+         ==================== */}
       <section id="contacto" className="py-16 text-center">
         <h3 className="text-3xl font-bold mb-6">{t.contactTitle}</h3>
         <div className="flex justify-center gap-4">
@@ -291,28 +287,26 @@ export default function App() {
         </div>
       </section>
 
-      {/* ============================================
-        TESTIMONIOS
-        ============================================ */}
+      {/* ====================
+         TESTIMONIOS
+         ==================== */}
       <section id="testimonios" className="py-16 bg-gray-50 text-center">
         <h3 className="text-3xl font-bold mb-8">{t.testimonialsTitle}</h3>
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
-          {[t.testimonial1, t.testimonial2, t.testimonial3].map(
-            (text, idx) => (
-              <div key={idx} className="p-6 bg-white rounded-lg shadow">
-                <p className="italic mb-4">“{text}”</p>
-                <p className="font-semibold">
-                  {["Carlos M.", "Ana R.", "Luis F."][idx]}
-                </p>
-              </div>
-            )
-          )}
+          {[t.testimonial1, t.testimonial2, t.testimonial3].map((text, idx) => (
+            <div key={idx} className="p-6 bg-white rounded-lg shadow card-hover">
+              <p className="italic mb-4">“{text}”</p>
+              <p className="font-semibold">
+                {["Carlos M.", "Ana R.", "Luis F."][idx]}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ============================================
-        FOOTER
-        ============================================ */}
+      {/* ====================
+         FOOTER
+         ==================== */}
       <footer className="bg-[#1e293b] text-white py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
           <p className="mb-4 md:mb-0">
@@ -347,9 +341,9 @@ export default function App() {
         </div>
       </footer>
 
-      {/* ============================================
-       MODAL DE SERVICIO (no cambió)
-       ============================================ */}
+      {/* ====================
+         MODAL DE SERVICIO
+         ==================== */}
       {selectedService && (
         <ServiceModal
           service={selectedService}
