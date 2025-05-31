@@ -1,4 +1,6 @@
-/* ================= Animaciones suaves ================= */
+/* ======================================================
+   Animaciones suaves para entrada de secciones y tarjetas
+   ====================================================== */
 .fade-in {
   animation: fadeIn 1s ease-in-out both;
 }
@@ -14,7 +16,9 @@
   }
 }
 
-/* ================= Sombra y transición en tarjetas ================= */
+/* ======================================================
+   Sombra y transición suave en tarjetas (card-hover)
+   ====================================================== */
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -24,33 +28,41 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* ================= Botones redondos ================= */
+/* ======================================================
+   Botones con bordes totalmente redondeados
+   ====================================================== */
 .button-rounded {
   border-radius: 9999px;
 }
 
-/* ================= Texto destacado (ej. en cuerpo) ================= */
+/* ======================================================
+   Texto destacado (para uso puntual)
+   ====================================================== */
 .text-highlight {
   color: #f97316; /* Tailwind orange-500 */
   font-weight: 600;
 }
 
-/* ================= Ajustes responsivos ================= */
+/* ======================================================
+   Ajustes responsivos generales
+   ====================================================== */
 @media (max-width: 768px) {
+  /* Centrar texto en pantallas móviles si hace falta */
   .mobile-center {
     text-align: center;
   }
 }
 
-/* ================= Espacio entre secciones para que no quede tan “flat” ================= */
+/* ======================================================
+   Ajuste de separaciones verticales para que no quede
+   todo “flat” en algunas secciones
+   ====================================================== */
 section {
-  /* Aquí podrías añadir un fondo tenue alternado si quisieras, por ejemplo:
-     background-color: #f9fafb; en algunas secciones.
-     Pero tal como está, solo dejamos espacio y que cada sección mantenga su propio fondo. */
+  /* Si quieres un fondo alternado suave, lo puedes
+     colgar aquí. Por ahora solo deja espacio. */
 }
 
 @media (min-width: 768px) {
-  /* En escritorio, reducimos márgenes verticales si se desea */
   section {
     margin-top: 1rem;
     margin-bottom: 1rem;
