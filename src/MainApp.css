@@ -1,4 +1,4 @@
-/* Animaciones suaves para entradas */
+/* ================= Animaciones suaves para entradas ================= */
 .fade-in {
   animation: fadeIn 1s ease-in-out both;
 }
@@ -14,7 +14,7 @@
   }
 }
 
-/* Sombra y transición suave en tarjetas */
+/* ================= Sombra y transición suave en tarjetas ================= */
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -24,35 +24,18 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Botones redondos */
+/* ================= Botones más redondos ================= */
 .button-rounded {
-  border-radius: 9999px;
+  border-radius: 9999px; /* full rounded */
 }
 
-/* Texto destacado */
+/* ================= Texto destacado ================= */
 .text-highlight {
-  color: #f97316;
+  color: #f97316; /* Tailwind orange-500 */
   font-weight: 600;
 }
 
-/* Header específico */
-header img {
-  max-height: 128px;
-}
-
-header p {
-  margin: 0;
-}
-
-header nav a {
-  font-size: 0.85rem;
-}
-
-header > div > button.md\\:hidden {
-  font-size: 1.5rem;
-}
-
-/* Ajustes responsivos */
+/* ================= Ajustes responsivos ================= */
 @media (max-width: 768px) {
   .mobile-center {
     text-align: center;
