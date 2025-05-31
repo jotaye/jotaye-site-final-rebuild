@@ -1,184 +1,4 @@
 /* ======================================================
-   AJUSTES HEADER PARA DESKTOP (≥768px)
-   — logo | frase | menú | botones IDIOMA
-   en una misma línea
-   ====================================================== */
-
-@media (min-width: 768px) {
-  header .header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-  }
-
-  /* 1) Logo */
-  header .logo-container {
-    flex-shrink: 0;
-  }
-
-  /* 2) Frase */
-  header .phrase-container {
-    flex-grow: 1;
-    margin: 0 1rem;
-    text-align: left;
-  }
-  header .phrase-container p {
-    margin: 0;
-  }
-
-  /* 3) Menú (ul en fila horizontal con gap fijo) */
-  header nav {
-    flex-shrink: 0;
-    margin: 0 1rem;
-    display: block;
-  }
-  header nav ul {
-    display: flex;
-    gap: 0.75rem;   /* espacio horizontal entre botones */
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  header nav ul li {
-    margin: 0;
-    padding: 0;
-  }
-  header nav ul li a {
-    font-size: 0.875rem;       /* text-sm */
-    padding: 0.5rem 0.75rem;   /* py-2 px-3 */
-    border-radius: 0.375rem;   /* rounded-md */
-    background-color: #f3f4f6; /* bg-gray-100 */
-    color: #1f2937;            /* text-gray-800 */
-    min-width: 5.5rem;         /* ancho mínimo fijo */
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-  header nav ul li a:hover {
-    background-color: #f97316; /* hover:bg-orange-500 */
-    color: #ffffff;            /* hover:text-white */
-  }
-
-  /* 4) Botones EN/ES */
-  header .lang-container {
-    flex-shrink: 0;
-    display: flex;
-    gap: 0.5rem;
-  }
-  header .lang-container button {
-    font-size: 0.875rem;       /* text-sm */
-    padding: 0.5rem 0.75rem;   /* py-2 px-3 */
-    border-radius: 0.375rem;
-  }
-
-  /* 5) Ocultar icono hamburguesa en desktop */
-  header .hamburger-button {
-    display: none;
-  }
-}
-
-/* ======================================================
-   AJUSTES HEADER PARA MÓVIL (≤767px)
-   — logo | frase | botones IDIOMA | hamburguesa
-   y menú desplegable sin solaparse
-   ====================================================== */
-
-@media (max-width: 767px) {
-  header .header-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 0.5rem;
-  }
-
-  /* 1) Logo centrado */
-  header .logo-container {
-    margin-top: 0.5rem;
-  }
-  header .logo-container img {
-    height: 3.5rem; /* ajustar tamaño de logo en móvil */
-    width: auto;
-  }
-
-  /* 2) Frase debajo del logo */
-  header .phrase-container {
-    margin-top: 0.5rem;
-    text-align: center;
-    width: 100%;
-    padding: 0 1rem;
-  }
-  header .phrase-container p {
-    margin: 0;
-    font-size: 1rem; /* ajustar si deseas más pequeño */
-    line-height: 1.4;
-  }
-
-  /* 3) Botones EN/ES debajo de la frase */
-  header .lang-container {
-    margin-top: 0.5rem;
-    display: flex;
-    gap: 0.5rem;
-  }
-  header .lang-container button {
-    font-size: 1rem;          /* slightly larger for touch */
-    padding: 0.4rem 0.8rem;   /* py-2 px-3 ajustados */
-    border-radius: 0.375rem;
-  }
-
-  /* 4) Ícono hamburguesa debajo de los idiomas */
-  header .hamburger-button {
-    margin-top: 0.5rem;
-  }
-  header .hamburger-button button {
-    background: none;
-    border: none;
-    padding: 0.25rem;
-  }
-
-  /* 5) MENÚ DESPLEGABLE (nav) */
-  /* Por defecto estará oculto; cuando menuOpen = true, la clase "block" lo mostrará */
-  header nav {
-    width: 100%;
-    margin-top: 0.5rem;    /* deja espacio sobre el menú desplegado */
-    display: none;         /* se mostrará solo si menuOpen = true (clase "block") */
-    flex-direction: column;
-    align-items: center;
-  }
-  header nav.block {
-    display: flex;
-  }
-  header nav ul {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-  }
-  header nav ul li {
-    width: 100%;
-  }
-  header nav ul li a {
-    display: block;
-    width: 100%;
-    font-size: 1rem;
-    padding: 0.6rem 1rem;
-    border-radius: 0.375rem;
-    background-color: #f3f4f6;
-    color: #1f2937;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-  header nav ul li a:hover {
-    background-color: #f97316;
-    color: #ffffff;
-  }
-}
-
-/* ======================================================
    Animaciones suaves para entrada de secciones y tarjetas
    ====================================================== */
 .fade-in {
@@ -209,14 +29,14 @@
 }
 
 /* ======================================================
-   Botones con bordes totalmente redondeados (button-rounded)
+   Botones con bordes totalmente redondeados
    ====================================================== */
 .button-rounded {
   border-radius: 9999px;
 }
 
 /* ======================================================
-   Texto destacado (text-highlight) para uso puntual
+   Texto destacado (para uso puntual)
    ====================================================== */
 .text-highlight {
   color: #f97316; /* Tailwind orange-500 */
@@ -224,11 +44,22 @@
 }
 
 /* ======================================================
+   Ajustes responsivos generales
+   ====================================================== */
+@media (max-width: 768px) {
+  /* Centrar texto en pantallas móviles si hace falta */
+  .mobile-center {
+    text-align: center;
+  }
+}
+
+/* ======================================================
    Ajuste de separaciones verticales para que no quede
    todo “flat” en algunas secciones
    ====================================================== */
 section {
-  /* Si deseas un fondo alternado, agrégalo aquí */
+  /* Si quieres un fondo alternado suave, lo puedes
+     colgar aquí. Por ahora solo deja espacio. */
 }
 
 @media (min-width: 768px) {
