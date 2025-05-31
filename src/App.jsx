@@ -1,15 +1,8 @@
 // src/App.jsx
 import React, { useState } from "react";
 import "./MainApp.css";
-// Ya no importamos el logo aquí; en su lugar usaremos la ruta pública en el <img>
-// import logo from "./assets/logo-header.png";
 import flyer from "./assets/flayer-jotaye.jpg";
-import {
-  FaWhatsapp,
-  FaEnvelope,
-  FaInstagram,
-  FaFacebook,
-} from "react-icons/fa";
+import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook } from "react-icons/fa";
 import ServiceModal from "./components/ServiceModal";
 import ContactForm from "./components/ContactForm";
 import services from "./data/services";
@@ -26,11 +19,9 @@ const translations = {
     mission: "Mission",
     missionText: "Provide high-standard construction services.",
     vision: "Vision",
-    visionText:
-      "Be leaders in remodeling and construction in South Florida.",
+    visionText: "Be leaders in remodeling and construction in South Florida.",
     goals: "Goals",
-    goalsText:
-      "Meet expectations, deadlines, and quality in every project.",
+    goalsText: "Meet expectations, deadlines, and quality in every project.",
     aboutTitle: "Jotaye Group LLC: more than construction",
     about1:
       "We are a South Florida-based company combining construction experience with digital innovation to create unique spaces.",
@@ -103,12 +94,16 @@ export default function App() {
 
   return (
     <div id="top" className="bg-white text-gray-800 font-sans relative">
-      {/* HEADER */}
+      {/* ====================
+          HEADER
+         ==================== */}
       <header className="bg-white shadow sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
-          <div className="flex items-center justify-between w-full mb-2">
+        {/* container-flex es la clase que activa el comportamiento flex-column en móvil
+            y flex-row en desktop, tal como definimos en MainApp.css */}
+        <div className="container-flex max-w-7xl mx-auto px-4 py-4">
+          {/* 1) Logo */}
+          <div className="logo-container">
             <a href="/" onClick={() => window.scrollTo(0, 0)}>
-              {/* Ahora usamos la ruta pública en lugar de import */}
               <img
                 src="/assets/logo-header.png"
                 alt="Jotaye Group LLC"
@@ -116,8 +111,14 @@ export default function App() {
               />
             </a>
           </div>
-          <p className="italic text-gray-600 mb-2">{t.motto}</p>
-          <div className="mb-2">
+
+          {/* 2) Frase / lema */}
+          <div className="motto-container">
+            <p className="italic text-gray-600">{t.motto}</p>
+          </div>
+
+          {/* 3) Botones de idioma */}
+          <div className="lang-buttons">
             <button
               onClick={() => setLang("en")}
               className={`mx-1 px-3 py-1 rounded ${
@@ -135,6 +136,8 @@ export default function App() {
               ES
             </button>
           </div>
+
+          {/* 4) Menú principal */}
           <nav className="flex flex-wrap justify-center gap-2">
             {[
               { href: "#top", label: t.home },
@@ -174,7 +177,9 @@ export default function App() {
         </div>
       </header>
 
-      {/* MISIÓN – VISIÓN – OBJETIVOS */}
+      {/* ====================
+          MISIÓN – VISIÓN – OBJETIVOS
+         ==================== */}
       <section className="py-16 text-center">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-gray-100 rounded-lg shadow">
@@ -192,7 +197,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* SOBRE NOSOTROS */}
+      {/* ====================
+          SOBRE NOSOTROS
+         ==================== */}
       <section className="bg-white py-16">
         <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow text-left">
           <h3 className="text-2xl font-bold mb-4">{t.aboutTitle}</h3>
@@ -203,11 +210,11 @@ export default function App() {
         </div>
       </section>
 
-      {/* NUESTROS SERVICIOS */}
+      {/* ====================
+          NUESTROS SERVICIOS
+         ==================== */}
       <main className="max-w-6xl mx-auto px-4 py-16" id="servicios">
-        <h3 className="text-3xl font-bold text-center mb-12">
-          {t.services}
-        </h3>
+        <h3 className="text-3xl font-bold text-center mb-12">{t.services}</h3>
         <div className="grid md:grid-cols-3 gap-6">
           {services.map((service, i) => (
             <div
@@ -225,7 +232,6 @@ export default function App() {
               </div>
             </div>
           ))}
-          {/* Promoción especial */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <img
               src={flyer}
@@ -240,12 +246,16 @@ export default function App() {
         </div>
       </main>
 
-      {/* FORMULARIO DE CONTACTO */}
+      {/* ====================
+          FORMULARIO DE CONTACTO
+         ==================== */}
       <section id="cotizacion" className="py-16 bg-gray-50">
         <ContactForm language={lang} />
       </section>
 
-      {/* CONTACTO RÁPIDO */}
+      {/* ====================
+          CONTACTO RÁPIDO
+         ==================== */}
       <section id="contacto" className="py-16 text-center">
         <h3 className="text-3xl font-bold mb-6">{t.contactTitle}</h3>
         <div className="flex justify-center gap-4">
@@ -266,7 +276,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* TESTIMONIOS */}
+      {/* ====================
+          TESTIMONIOS
+         ==================== */}
       <section id="testimonios" className="py-16 bg-gray-50 text-center">
         <h3 className="text-3xl font-bold mb-8">{t.testimonialsTitle}</h3>
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
@@ -283,7 +295,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* ====================
+          FOOTER
+         ==================== */}
       <footer className="bg-[#1e293b] text-white py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
           <p className="mb-4 md:mb-0">
@@ -318,7 +332,9 @@ export default function App() {
         </div>
       </footer>
 
-      {/* MODAL DE SERVICIO */}
+      {/* ====================
+          MODAL DE SERVICIO
+         ==================== */}
       {selectedService && (
         <ServiceModal
           service={selectedService}
