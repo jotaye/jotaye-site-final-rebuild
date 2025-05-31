@@ -1,6 +1,8 @@
+// src/App.jsx
 import React, { useState } from "react";
 import "./MainApp.css";
-import logo from "./assets/logo-header.png";
+// Ya no importamos el logo aquí; en su lugar usaremos la ruta pública en el <img>
+// import logo from "./assets/logo-header.png";
 import flyer from "./assets/flayer-jotaye.jpg";
 import {
   FaWhatsapp,
@@ -8,7 +10,6 @@ import {
   FaInstagram,
   FaFacebook,
 } from "react-icons/fa";
-import { FiMenu, FiX } from "react-icons/fi";
 import ServiceModal from "./components/ServiceModal";
 import ContactForm from "./components/ContactForm";
 import services from "./data/services";
@@ -96,100 +97,84 @@ const translations = {
 };
 
 export default function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   const [lang, setLang] = useState("en");
   const t = translations[lang];
 
   return (
     <div id="top" className="bg-white text-gray-800 font-sans relative">
-      {/* =====================
-         HEADER (reemplazado)
-         ===================== */}
+      {/* HEADER */}
       <header className="bg-white shadow sticky top-0 z-50">
-        <div className="header-container max-w-7xl mx-auto px-4 py-4">
-          {/* 1) LOGO */}
-          <div className="logo-container flex-shrink-0">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
+          <div className="flex items-center justify-between w-full mb-2">
             <a href="/" onClick={() => window.scrollTo(0, 0)}>
+              {/* Ahora usamos la ruta pública en lugar de import */}
               <img
-                src={logo}
+                src="/assets/logo-header.png"
                 alt="Jotaye Group LLC"
-                className="h-20 w-auto" /* ajustado altura en desktop */
+                className="h-16 mx-auto"
               />
             </a>
           </div>
-
-          {/* 2) FRASE */}
-          <div className="phrase-container">
-            <p className="italic text-gray-600">{t.motto}</p>
-          </div>
-
-          {/* 3) MENÚ */}
-          <nav className={`md:block ${menuOpen ? "block" : "hidden"}`}>
-            <ul>
-              {[
-                { href: "#top", label: t.home, external: false },
-                { href: "#servicios", label: t.services, external: false },
-                {
-                  href: "https://instagram.com",
-                  label: t.gallery,
-                  icon: <FaInstagram className="inline-block mr-1" />,
-                  external: true,
-                },
-                { href: "#testimonios", label: t.testimonials, external: false },
-                { href: "#contacto", label: t.contact, external: false },
-                { href: "#cotizacion", label: t.visit, external: false },
-              ].map((link, i) => (
-                <li key={i}>
-                  {link.external ? (
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {link.icon}
-                      {link.label}
-                    </a>
-                  ) : (
-                    <a href={link.href}>{link.label}</a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* 4) BOTONES DE IDIOMA */}
-          <div className="lang-container flex-shrink-0">
+          <p className="italic text-gray-600 mb-2">{t.motto}</p>
+          <div className="mb-2">
             <button
               onClick={() => setLang("en")}
-              className={`lang-button rounded ${
-                lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"
+              className={`mx-1 px-3 py-1 rounded ${
+                lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200"
               }`}
             >
               EN
             </button>
             <button
               onClick={() => setLang("es")}
-              className={`lang-button rounded ${
-                lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"
+              className={`mx-1 px-3 py-1 rounded ${
+                lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200"
               }`}
             >
               ES
             </button>
           </div>
-
-          {/* 5) HAMBURGUESA (solo en móvil) */}
-          <div className="hamburger-button md:hidden flex-shrink-0 ml-2">
-            <button onClick={() => setMenuOpen((prev) => !prev)}>
-              {menuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
-            </button>
-          </div>
+          <nav className="flex flex-wrap justify-center gap-2">
+            {[
+              { href: "#top", label: t.home },
+              { href: "#servicios", label: t.services },
+              {
+                href: "https://instagram.com/jotayegroup",
+                label: t.gallery,
+                icon: <FaInstagram className="inline-block mr-1" />,
+                external: true,
+              },
+              { href: "#testimonios", label: t.testimonials },
+              { href: "#contacto", label: t.contact },
+              { href: "#cotizacion", label: t.visit },
+            ].map((link, i) =>
+              link.external ? (
+                <a
+                  key={i}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                >
+                  {link.icon}
+                  {link.label}
+                </a>
+              ) : (
+                <a
+                  key={i}
+                  href={link.href}
+                  className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
+          </nav>
         </div>
       </header>
 
-      {/* ===========================================
-         MISIÓN – VISIÓN – OBJETIVOS (MISIÓN/SECCIÓN)
-         =========================================== */}
+      {/* MISIÓN – VISIÓN – OBJETIVOS */}
       <section className="py-16 text-center">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-gray-100 rounded-lg shadow">
@@ -207,9 +192,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* ====================
-         SOBRE NOSOTROS
-         ==================== */}
+      {/* SOBRE NOSOTROS */}
       <section className="bg-white py-16">
         <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow text-left">
           <h3 className="text-2xl font-bold mb-4">{t.aboutTitle}</h3>
@@ -220,16 +203,16 @@ export default function App() {
         </div>
       </section>
 
-      {/* ====================
-         NUESTROS SERVICIOS
-         ==================== */}
+      {/* NUESTROS SERVICIOS */}
       <main className="max-w-6xl mx-auto px-4 py-16" id="servicios">
-        <h3 className="text-3xl font-bold text-center mb-12">{t.services}</h3>
+        <h3 className="text-3xl font-bold text-center mb-12">
+          {t.services}
+        </h3>
         <div className="grid md:grid-cols-3 gap-6">
           {services.map((service, i) => (
             <div
               key={i}
-              className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden cursor-pointer card-hover"
+              className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden cursor-pointer"
               onClick={() => setSelectedService(service)}
             >
               <img
@@ -257,16 +240,12 @@ export default function App() {
         </div>
       </main>
 
-      {/* ====================
-         FORMULARIO DE CONTACTO
-         ==================== */}
+      {/* FORMULARIO DE CONTACTO */}
       <section id="cotizacion" className="py-16 bg-gray-50">
         <ContactForm language={lang} />
       </section>
 
-      {/* ====================
-         CONTACTO RÁPIDO
-         ==================== */}
+      {/* CONTACTO RÁPIDO */}
       <section id="contacto" className="py-16 text-center">
         <h3 className="text-3xl font-bold mb-6">{t.contactTitle}</h3>
         <div className="flex justify-center gap-4">
@@ -287,26 +266,24 @@ export default function App() {
         </div>
       </section>
 
-      {/* ====================
-         TESTIMONIOS
-         ==================== */}
+      {/* TESTIMONIOS */}
       <section id="testimonios" className="py-16 bg-gray-50 text-center">
         <h3 className="text-3xl font-bold mb-8">{t.testimonialsTitle}</h3>
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
-          {[t.testimonial1, t.testimonial2, t.testimonial3].map((text, idx) => (
-            <div key={idx} className="p-6 bg-white rounded-lg shadow card-hover">
-              <p className="italic mb-4">“{text}”</p>
-              <p className="font-semibold">
-                {["Carlos M.", "Ana R.", "Luis F."][idx]}
-              </p>
-            </div>
-          ))}
+          {[t.testimonial1, t.testimonial2, t.testimonial3].map(
+            (text, idx) => (
+              <div key={idx} className="p-6 bg-white rounded-lg shadow">
+                <p className="italic mb-4">“{text}”</p>
+                <p className="font-semibold">
+                  {["Carlos M.", "Ana R.", "Luis F."][idx]}
+                </p>
+              </div>
+            )
+          )}
         </div>
       </section>
 
-      {/* ====================
-         FOOTER
-         ==================== */}
+      {/* FOOTER */}
       <footer className="bg-[#1e293b] text-white py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
           <p className="mb-4 md:mb-0">
@@ -341,9 +318,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* ====================
-         MODAL DE SERVICIO
-         ==================== */}
+      {/* MODAL DE SERVICIO */}
       {selectedService && (
         <ServiceModal
           service={selectedService}
