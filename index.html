@@ -2,33 +2,59 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- ======================================================
+         Política de Seguridad de Contenido (CSP) para permitir
+         usos legítimos de eval(), setTimeout(string), etc.
+        ====================================================== -->
     <meta http-equiv="Content-Security-Policy" 
-          content="default-src 'self'; 
-                   script-src 'self' 'unsafe-eval'; 
-                   style-src 'self' 'unsafe-inline'; 
-                   img-src 'self' data:; 
-                   connect-src 'self';" />
+          content="
+            default-src 'self'; 
+            script-src 'self' 'unsafe-eval'; 
+            style-src  'self' 'unsafe-inline'; 
+            img-src    'self' data:; 
+            connect-src 'self';
+          " />
+    <!-- ====================================================== -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Servicios profesionales de construcción y remodelación en South Florida por Jotaye Group LLC. Electricidad, plomería, pintura, cocinas y más." />
-    <meta name="keywords" content="construcción, remodelación, electricidad, plomería, drywall, pintura, Jotaye Group LLC, Florida" />
+    <meta
+      name="description"
+      content="Servicios profesionales de construcción y remodelación en South Florida por Jotaye Group LLC. Electricidad, plomería, pintura, cocinas y más."
+    />
+    <meta
+      name="keywords"
+      content="construcción, remodelación, electricidad, plomería, drywall, pintura, Jotaye Group LLC, Florida"
+    />
     <meta name="author" content="Jotaye Group LLC" />
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="Jotaye Group LLC - Construcción y Remodelación Profesional" />
-    <meta property="og:description" content="Expertos en servicios de construcción residencial y comercial en South Florida." />
+    <meta
+      property="og:title"
+      content="Jotaye Group LLC - Construcción y Remodelación Profesional"
+    />
+    <meta
+      property="og:description"
+      content="Expertos en servicios de construcción residencial y comercial en South Florida."
+    />
     <meta property="og:image" content="/assets/flayer-jotaye.jpg" />
     <meta property="og:url" content="https://jotayegroupllc.com/" />
     <meta property="og:type" content="website" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Jotaye Group LLC - Construcción y Remodelación Profesional" />
-    <meta name="twitter:description" content="Servicios integrales de remodelación en cocinas, baños, plomería, electricidad y más." />
+    <meta
+      name="twitter:title"
+      content="Jotaye Group LLC - Construcción y Remodelación Profesional"
+    />
+    <meta
+      name="twitter:description"
+      content="Servicios integrales de remodelación en cocinas, baños, plomería, electricidad y más."
+    />
     <meta name="twitter:image" content="/assets/flayer-jotaye.jpg" />
 
-    <!-- Redes sociales -->
+    <!-- Redes sociales (rel="me") -->
     <link rel="me" href="https://www.instagram.com/tuusuario" />
     <link rel="me" href="https://www.facebook.com/tuusuario" />
 
@@ -38,6 +64,7 @@
     <meta name="theme-color" content="#1e293b" />
     <title>Jotaye Group LLC | Construcción y Remodelación en Florida</title>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
