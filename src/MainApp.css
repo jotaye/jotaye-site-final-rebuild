@@ -1,0 +1,60 @@
+/* Animaciones suaves para entradas */
+.fade-in {
+  animation: fadeIn 1s ease-in-out both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sombra y transición suave en tarjetas */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Botones redondos */
+.button-rounded {
+  border-radius: 9999px;
+}
+
+/* Texto destacado */
+.text-highlight {
+  color: #f97316;
+  font-weight: 600;
+}
+
+/* Header específico */
+header img {
+  max-height: 128px;
+}
+
+header p {
+  margin: 0;
+}
+
+header nav a {
+  font-size: 0.85rem;
+}
+
+header > div > button.md\\:hidden {
+  font-size: 1.5rem;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .mobile-center {
+    text-align: center;
+  }
+}
