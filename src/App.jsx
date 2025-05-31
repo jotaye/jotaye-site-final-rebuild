@@ -1,3 +1,5 @@
+// src/App.jsx
+
 import React, { useState } from "react";
 import "./MainApp.css";
 import logo from "./assets/logo-header.png";
@@ -117,34 +119,13 @@ export default function App() {
             />
           </a>
 
-          {/* Frase (sí o sí visible en móvil y escritorio) */}
+          {/* Frase: ahora va justo a la derecha del logo */}
           <p className="italic text-gray-600 mt-2 md:mt-0 md:ml-6">
             {t.motto}
           </p>
 
-          {/* Botones de idioma (siempre visibles) */}
-          <div className="mt-2 md:mt-0 md:ml-6">
-            <button
-              onClick={() => setLang("en")}
-              className={`mx-1 px-3 py-1 rounded ${
-                lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200"
-              } text-sm`}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => setLang("es")}
-              className={`mx-1 px-3 py-1 rounded ${
-                lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200"
-              } text-sm`}
-            >
-              ES
-            </button>
-          </div>
-
-          {/* Menú principal */}
+          {/* Menú principal: va después de la frase */}
           <nav className="mt-4 md:mt-0 md:ml-8 flex flex-wrap justify-center gap-2">
-            {/* CADA BOTÓN DEL MENÚ AHORA TIENE px-3 en lugar de px-4 */}
             <a
               href="#top"
               className="px-3 py-2 bg-gray-100 rounded text-sm hover:bg-orange-500 hover:text-white transition"
@@ -185,6 +166,26 @@ export default function App() {
               {t.visit}
             </a>
           </nav>
+
+          {/* Botones de idioma: se quedan al final */}
+          <div className="mt-2 md:mt-0 md:ml-6">
+            <button
+              onClick={() => setLang("en")}
+              className={`mx-1 px-3 py-1 rounded ${
+                lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200"
+              } text-sm`}
+            >
+              EN
+            </button>
+            <button
+              onClick={() => setLang("es")}
+              className={`mx-1 px-3 py-1 rounded ${
+                lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200"
+              } text-sm`}
+            >
+              ES
+            </button>
+          </div>
         </div>
       </header>
 
