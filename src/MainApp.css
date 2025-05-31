@@ -1,3 +1,5 @@
+/* src/MainApp.css */
+
 /* ======================================================
    Animaciones suaves para entrada de secciones y tarjetas
    ====================================================== */
@@ -44,27 +46,114 @@
 }
 
 /* ======================================================
-   Ajustes responsivos generales
+   Ajustes responsivos y específicos del HEADER
    ====================================================== */
-@media (max-width: 768px) {
-  /* Centrar texto en pantallas móviles si hace falta */
-  .mobile-center {
-    text-align: center;
+
+/*
+  1) En móviles (<768px): 
+     - El contenedor del header (.header-wrapper) está en columna.
+     - Cada bloque (logo, lema, idiomas, menú) se apila verticalmente.
+     - Ajustamos márgenes para que no queden muy apiñados.
+  2) En escritorios (>=768px):
+     - El contenedor del header se convierte en fila horizontal.
+     - El logo queda alineado a la izquierda, el lema centrado, el menú a la derecha,
+       y los botones de idioma al final (lo “empujamos” con margin-left: auto).
+     - Reducimos márgenes para que todo quepa en una línea.
+*/
+
+/* — Clases “globales” para el header — */
+
+/* 
+  Asignamos una clase de ayuda al contenedor principal del header 
+  para distinguirlo de otros <header> que pudiera haber. 
+  App.jsx no la tenía, así que la detectamos con un selector directo 
+  (header > .container-flex). 
+  Asegúrate de que en tu JSX la primera <div> dentro de <header> 
+  tenga la clase utilitaria “container-flex”, tal como en el ejemplo.
+*/
+.container-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Márgenes verticales “base” para la versión móvil */
+.container-flex > .logo-container {
+  margin-bottom: 0.5rem;
+}
+.container-flex > .motto-container {
+  margin-bottom: 0.5rem;
+}
+.container-flex > .lang-buttons {
+  margin-bottom: 0.5rem;
+}
+.container-flex > nav {
+  margin-bottom: 0.5rem;
+}
+
+/* Estilo genérico para los links del menú (solo como respaldo) */
+.container-flex nav a {
+  font-size: 0.875rem; /* text-sm */
+}
+
+/* =========================
+   Estilos para pantallas >=768px
+   ========================= */
+@media (min-width: 768px) {
+  /* Convertimos el header en fila */
+  .container-flex {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100%;
+  }
+
+  /* Ajustamos márgenes para cada bloque en desktop */
+  .container-flex > .logo-container {
+    margin-bottom: 0;       /* eliminamos margen inferior */
+    margin-right: 1rem;     /* separa logo del lema */
+  }
+  .container-flex > .motto-container {
+    margin-bottom: 0;
+    margin-right: auto;     /* el lema “centra” y empuja el menú a la derecha */
+  }
+  .container-flex > .lang-buttons {
+    margin-bottom: 0;
+    margin-left: 1rem;      /* separa idiomas del menú */
+    margin-right: 1rem;     /* separación con el menú */
+  }
+  .container-flex > nav {
+    margin-bottom: 0;
+    margin-left: 0;         /* en desktop, el menú ya no necesita margen izquierdo */
+    display: flex;          /* para asegurarnos de que sea horizontal */
+    gap: 0.5rem;            /* espacio pequeño entre botones del menú */
+  }
+
+  /* Reducimos ligeramente el padding de los links del menú para que quepan */
+  .container-flex nav a {
+    padding: 0.5rem 0.75rem; /* aprox px-3 py-2 */
+    font-size: 0.875rem;     /* text-sm */
   }
 }
 
 /* ======================================================
-   Ajuste de separaciones verticales para que no quede
-   todo “flat” en algunas secciones
+   Ajuste de separaciones verticales para secciones “flat”
    ====================================================== */
-section {
-  /* Si quieres un fondo alternado suave, lo puedes
-     colgar aquí. Por ahora solo deja espacio. */
-}
-
 @media (min-width: 768px) {
   section {
     margin-top: 1rem;
     margin-bottom: 1rem;
+  }
+}
+
+/* ======================================================
+   (Opcional) Ajustes adicionales para móviles pequeños
+   ====================================================== */
+@media (max-width: 640px) {
+  /* Si notas que los botones de idioma se solapan en pantallas muy angostas,
+     les damos un padding extra para separarlos un poco */
+  .lang-buttons > button {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
