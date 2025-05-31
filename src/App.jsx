@@ -1,5 +1,3 @@
-// src/App.jsx
-
 import React, { useState } from "react";
 import "./MainApp.css";
 import logo from "./assets/logo-header.png";
@@ -101,11 +99,10 @@ export default function App() {
 
   return (
     <div id="top" className="bg-white text-gray-800 font-sans relative">
-      {/* =============== HEADER =============== */}
+      {/* ================== HEADER ================== */}
       <header className="bg-white shadow sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center md:justify-between">
-
-          {/* 1) LOGO (siempre en la primera posición) */}
+          {/* 1) LOGO */}
           <div className="order-1">
             <a
               href="/"
@@ -122,56 +119,13 @@ export default function App() {
             </a>
           </div>
 
-          {/* 2) FRASE (en escritorio: segunda posición; en móvil: orden 2) */}
-          <p className="order-2 mt-2 md:mt-0 md:ml-6 italic text-gray-600 text-center">
+          {/* 2) FRASE */}
+          <p className="order-2 mt-2 md:mt-0 md:mx-6 italic text-gray-600 text-center">
             {t.motto}
           </p>
 
-          {/* 3) MENÚ (en escritorio: tercera posición; en móvil: cuarta) */}
-          <nav className="order-4 md:order-3 mt-4 md:mt-0 md:ml-6 flex flex-wrap justify-center gap-2">
-            <a
-              href="#top"
-              className="px-3 py-2 bg-gray-100 rounded text-sm hover:bg-orange-500 hover:text-white transition"
-            >
-              {t.home}
-            </a>
-            <a
-              href="#servicios"
-              className="px-3 py-2 bg-gray-100 rounded text-sm hover:bg-orange-500 hover:text-white transition"
-            >
-              {t.services}
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3 py-2 bg-gray-100 rounded text-sm hover:bg-orange-500 hover:text-white transition flex items-center"
-            >
-              <FaInstagram className="mr-1" />
-              {t.gallery}
-            </a>
-            <a
-              href="#testimonios"
-              className="px-3 py-2 bg-gray-100 rounded text-sm hover:bg-orange-500 hover:text-white transition"
-            >
-              {t.testimonials}
-            </a>
-            <a
-              href="#contacto"
-              className="px-3 py-2 bg-gray-100 rounded text-sm hover:bg-orange-500 hover:text-white transition"
-            >
-              {t.contact}
-            </a>
-            <a
-              href="#cotizacion"
-              className="px-3 py-2 bg-gray-100 rounded text-sm hover:bg-orange-500 hover:text-white transition"
-            >
-              {t.visit}
-            </a>
-          </nav>
-
-          {/* 4) BOTONES DE IDIOMA (en escritorio: cuarta posición; en móvil: orden 3) */}
-          <div className="order-3 md:order-4 mt-2 md:mt-0 md:ml-6">
+          {/* 3) BOTONES DE IDIOMA */}
+          <div className="order-3 md:order-4 mt-2 md:mt-0">
             <button
               onClick={() => setLang("en")}
               className={`mx-1 px-3 py-1 rounded ${
@@ -189,6 +143,49 @@ export default function App() {
               ES
             </button>
           </div>
+
+          {/* 4) MENÚ */}
+          <nav className="order-4 md:order-3 mt-4 md:mt-0 flex flex-wrap justify-center gap-2">
+            <a
+              href="#top"
+              className="px-2 py-1 bg-gray-100 rounded text-xs md:text-sm hover:bg-orange-500 hover:text-white transition"
+            >
+              {t.home}
+            </a>
+            <a
+              href="#servicios"
+              className="px-2 py-1 bg-gray-100 rounded text-xs md:text-sm hover:bg-orange-500 hover:text-white transition"
+            >
+              {t.services}
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-2 py-1 bg-gray-100 rounded text-xs md:text-sm hover:bg-orange-500 hover:text-white transition flex items-center"
+            >
+              <FaInstagram className="mr-1" />
+              {t.gallery}
+            </a>
+            <a
+              href="#testimonios"
+              className="px-2 py-1 bg-gray-100 rounded text-xs md:text-sm hover:bg-orange-500 hover:text-white transition"
+            >
+              {t.testimonials}
+            </a>
+            <a
+              href="#contacto"
+              className="px-2 py-1 bg-gray-100 rounded text-xs md:text-sm hover:bg-orange-500 hover:text-white transition"
+            >
+              {t.contact}
+            </a>
+            <a
+              href="#cotizacion"
+              className="px-2 py-1 bg-gray-100 rounded text-xs md:text-sm hover:bg-orange-500 hover:text-white transition"
+            >
+              {t.visit}
+            </a>
+          </nav>
         </div>
       </header>
 
