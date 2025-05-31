@@ -101,31 +101,34 @@ export default function App() {
 
   return (
     <div id="top" className="bg-white text-gray-800 font-sans relative">
-      {/* ================= HEADER ================= */}
+      {/* =============== HEADER =============== */}
       <header className="bg-white shadow sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center md:justify-between">
-          {/* Logo */}
-          <a
-            href="/"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo(0, 0);
-            }}
-          >
-            <img
-              src={logo}
-              alt="Jotaye Group LLC"
-              className="h-24 w-auto"
-            />
-          </a>
 
-          {/* Frase: ahora va justo a la derecha del logo */}
-          <p className="italic text-gray-600 mt-2 md:mt-0 md:ml-6">
+          {/* 1) LOGO (siempre en la primera posición) */}
+          <div className="order-1">
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo(0, 0);
+              }}
+            >
+              <img
+                src={logo}
+                alt="Jotaye Group LLC"
+                className="h-24 w-auto"
+              />
+            </a>
+          </div>
+
+          {/* 2) FRASE (en escritorio: segunda posición; en móvil: orden 2) */}
+          <p className="order-2 mt-2 md:mt-0 md:ml-6 italic text-gray-600 text-center">
             {t.motto}
           </p>
 
-          {/* Menú principal: va después de la frase */}
-          <nav className="mt-4 md:mt-0 md:ml-8 flex flex-wrap justify-center gap-2">
+          {/* 3) MENÚ (en escritorio: tercera posición; en móvil: cuarta) */}
+          <nav className="order-4 md:order-3 mt-4 md:mt-0 md:ml-6 flex flex-wrap justify-center gap-2">
             <a
               href="#top"
               className="px-3 py-2 bg-gray-100 rounded text-sm hover:bg-orange-500 hover:text-white transition"
@@ -167,8 +170,8 @@ export default function App() {
             </a>
           </nav>
 
-          {/* Botones de idioma: se quedan al final */}
-          <div className="mt-2 md:mt-0 md:ml-6">
+          {/* 4) BOTONES DE IDIOMA (en escritorio: cuarta posición; en móvil: orden 3) */}
+          <div className="order-3 md:order-4 mt-2 md:mt-0 md:ml-6">
             <button
               onClick={() => setLang("en")}
               className={`mx-1 px-3 py-1 rounded ${
