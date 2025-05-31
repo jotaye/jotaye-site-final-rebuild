@@ -1,5 +1,13 @@
 /* ======================================================
-   Animaciones suaves para entrada de secciones y tarjetas
+   Tailwind Directivas (si las usas; de lo contrario, omítelas)
+   ====================================================== */
+/*  Si ya tienes un preámbulo con @tailwind base/components/utilities, no lo repitas.  */
+/*  @tailwind base;
+    @tailwind components;
+    @tailwind utilities;  */
+
+/* ======================================================
+   1) ANIMACIONES SUAVES PARA ENTRADAS (fade-in)
    ====================================================== */
 .fade-in {
   animation: fadeIn 1s ease-in-out both;
@@ -17,7 +25,7 @@
 }
 
 /* ======================================================
-   Sombra y transición suave en tarjetas (card-hover)
+   2) SOMBRA Y TRANSICIÓN SUAVE EN TARJETAS (card-hover)
    ====================================================== */
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -29,14 +37,14 @@
 }
 
 /* ======================================================
-   Botones con bordes totalmente redondeados
+   3) BOTONES TOTALMENTE REDONDEADOS (button-rounded)
    ====================================================== */
 .button-rounded {
   border-radius: 9999px;
 }
 
 /* ======================================================
-   Texto destacado (para uso puntual)
+   4) TEXTO DESTACADO (text-highlight)
    ====================================================== */
 .text-highlight {
   color: #f97316; /* Tailwind orange-500 */
@@ -44,7 +52,7 @@
 }
 
 /* ======================================================
-   Ajustes responsivos generales
+   5) AJUSTES RESPONSIVOS GENERALES
    ====================================================== */
 @media (max-width: 768px) {
   /* Centrar texto en pantallas móviles si hace falta */
@@ -54,17 +62,67 @@
 }
 
 /* ======================================================
-   Ajuste de separaciones verticales para que no quede
-   todo “flat” en algunas secciones
+   6) ESPACIADOS VERTICALES EN SECCIONES
    ====================================================== */
 section {
-  /* Si quieres un fondo alternado suave, lo puedes
-     colgar aquí. Por ahora solo deja espacio. */
+  /* Si quieres un fondo alternado suave, lo puedes colgar aquí.
+     Por ahora solo deja espacio para que no se vea “flat”. */
 }
 
 @media (min-width: 768px) {
   section {
     margin-top: 1rem;
     margin-bottom: 1rem;
+  }
+}
+
+/* ======================================================
+   7) REDUCCIÓN DE TAMAÑO DE BOTONES DEL MENÚ
+   ====================================================== */
+/* Este bloque se encarga de que los <a> del menú en el header
+   sean un poco más pequeños que las tarjetas “grandes” previas. */
+header nav ul li a {
+  /* Texto ligeramente más chico */
+  font-size: 0.875rem;    /* equivale a text-sm de Tailwind */
+  /* Relleno interno más compacto */
+  padding: 0.5rem 0.75rem; /* equivale a py-2 px-3 de Tailwind */
+  border-radius: 0.375rem; /* equivale a rounded-md de Tailwind */
+  background-color: #f3f4f6; /* equivale a bg-gray-100 */
+  color: #1f2937;            /* equivale a text-gray-800 */
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+header nav ul li a:hover {
+  background-color: #f97316; /* equivale a hover:bg-orange-500 */
+  color: #ffffff;            /* equivale a hover:text-white */
+}
+
+/* ======================================================
+   8) EN MÓVIL, SE MUESTRA EL MENÚ EN BLOQUE CUANDO ABRE EL HAMBURGUESA
+   ====================================================== */
+/* No es estrictamente necesario en CSS (lo controlamos en JSX con clases),
+   pero podemos asegurarnos de que el nav en móvil ocupe todo el ancho: */
+@media (max-width: 767px) {
+  header nav {
+    width: 100%;
+  }
+  header nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+}
+
+/* ======================================================
+   9) EN ESCRITORIO, EL MENÚ VA HORIZONTAL
+   ====================================================== */
+@media (min-width: 768px) {
+  header nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    align-items: center;
   }
 }
