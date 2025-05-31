@@ -1,14 +1,10 @@
-/* ======================================================
-   Tailwind Directivas (si las usas; de lo contrario, omítelas)
-   ====================================================== */
-/*  Si ya tienes un preámbulo con @tailwind base/components/utilities, no lo repitas.  */
-/*  @tailwind base;
-    @tailwind components;
-    @tailwind utilities;  */
+/* ======================================================================
+   MAINAPP.CSS COMPLETO
+   ====================================================================== */
 
-/* ======================================================
-   1) ANIMACIONES SUAVES PARA ENTRADAS (fade-in)
-   ====================================================== */
+/* ----------------------------------------------------------------------
+   1) Animaciones suaves para entrada de secciones y tarjetas
+   ---------------------------------------------------------------------- */
 .fade-in {
   animation: fadeIn 1s ease-in-out both;
 }
@@ -24,9 +20,9 @@
   }
 }
 
-/* ======================================================
-   2) SOMBRA Y TRANSICIÓN SUAVE EN TARJETAS (card-hover)
-   ====================================================== */
+/* ----------------------------------------------------------------------
+   2) Sombra y transición suave en tarjetas (card-hover)
+   ---------------------------------------------------------------------- */
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -36,37 +32,26 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* ======================================================
-   3) BOTONES TOTALMENTE REDONDEADOS (button-rounded)
-   ====================================================== */
+/* ----------------------------------------------------------------------
+   3) Botones con bordes totalmente redondeados (button-rounded)
+   ---------------------------------------------------------------------- */
 .button-rounded {
   border-radius: 9999px;
 }
 
-/* ======================================================
-   4) TEXTO DESTACADO (text-highlight)
-   ====================================================== */
+/* ----------------------------------------------------------------------
+   4) Texto destacado (text-highlight)
+   ---------------------------------------------------------------------- */
 .text-highlight {
   color: #f97316; /* Tailwind orange-500 */
   font-weight: 600;
 }
 
-/* ======================================================
-   5) AJUSTES RESPONSIVOS GENERALES
-   ====================================================== */
-@media (max-width: 768px) {
-  /* Centrar texto en pantallas móviles si hace falta */
-  .mobile-center {
-    text-align: center;
-  }
-}
-
-/* ======================================================
-   6) ESPACIADOS VERTICALES EN SECCIONES
-   ====================================================== */
+/* ----------------------------------------------------------------------
+   5) Ajustes de espaciado vertical en <section> (para que no quede “flat”)
+   ---------------------------------------------------------------------- */
 section {
-  /* Si quieres un fondo alternado suave, lo puedes colgar aquí.
-     Por ahora solo deja espacio para que no se vea “flat”. */
+  /* (Puedes agregar un fondo suave alternado aquí si deseas) */
 }
 
 @media (min-width: 768px) {
@@ -76,53 +61,93 @@ section {
   }
 }
 
-/* ======================================================
-   7) REDUCCIÓN DE TAMAÑO DE BOTONES DEL MENÚ
-   ====================================================== */
-/* Este bloque se encarga de que los <a> del menú en el header
-   sean un poco más pequeños que las tarjetas “grandes” previas. */
+/* ----------------------------------------------------------------------
+   6) AJUSTES GENERALES RESPONSIVOS
+   ---------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Centrar texto en pantallas móviles si hace falta */
+  .mobile-center {
+    text-align: center;
+  }
+}
+
+/* ----------------------------------------------------------------------
+   7) REDUCCIÓN DE TAMAÑO DE BOTONES DEL MENÚ (header nav ul li a)
+   ---------------------------------------------------------------------- */
+/* 
+   Esto hace que cada <a> dentro del <nav> del header
+   sea “text-sm” con “px-3 py-2” y “rounded-md” por defecto,
+   con el color de fondo gris claro y texto gris oscuro.
+*/
 header nav ul li a {
-  /* Texto ligeramente más chico */
-  font-size: 0.875rem;    /* equivale a text-sm de Tailwind */
-  /* Relleno interno más compacto */
-  padding: 0.5rem 0.75rem; /* equivale a py-2 px-3 de Tailwind */
-  border-radius: 0.375rem; /* equivale a rounded-md de Tailwind */
-  background-color: #f3f4f6; /* equivale a bg-gray-100 */
-  color: #1f2937;            /* equivale a text-gray-800 */
+  font-size: 0.875rem;        /* text-sm */
+  padding: 0.5rem 0.75rem;    /* py-2  px-3 */
+  border-radius: 0.375rem;    /* rounded-md */
+  background-color: #f3f4f6;  /* bg-gray-100 */
+  color: #1f2937;             /* text-gray-800 */
   text-decoration: none;
+  /* Forzar un ancho mínimo idéntico en todos: */
+  min-width: 5.5rem;          /* ajusta este valor si quieres más o menos ancho */
+  text-align: center;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* Al pasar el ratón, que cambie a bg-orange-500 y texto blanco */
 header nav ul li a:hover {
-  background-color: #f97316; /* equivale a hover:bg-orange-500 */
-  color: #ffffff;            /* equivale a hover:text-white */
+  background-color: #f97316;  /* hover:bg-orange-500 */
+  color: #ffffff;             /* hover:text-white */
 }
 
-/* ======================================================
-   8) EN MÓVIL, SE MUESTRA EL MENÚ EN BLOQUE CUANDO ABRE EL HAMBURGUESA
-   ====================================================== */
-/* No es estrictamente necesario en CSS (lo controlamos en JSX con clases),
-   pero podemos asegurarnos de que el nav en móvil ocupe todo el ancho: */
+/* ----------------------------------------------------------------------
+   8) LAYOUT DEL HEADER EN MOVIL (pantallas < 768px)
+   ---------------------------------------------------------------------- */
 @media (max-width: 767px) {
+  /* Asegurarnos de que el nav ocupe todo el ancho */
   header nav {
     width: 100%;
   }
+  /* Colocar los <li> en columna y con gap vertical */
   header nav ul {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     margin-top: 0.5rem;
+    align-items: flex-start; /* que queden alineados a la izquierda */
+  }
+  /* Hacer que los botones de EN/ES sean un poco más chico en móvil */
+  .lang-button {
+    font-size: 0.875rem;       /* text-sm */
+    padding: 0.5rem 0.75rem;    /* py-2  px-3 */
   }
 }
 
-/* ======================================================
-   9) EN ESCRITORIO, EL MENÚ VA HORIZONTAL
-   ====================================================== */
+/* ----------------------------------------------------------------------
+   9) LAYOUT DEL HEADER EN ESCRITORIO (pantallas ≥ 768px)
+   ---------------------------------------------------------------------- */
 @media (min-width: 768px) {
+  /* En escritorio, el <ul> en fila horizontal y con gap */
   header nav ul {
     display: flex;
     flex-direction: row;
-    gap: 0.75rem;
+    gap: 0.75rem;     /* equivalente a space-x-3 o gap-3 de Tailwind */
     align-items: center;
   }
+  /* Que los botones de EN/ES tengan tamaño “text-sm” y padding uniforme */
+  .lang-button {
+    font-size: 0.875rem;       /* text-sm */
+    padding: 0.5rem 0.75rem;    /* py-2  px-3 */
+  }
 }
+
+/* ----------------------------------------------------------------------
+   10) OCULTAR LÍNEA DE FRASE EN MOBILE CUANDO EL MENÚ ESTÁ DESPLEGADO
+   (opcional, por si no quieres que la frase interrumpa el menú)
+   ---------------------------------------------------------------------- */
+/*
+@media (max-width: 767px) {
+  header.open .header-phrase {
+    display: none;
+  }
+}
+*/
+
