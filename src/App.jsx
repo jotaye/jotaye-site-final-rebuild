@@ -1,6 +1,7 @@
 // src/App.jsx
 import React, { useState } from "react";
-import "./MainApp.css";            // Asegúrate de que este archivo está en src/MainApp.css
+import "./MainApp.css";
+// No importamos logo desde src/assets; usamos la ruta pública "/assets/logo-header.png"
 import flyer from "./assets/flayer-jotaye.jpg";
 import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook } from "react-icons/fa";
 import ServiceModal from "./components/ServiceModal";
@@ -37,8 +38,7 @@ const translations = {
     whatsapp: "WhatsApp",
     email: "Email",
     testimonialsTitle: "What our clients say",
-    testimonial1:
-      "Excellent service and attention to detail. Highly recommended.",
+    testimonial1: "Excellent service and attention to detail. Highly recommended.",
     testimonial2:
       "The team was punctual, professional, and left everything spotless.",
     testimonial3:
@@ -75,7 +75,8 @@ const translations = {
     email: "Correo",
     testimonialsTitle: "Lo que dicen nuestros clientes",
     testimonial1: "Excelente servicio y atención al detalle. Muy recomendados.",
-    testimonial2: "El equipo fue puntual, profesional y dejaron todo impecable.",
+    testimonial2:
+      "El equipo fue puntual, profesional y dejaron todo impecable.",
     testimonial3:
       "Transformaron mi cocina y baño, ¡me encantó el resultado final!",
     copyright: "Jotaye Group LLC",
@@ -89,23 +90,47 @@ export default function App() {
 
   return (
     <div id="top" className="bg-white text-gray-800 font-sans relative">
-      {/* ===================== HEADER ===================== */}
-      <header className="app-header bg-white shadow sticky top-0 z-50">
-        <div className="container-header">
-          {/* -- Logo -- */}
-          <a href="/" onClick={() => window.scrollTo(0, 0)} className="logo-container">
-            <img
-              src="/assets/logo-header.png"
-              alt="Jotaye Group LLC"
-              className="logo-img"
-            />
-          </a>
+      {/* ===================== */}
+      {/*       HEADER         */}
+      {/* ===================== */}
+      <header className="bg-white shadow sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
+          <div className="flex items-center justify-between w-full mb-2">
+            <a href="/" onClick={() => window.scrollTo(0, 0)}>
+              {/* Ruta pública: "/assets/logo-header.png" */}
+              <img
+                src="/assets/logo-header.png"
+                alt="Jotaye Group LLC"
+                className="h-16 mx-auto"
+              />
+            </a>
+          </div>
 
-          {/* -- Frase/Eslogan -- */}
-          <p className="motto">{t.motto}</p>
+          {/* Frase/motto */}
+          <p className="italic text-gray-600 mb-2">{t.motto}</p>
 
-          {/* -- Navegación (menú) -- */}
-          <nav className="main-nav">
+          {/* Botones de cambio de idioma */}
+          <div className="mb-2">
+            <button
+              onClick={() => setLang("en")}
+              className={`mx-1 px-3 py-1 rounded ${
+                lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200"
+              }`}
+            >
+              EN
+            </button>
+            <button
+              onClick={() => setLang("es")}
+              className={`mx-1 px-3 py-1 rounded ${
+                lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200"
+              }`}
+            >
+              ES
+            </button>
+          </div>
+
+          {/* NAV (menú horizontal) */}
+          <nav className="flex flex-wrap justify-center gap-2">
             {[
               { href: "#top", label: t.home },
               { href: "#servicios", label: t.services },
@@ -125,38 +150,28 @@ export default function App() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="nav-link"
+                  className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
                 >
                   {link.icon}
                   {link.label}
                 </a>
               ) : (
-                <a key={i} href={link.href} className="nav-link">
+                <a
+                  key={i}
+                  href={link.href}
+                  className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                >
                   {link.label}
                 </a>
               )
             )}
           </nav>
-
-          {/* -- Botones de Idioma -- */}
-          <div className="lang-switcher">
-            <button
-              onClick={() => setLang("en")}
-              className={`btn-lang ${lang === "en" ? "active-lang" : ""}`}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => setLang("es")}
-              className={`btn-lang ${lang === "es" ? "active-lang" : ""}`}
-            >
-              ES
-            </button>
-          </div>
         </div>
       </header>
 
-      {/* ================ MISIÓN – VISIÓN – OBJETIVOS ================ */}
+      {/* ===================== */}
+      {/* MISIÓN – VISIÓN – OBJETIVOS */}
+      {/* ===================== */}
       <section className="py-16 text-center">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-gray-100 rounded-lg shadow">
@@ -174,7 +189,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ================ SOBRE NOSOTROS ================ */}
+      {/* ===================== */}
+      {/*     SOBRE NOSOTROS    */}
+      {/* ===================== */}
       <section className="bg-white py-16">
         <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow text-left">
           <h3 className="text-2xl font-bold mb-4">{t.aboutTitle}</h3>
@@ -185,7 +202,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ================ NUESTROS SERVICIOS ================ */}
+      {/* ===================== */}
+      {/*   NUESTROS SERVICIOS   */}
+      {/* ===================== */}
       <main className="max-w-6xl mx-auto px-4 py-16" id="servicios">
         <h3 className="text-3xl font-bold text-center mb-12">{t.services}</h3>
         <div className="grid md:grid-cols-3 gap-6">
@@ -205,11 +224,10 @@ export default function App() {
               </div>
             </div>
           ))}
-
           {/* Promoción especial */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <img
-              src={flyer}
+              src={flyer} // flyer importado desde src/assets/
               alt="Promoción"
               className="w-full h-48 object-cover"
             />
@@ -221,12 +239,16 @@ export default function App() {
         </div>
       </main>
 
-      {/* ================ FORMULARIO DE CONTACTO ================ */}
+      {/* ===================== */}
+      {/*  FORMULARIO DE CONTACTO */}
+      {/* ===================== */}
       <section id="cotizacion" className="py-16 bg-gray-50">
         <ContactForm language={lang} />
       </section>
 
-      {/* ================ CONTACTO RÁPIDO ================ */}
+      {/* ===================== */}
+      {/*     CONTACTO RÁPIDO    */}
+      {/* ===================== */}
       <section id="contacto" className="py-16 text-center">
         <h3 className="text-3xl font-bold mb-6">{t.contactTitle}</h3>
         <div className="flex justify-center gap-4">
@@ -247,23 +269,31 @@ export default function App() {
         </div>
       </section>
 
-      {/* ================ TESTIMONIOS ================ */}
+      {/* ===================== */}
+      {/*     TESTIMONIOS       */}
+      {/* ===================== */}
       <section id="testimonios" className="py-16 bg-gray-50 text-center">
         <h3 className="text-3xl font-bold mb-8">{t.testimonialsTitle}</h3>
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
           {[t.testimonial1, t.testimonial2, t.testimonial3].map((text, idx) => (
             <div key={idx} className="p-6 bg-white rounded-lg shadow">
               <p className="italic mb-4">“{text}”</p>
-              <p className="font-semibold">{["Carlos M.", "Ana R.", "Luis F."][idx]}</p>
+              <p className="font-semibold">
+                {["Carlos M.", "Ana R.", "Luis F."][idx]}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ================ FOOTER ================ */}
+      {/* ===================== */}
+      {/*       FOOTER         */}
+      {/* ===================== */}
       <footer className="bg-[#1e293b] text-white py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-          <p className="mb-4 md:mb-0">&copy; {new Date().getFullYear()} {t.copyright}</p>
+          <p className="mb-4 md:mb-0">
+            &copy; {new Date().getFullYear()} {t.copyright}
+          </p>
           <div className="flex gap-4">
             <a href="https://wa.me/13054172681" target="_blank" rel="noopener noreferrer">
               <FaWhatsapp size={20} />
@@ -271,17 +301,25 @@ export default function App() {
             <a href="mailto:jotayegroupllc@gmail.com">
               <FaEnvelope size={20} />
             </a>
-            <a href="https://instagram.com/jotayegroup" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://instagram.com/jotayegroup"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaInstagram size={20} />
             </a>
-            <a href="https://facebook.com/JotayeGroupLLC" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://facebook.com/JotayeGroupLLC"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaFacebook size={20} />
             </a>
           </div>
         </div>
       </footer>
 
-      {/* ================ MODAL DE SERVICIO ================ */}
+      {/* MODAL DE SERVICIO */}
       {selectedService && (
         <ServiceModal
           service={selectedService}
