@@ -1,8 +1,8 @@
 // src/App.jsx
 import React, { useState } from "react";
 import "./MainApp.css";
-// ---- Ya NO importamos el flyer desde /assets, sino que lo referenciamos directamente con cadena ----
-// import flyer from "/assets/flayer-jotaye.webp";
+
+// IMPORTS DE ICONOS Y COMPONENTES
 import {
   FaWhatsapp,
   FaEnvelope,
@@ -13,6 +13,7 @@ import ServiceModal from "./components/ServiceModal";
 import ContactForm from "./components/ContactForm";
 import services from "./data/services";
 
+// TRADUCCIONES
 const translations = {
   en: {
     motto: "We build spaces and strengthen your trust...",
@@ -36,6 +37,7 @@ const translations = {
     about3:
       "We always aim to achieve full client satisfaction, with constant supervision to reach goals and meet objectives.",
     about4: "At Jotaye Group, we build spaces and generate trust.",
+    ourServices: "Our Services",
     promoTitle: "Special Promotion",
     promoText: "Check out our discounts.",
     contactTitle: "Contact",
@@ -59,11 +61,14 @@ const translations = {
     contact: "Contacto",
     visit: "Solicita una visita",
     mission: "Misión",
-    missionText: "Brindar servicios de construcción con altos estándares de calidad.",
+    missionText:
+      "Brindar servicios de construcción con altos estándares de calidad.",
     vision: "Visión",
-    visionText: "Ser líderes en remodelación y construcción en South Florida.",
+    visionText:
+      "Ser líderes en remodelación y construcción en South Florida.",
     goals: "Objetivos",
-    goalsText: "Cumplir expectativas, plazos y calidad en cada proyecto.",
+    goalsText:
+      "Cumplir expectativas, plazos y calidad en cada proyecto.",
     aboutTitle: "Jotaye Group LLC: más que construcción",
     about1:
       "Somos una empresa con base en el Sur de la Florida que combina experiencia en obra con innovación digital para crear espacios únicos.",
@@ -72,6 +77,7 @@ const translations = {
     about3:
       "Estamos siempre a la disposición de lograr la plena satisfacción de nuestros clientes, con una supervisión constante para lograr las metas y alcanzar los objetivos.",
     about4: "En Jotaye Group, construimos espacios y generamos confianza.",
+    ourServices: "Nuestros Servicios",
     promoTitle: "Promoción Especial",
     promoText: "Consulta nuestros descuentos.",
     contactTitle: "Contacto",
@@ -93,28 +99,34 @@ export default function App() {
   const [lang, setLang] = useState("en");
   const t = translations[lang];
 
-  // Ruta al flyer en /public/assets
-  const flyerPath = "/assets/flayer-jotaye.webp";
-
   return (
     <div id="top" className="bg-white text-gray-800 font-sans relative">
-      {/* HEADER */}
+      {/* ======================
+          HEADER
+          ====================== */}
       <header className="bg-white shadow sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
-          <div className="flex items-center justify-between w-full mb-2">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center">
+          {/* 1) LOGO */}
+          <div className="flex-shrink-0">
             <a href="/" onClick={() => window.scrollTo(0, 0)}>
               <img
                 src="/assets/logo-header.png"
                 alt="Jotaye Group LLC"
-                className="h-24 w-auto"
+                className="h-16"
               />
             </a>
           </div>
-          <p className="italic text-gray-600 mb-2">{t.motto}</p>
-          <div className="mb-2">
+
+          {/* 2) FRASE (MOTTO) */}
+          <div className="flex-1 text-center px-4">
+            <p className="italic text-gray-600">{t.motto}</p>
+          </div>
+
+          {/* 3) BOTONES DE IDIOMA */}
+          <div className="flex-shrink-0 space-x-2">
             <button
               onClick={() => setLang("en")}
-              className={`mx-1 px-2 py-1 rounded text-sm ${
+              className={`px-3 py-1 rounded ${
                 lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200"
               }`}
             >
@@ -122,53 +134,64 @@ export default function App() {
             </button>
             <button
               onClick={() => setLang("es")}
-              className={`mx-1 px-2 py-1 rounded text-sm ${
+              className={`px-3 py-1 rounded ${
                 lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200"
               }`}
             >
               ES
             </button>
           </div>
-          <nav className="flex flex-wrap justify-center gap-2">
-            {[
-              { href: "#top", label: t.home },
-              { href: "#servicios", label: t.services },
-              {
-                href: "https://instagram.com/jotayegroup",
-                label: t.gallery,
-                icon: <FaInstagram className="inline-block mr-1" />,
-                external: true,
-              },
-              { href: "#testimonios", label: t.testimonials },
-              { href: "#contacto", label: t.contact },
-              { href: "#cotizacion", label: t.visit },
-            ].map((link, i) =>
-              link.external ? (
-                <a
-                  key={i}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3 py-1 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
-                >
-                  {link.icon}
-                  {link.label}
-                </a>
-              ) : (
-                <a
-                  key={i}
-                  href={link.href}
-                  className="px-3 py-1 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
-                >
-                  {link.label}
-                </a>
-              )
-            )}
-          </nav>
         </div>
+
+        {/* 4) MENÚ DE NAVEGACIÓN (en una línea, centrado o a la derecha) */}
+        <nav className="bg-white border-t border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 py-2 flex justify-center space-x-3">
+            {/* Cada enlace */}
+            <a
+              href="#top"
+              className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+            >
+              {t.home}
+            </a>
+            <a
+              href="#servicios"
+              className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+            >
+              {t.services}
+            </a>
+            <a
+              href="https://instagram.com/jotayegroup"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm inline-flex items-center"
+            >
+              <FaInstagram className="mr-1" /> {t.gallery}
+            </a>
+            <a
+              href="#testimonios"
+              className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+            >
+              {t.testimonials}
+            </a>
+            <a
+              href="#contacto"
+              className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+            >
+              {t.contact}
+            </a>
+            <a
+              href="#cotizacion"
+              className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+            >
+              {t.visit}
+            </a>
+          </div>
+        </nav>
       </header>
 
-      {/* MISIÓN – VISIÓN – OBJETIVOS */}
+      {/* ======================
+          SECCIÓN: MISIÓN / VISIÓN / OBJETIVOS
+          ====================== */}
       <section className="py-16 text-center">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-gray-100 rounded-lg shadow">
@@ -186,7 +209,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* SOBRE NOSOTROS */}
+      {/* ======================
+          SECCIÓN: SOBRE NOSOTROS
+          ====================== */}
       <section className="bg-white py-16">
         <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow text-left">
           <h3 className="text-2xl font-bold mb-4">{t.aboutTitle}</h3>
@@ -197,9 +222,16 @@ export default function App() {
         </div>
       </section>
 
-      {/* NUESTROS SERVICIOS */}
-      <main className="max-w-6xl mx-auto px-4 py-16" id="servicios">
-        <h3 className="text-3xl font-bold text-center mb-12">{t.services}</h3>
+      {/* ======================
+          SECCIÓN: NUESTROS SERVICIOS
+          ====================== */}
+      <main
+        className="max-w-6xl mx-auto px-4 py-16"
+        id="servicios"
+      >
+        <h3 className="text-3xl font-bold text-center mb-12">
+          {t.services}
+        </h3>
         <div className="grid md:grid-cols-3 gap-6">
           {services.map((service, i) => (
             <div
@@ -217,10 +249,12 @@ export default function App() {
               </div>
             </div>
           ))}
-          {/* Promoción especial */}
+
+          {/* Promoción especial (flyer) */}
+          {/* IMPORTANTE: Aquí ya no usamos “import flyer from …”; usamos la ruta pública */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <img
-              src={flyerPath}
+              src="/assets/flayer-jotaye.webp"
               alt="Promoción"
               className="w-full h-48 object-cover"
             />
@@ -232,12 +266,16 @@ export default function App() {
         </div>
       </main>
 
-      {/* FORMULARIO DE CONTACTO */}
+      {/* ======================
+          SECCIÓN: FORMULARIO DE CONTACTO
+          ====================== */}
       <section id="cotizacion" className="py-16 bg-gray-50">
         <ContactForm language={lang} />
       </section>
 
-      {/* CONTACTO RÁPIDO */}
+      {/* ======================
+          SECCIÓN: CONTACTO RÁPIDO
+          ====================== */}
       <section id="contacto" className="py-16 text-center">
         <h3 className="text-3xl font-bold mb-6">{t.contactTitle}</h3>
         <div className="flex justify-center gap-4">
@@ -258,7 +296,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* TESTIMONIOS */}
+      {/* ======================
+          SECCIÓN: TESTIMONIOS
+          ====================== */}
       <section id="testimonios" className="py-16 bg-gray-50 text-center">
         <h3 className="text-3xl font-bold mb-8">{t.testimonialsTitle}</h3>
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
@@ -275,7 +315,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* ======================
+          FOOTER
+          ====================== */}
       <footer className="bg-[#1e293b] text-white py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
           <p className="mb-4 md:mb-0">
@@ -310,7 +352,9 @@ export default function App() {
         </div>
       </footer>
 
-      {/* MODAL DE SERVICIO */}
+      {/* ======================
+          MODAL DE SERVICIO
+          ====================== */}
       {selectedService && (
         <ServiceModal
           service={selectedService}
