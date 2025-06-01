@@ -1,7 +1,14 @@
 // src/App.jsx
 import React, { useState } from "react";
-import "./MainApp.css";
-import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook } from "react-icons/fa";
+import "./MainApp.css"; // Tus animaciones y estilos generales
+// Ya no importamos el logo aquí; usamos la ruta pública en <img>
+import flyer from "/assets/flayer-jotaye.webp"; // WebP para mayor eficiencia
+import {
+  FaWhatsapp,
+  FaEnvelope,
+  FaInstagram,
+  FaFacebook,
+} from "react-icons/fa";
 import ServiceModal from "./components/ServiceModal";
 import ContactForm from "./components/ContactForm";
 import services from "./data/services";
@@ -39,8 +46,7 @@ const translations = {
     testimonial1: "Excellent service and attention to detail. Highly recommended.",
     testimonial2:
       "The team was punctual, professional, and left everything spotless.",
-    testimonial3:
-      "They transformed my kitchen and bathroom — I loved the final result!",
+    testimonial3: "They transformed my kitchen and bathroom — I loved the final result!",
     copyright: "Jotaye Group LLC",
   },
   es: {
@@ -73,7 +79,8 @@ const translations = {
     email: "Correo",
     testimonialsTitle: "Lo que dicen nuestros clientes",
     testimonial1: "Excelente servicio y atención al detalle. Muy recomendados.",
-    testimonial2: "El equipo fue puntual, profesional y dejaron todo impecable.",
+    testimonial2:
+      "El equipo fue puntual, profesional y dejaron todo impecable.",
     testimonial3: "Transformaron mi cocina y baño, ¡me encantó el resultado final!",
     copyright: "Jotaye Group LLC",
   },
@@ -82,34 +89,36 @@ const translations = {
 export default function App() {
   const [selectedService, setSelectedService] = useState(null);
   const [lang, setLang] = useState("en");
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const t = translations[lang];
 
   return (
     <div id="top" className="bg-white text-gray-800 font-sans relative">
-      {/* ============================= */}
-      {/*        HEADER CORREGIDO      */}
-      {/* ============================= */}
+      {/* HEADER */}
       <header className="bg-white shadow sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center">
-          {/* 1) LOGO */}
-          <div className="flex-shrink-0">
-            <a href="/" onClick={() => window.scrollTo(0, 0)}>
-              <img
-                src="/assets/logo-header.png"
-                alt="Jotaye Group LLC"
-                className="h-20 w-auto"
-              />
-            </a>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between">
+          {/* Logo */}
+          <a
+            href="/"
+            onClick={() => window.scrollTo(0, 0)}
+            className="flex-shrink-0"
+          >
+            <img
+              src="/assets/logo-header.webp"
+              alt="Jotaye Group LLC"
+              className="h-24 w-auto"
+              width={180}
+              height={60}
+              loading="lazy"
+            />
+          </a>
 
-          {/* 2) LEMA CENTRADO */}
-          <div className="flex-1 flex justify-center">
-            <p className="italic text-gray-600">{t.motto}</p>
-          </div>
+          {/* Frase */}
+          <p className="italic text-gray-600 my-2 md:my-0 md:mx-6 flex-1 text-center md:text-left">
+            {t.motto}
+          </p>
 
-          {/* 3) MENÚ HORIZONTAL (desktop) */}
-          <nav className="hidden md:flex space-x-2 ml-8">
+          {/* Menú horizontal */}
+          <nav className="flex flex-wrap justify-center gap-2 mb-2 md:mb-0">
             {[
               { href: "#top", label: t.home },
               { href: "#servicios", label: t.services },
@@ -129,7 +138,7 @@ export default function App() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                  className="px-3 py-2 text-sm bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition"
                 >
                   {link.icon}
                   {link.label}
@@ -138,7 +147,7 @@ export default function App() {
                 <a
                   key={i}
                   href={link.href}
-                  className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                  className="px-3 py-2 text-sm bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition"
                 >
                   {link.label}
                 </a>
@@ -146,128 +155,30 @@ export default function App() {
             )}
           </nav>
 
-          {/* 4) BOTONES DE IDIOMA (desktop) */}
-          <div className="hidden md:flex items-center space-x-2 ml-8">
+          {/* Botones de cambio de idioma */}
+          <div className="flex gap-2">
             <button
               onClick={() => setLang("en")}
-              className={`px-3 py-1 rounded ${
-                lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"
+              className={`px-2 py-1 text-sm rounded ${
+                lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200"
               }`}
             >
               EN
             </button>
             <button
               onClick={() => setLang("es")}
-              className={`px-3 py-1 rounded ${
-                lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"
+              className={`px-2 py-1 text-sm rounded ${
+                lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200"
               }`}
             >
               ES
             </button>
           </div>
-
-          {/* 5) BOTÓN HAMBURGUESA (móvil) */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setShowMobileMenu((prev) => !prev)}
-              aria-label="Toggle mobile menu"
-            >
-              <svg
-                className="h-6 w-6 text-gray-700"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-          </div>
         </div>
-
-        {/* ----------------------------- */}
-        {/* MENÚ MÓVIL DESPLEGABLE      */}
-        {/* ----------------------------- */}
-        {showMobileMenu && (
-          <div className="md:hidden bg-white border-t border-gray-200">
-            <div className="px-4 py-2 space-y-2">
-              {/* Idiomas en móvil */}
-              <div className="flex space-x-2 mb-2">
-                <button
-                  onClick={() => {
-                    setLang("en");
-                    setShowMobileMenu(false);
-                  }}
-                  className={`px-3 py-1 rounded ${
-                    lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"
-                  }`}
-                >
-                  EN
-                </button>
-                <button
-                  onClick={() => {
-                    setLang("es");
-                    setShowMobileMenu(false);
-                  }}
-                  className={`px-3 py-1 rounded ${
-                    lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"
-                  }`}
-                >
-                  ES
-                </button>
-              </div>
-
-              {/* Enlaces (móvil) */}
-              {[
-                { href: "#top", label: t.home },
-                { href: "#servicios", label: t.services },
-                {
-                  href: "https://instagram.com/jotayegroup",
-                  label: t.gallery,
-                  icon: <FaInstagram className="inline-block mr-1" />,
-                  external: true,
-                },
-                { href: "#testimonios", label: t.testimonials },
-                { href: "#contacto", label: t.contact },
-                { href: "#cotizacion", label: t.visit },
-              ].map((link, i) =>
-                link.external ? (
-                  <a
-                    key={i}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
-                    onClick={() => setShowMobileMenu(false)}
-                  >
-                    {link.icon}
-                    {link.label}
-                  </a>
-                ) : (
-                  <a
-                    key={i}
-                    href={link.href}
-                    className="block px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
-                    onClick={() => setShowMobileMenu(false)}
-                  >
-                    {link.label}
-                  </a>
-                )
-              )}
-            </div>
-          </div>
-        )}
       </header>
-      {/* ============================= */}
-      {/*      FIN DEL HEADER          */}
-      {/* ============================= */}
 
       {/* MISIÓN – VISIÓN – OBJETIVOS */}
-      <section className="py-16 text-center">
+      <section className="py-12 text-center">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-gray-100 rounded-lg shadow">
             <h4 className="text-xl font-semibold mb-2">{t.mission}</h4>
@@ -305,23 +216,40 @@ export default function App() {
               className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden cursor-pointer"
               onClick={() => setSelectedService(service)}
             >
-              <img
-                src={service.image}
-                alt={service.title[lang]}
-                className="w-full h-48 object-cover"
-              />
+              {/* Uso de <picture> para servir WebP cuando esté disponible */}
+              <picture>
+                <source
+                  srcSet={service.image.replace(".jpg", ".webp")}
+                  type="image/webp"
+                />
+                <img
+                  src={service.image}
+                  alt={service.title[lang]}
+                  className="w-full h-48 object-cover"
+                  width={400}
+                  height={240}
+                  loading="lazy"
+                />
+              </picture>
               <div className="p-4 text-center">
                 <h4 className="font-semibold">{service.title[lang]}</h4>
               </div>
             </div>
           ))}
+
           {/* Promoción especial */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
-            <img
-              src="/assets/flayer-jotaye.jpg"
-              alt="Promoción"
-              className="w-full h-48 object-cover"
-            />
+            <picture>
+              <source srcSet="/assets/flayer-jotaye.webp" type="image/webp" />
+              <img
+                src="/assets/flayer-jotaye.jpg"
+                alt="Promoción"
+                className="w-full h-48 object-cover"
+                width={400}
+                height={240}
+                loading="lazy"
+              />
+            </picture>
             <div className="p-4 text-center">
               <h4 className="font-semibold">{t.promoTitle}</h4>
               <p className="text-gray-600">{t.promoText}</p>
@@ -360,14 +288,16 @@ export default function App() {
       <section id="testimonios" className="py-16 bg-gray-50 text-center">
         <h3 className="text-3xl font-bold mb-8">{t.testimonialsTitle}</h3>
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
-          {[t.testimonial1, t.testimonial2, t.testimonial3].map((text, idx) => (
-            <div key={idx} className="p-6 bg-white rounded-lg shadow">
-              <p className="italic mb-4">“{text}”</p>
-              <p className="font-semibold">
-                {["Carlos M.", "Ana R.", "Luis F."][idx]}
-              </p>
-            </div>
-          ))}
+          {[t.testimonial1, t.testimonial2, t.testimonial3].map(
+            (text, idx) => (
+              <div key={idx} className="p-6 bg-white rounded-lg shadow">
+                <p className="italic mb-4">“{text}”</p>
+                <p className="font-semibold">
+                  {["Carlos M.", "Ana R.", "Luis F."][idx]}
+                </p>
+              </div>
+            )
+          )}
         </div>
       </section>
 
@@ -378,28 +308,16 @@ export default function App() {
             &copy; {new Date().getFullYear()} {t.copyright}
           </p>
           <div className="flex gap-4">
-            <a
-              href="https://wa.me/13054172681"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://wa.me/13054172681" target="_blank" rel="noopener noreferrer">
               <FaWhatsapp size={20} />
             </a>
             <a href="mailto:jotayegroupllc@gmail.com">
               <FaEnvelope size={20} />
             </a>
-            <a
-              href="https://instagram.com/jotayegroup"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://instagram.com/jotayegroup" target="_blank" rel="noopener noreferrer">
               <FaInstagram size={20} />
             </a>
-            <a
-              href="https://facebook.com/JotayeGroupLLC"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://facebook.com/JotayeGroupLLC" target="_blank" rel="noopener noreferrer">
               <FaFacebook size={20} />
             </a>
           </div>
