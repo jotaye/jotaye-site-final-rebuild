@@ -2,14 +2,15 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <!-- Eliminamos CSP estricto para evitar warnings de Vite en dev -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Servicios profesionales de construcción y remodelación en South Florida por Jotaye Group LLC."
+      content="Servicios profesionales de construcción y remodelación en South Florida por Jotaye Group LLC. Electricidad, plomería, pintura, cocinas y más."
     />
     <meta
       name="keywords"
-      content="construcción, remodelación, electricidad, plomería, pintura, Jotaye Group LLC, Florida"
+      content="construcción, remodelación, electricidad, plomería, drywall, pintura, Jotaye Group LLC, Florida"
     />
     <meta name="author" content="Jotaye Group LLC" />
     <meta name="robots" content="index, follow" />
@@ -23,9 +24,9 @@
       property="og:description"
       content="Expertos en servicios de construcción residencial y comercial en South Florida."
     />
-    <!-- Este flayer-jotaye.jpg debe estar en public/assets/ -->
-    <meta property="og:image" content="/assets/flayer-jotaye.jpg" />
-    <meta property="og:url" content="https://jotayegroupllc.com/" />
+    <!-- Para que Facebook/Twitter usen la versión WebP si está soportado -->
+    <meta property="og:image" content="/assets/flayer-jotaye.webp" />
+    <meta property="og:url" content="https://www.jotayegroupllc.com/" />
     <meta property="og:type" content="website" />
 
     <!-- Twitter -->
@@ -38,16 +39,35 @@
       name="twitter:description"
       content="Servicios integrales de remodelación en cocinas, baños, plomería, electricidad y más."
     />
-    <meta name="twitter:image" content="/assets/flayer-jotaye.jpg" />
+    <meta name="twitter:image" content="/assets/flayer-jotaye.webp" />
 
-    <!-- Favicon: Debes tener favicon.ico en public/ -->
+    <!-- Precarga del logo (evita CLS) -->
+    <link rel="preload" href="/assets/logo-header.webp" as="image" />
+    <!-- Precarga de la fuente (si usas Inter u otra, ejemplo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.ico" />
 
     <meta name="theme-color" content="#1e293b" />
     <title>Jotaye Group LLC | Construcción y Remodelación en Florida</title>
+
+    <!-- Carga del CSS generado por Vite + Tailwind/JIT -->
+    <link rel="stylesheet" href="/index.css" />
   </head>
-  <body>
+  <body class="font-sans antialiased">
     <div id="root"></div>
+
+    <!-- Scripts de terceros (ejemplo: Analytics) con async/defer -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=TU_ID"></script> -->
+    <!-- <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'TU_ID');</script> -->
+
+    <!-- Se monta React desde main.jsx -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
