@@ -1,7 +1,8 @@
+// src/App.jsx
 import React, { useState } from "react";
 import "./MainApp.css";
-// Ahora el logo se carga desde /assets/logo-header.png en public
-import flyer from "/assets/flayer-jotaye.webp";
+// ---- Ya NO importamos el flyer desde /assets, sino que lo referenciamos directamente con cadena ----
+// import flyer from "/assets/flayer-jotaye.webp";
 import {
   FaWhatsapp,
   FaEnvelope,
@@ -91,6 +92,9 @@ export default function App() {
   const [selectedService, setSelectedService] = useState(null);
   const [lang, setLang] = useState("en");
   const t = translations[lang];
+
+  // Ruta al flyer en /public/assets
+  const flyerPath = "/assets/flayer-jotaye.webp";
 
   return (
     <div id="top" className="bg-white text-gray-800 font-sans relative">
@@ -216,7 +220,7 @@ export default function App() {
           {/* Promoción especial */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <img
-              src={flyer}
+              src={flyerPath}
               alt="Promoción"
               className="w-full h-48 object-cover"
             />
@@ -278,16 +282,28 @@ export default function App() {
             &copy; {new Date().getFullYear()} {t.copyright}
           </p>
           <div className="flex gap-4">
-            <a href="https://wa.me/13054172681" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://wa.me/13054172681"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaWhatsapp size={20} />
             </a>
             <a href="mailto:jotayegroupllc@gmail.com">
               <FaEnvelope size={20} />
             </a>
-            <a href="https://instagram.com/jotayegroup" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://instagram.com/jotayegroup"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaInstagram size={20} />
             </a>
-            <a href="https://facebook.com/JotayeGroupLLC" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://facebook.com/JotayeGroupLLC"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaFacebook size={20} />
             </a>
           </div>
