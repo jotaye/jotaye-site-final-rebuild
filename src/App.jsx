@@ -1,8 +1,7 @@
-// src/App.jsx
 import React, { useState } from "react";
-import "./MainApp.css"; // Tus animaciones y estilos generales
-// Ya no importamos el logo aquí; usamos la ruta pública en <img>
-import flyer from "/assets/flayer-jotaye.webp"; // WebP para mayor eficiencia
+import "./MainApp.css";
+// Ahora el logo se carga desde /assets/logo-header.png en public
+import flyer from "/assets/flayer-jotaye.webp";
 import {
   FaWhatsapp,
   FaEnvelope,
@@ -36,17 +35,18 @@ const translations = {
     about3:
       "We always aim to achieve full client satisfaction, with constant supervision to reach goals and meet objectives.",
     about4: "At Jotaye Group, we build spaces and generate trust.",
-    ourServices: "Our Services",
     promoTitle: "Special Promotion",
     promoText: "Check out our discounts.",
     contactTitle: "Contact",
     whatsapp: "WhatsApp",
     email: "Email",
     testimonialsTitle: "What our clients say",
-    testimonial1: "Excellent service and attention to detail. Highly recommended.",
+    testimonial1:
+      "Excellent service and attention to detail. Highly recommended.",
     testimonial2:
       "The team was punctual, professional, and left everything spotless.",
-    testimonial3: "They transformed my kitchen and bathroom — I loved the final result!",
+    testimonial3:
+      "They transformed my kitchen and bathroom — I loved the final result!",
     copyright: "Jotaye Group LLC",
   },
   es: {
@@ -71,17 +71,18 @@ const translations = {
     about3:
       "Estamos siempre a la disposición de lograr la plena satisfacción de nuestros clientes, con una supervisión constante para lograr las metas y alcanzar los objetivos.",
     about4: "En Jotaye Group, construimos espacios y generamos confianza.",
-    ourServices: "Nuestros Servicios",
     promoTitle: "Promoción Especial",
     promoText: "Consulta nuestros descuentos.",
     contactTitle: "Contacto",
     whatsapp: "WhatsApp",
     email: "Correo",
     testimonialsTitle: "Lo que dicen nuestros clientes",
-    testimonial1: "Excelente servicio y atención al detalle. Muy recomendados.",
+    testimonial1:
+      "Excelente servicio y atención al detalle. Muy recomendados.",
     testimonial2:
       "El equipo fue puntual, profesional y dejaron todo impecable.",
-    testimonial3: "Transformaron mi cocina y baño, ¡me encantó el resultado final!",
+    testimonial3:
+      "Transformaron mi cocina y baño, ¡me encantó el resultado final!",
     copyright: "Jotaye Group LLC",
   },
 };
@@ -95,30 +96,36 @@ export default function App() {
     <div id="top" className="bg-white text-gray-800 font-sans relative">
       {/* HEADER */}
       <header className="bg-white shadow sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between">
-          {/* Logo */}
-          <a
-            href="/"
-            onClick={() => window.scrollTo(0, 0)}
-            className="flex-shrink-0"
-          >
-            <img
-              src="/assets/logo-header.webp"
-              alt="Jotaye Group LLC"
-              className="h-24 w-auto"
-              width={180}
-              height={60}
-              loading="lazy"
-            />
-          </a>
-
-          {/* Frase */}
-          <p className="italic text-gray-600 my-2 md:my-0 md:mx-6 flex-1 text-center md:text-left">
-            {t.motto}
-          </p>
-
-          {/* Menú horizontal */}
-          <nav className="flex flex-wrap justify-center gap-2 mb-2 md:mb-0">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
+          <div className="flex items-center justify-between w-full mb-2">
+            <a href="/" onClick={() => window.scrollTo(0, 0)}>
+              <img
+                src="/assets/logo-header.png"
+                alt="Jotaye Group LLC"
+                className="h-24 w-auto"
+              />
+            </a>
+          </div>
+          <p className="italic text-gray-600 mb-2">{t.motto}</p>
+          <div className="mb-2">
+            <button
+              onClick={() => setLang("en")}
+              className={`mx-1 px-2 py-1 rounded text-sm ${
+                lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200"
+              }`}
+            >
+              EN
+            </button>
+            <button
+              onClick={() => setLang("es")}
+              className={`mx-1 px-2 py-1 rounded text-sm ${
+                lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200"
+              }`}
+            >
+              ES
+            </button>
+          </div>
+          <nav className="flex flex-wrap justify-center gap-2">
             {[
               { href: "#top", label: t.home },
               { href: "#servicios", label: t.services },
@@ -138,7 +145,7 @@ export default function App() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3 py-2 text-sm bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition"
+                  className="px-3 py-1 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
                 >
                   {link.icon}
                   {link.label}
@@ -147,38 +154,18 @@ export default function App() {
                 <a
                   key={i}
                   href={link.href}
-                  className="px-3 py-2 text-sm bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition"
+                  className="px-3 py-1 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
                 >
                   {link.label}
                 </a>
               )
             )}
           </nav>
-
-          {/* Botones de cambio de idioma */}
-          <div className="flex gap-2">
-            <button
-              onClick={() => setLang("en")}
-              className={`px-2 py-1 text-sm rounded ${
-                lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200"
-              }`}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => setLang("es")}
-              className={`px-2 py-1 text-sm rounded ${
-                lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200"
-              }`}
-            >
-              ES
-            </button>
-          </div>
         </div>
       </header>
 
       {/* MISIÓN – VISIÓN – OBJETIVOS */}
-      <section className="py-12 text-center">
+      <section className="py-16 text-center">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-gray-100 rounded-lg shadow">
             <h4 className="text-xl font-semibold mb-2">{t.mission}</h4>
@@ -216,40 +203,23 @@ export default function App() {
               className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden cursor-pointer"
               onClick={() => setSelectedService(service)}
             >
-              {/* Uso de <picture> para servir WebP cuando esté disponible */}
-              <picture>
-                <source
-                  srcSet={service.image.replace(".jpg", ".webp")}
-                  type="image/webp"
-                />
-                <img
-                  src={service.image}
-                  alt={service.title[lang]}
-                  className="w-full h-48 object-cover"
-                  width={400}
-                  height={240}
-                  loading="lazy"
-                />
-              </picture>
+              <img
+                src={service.image}
+                alt={service.title[lang]}
+                className="w-full h-48 object-cover"
+              />
               <div className="p-4 text-center">
                 <h4 className="font-semibold">{service.title[lang]}</h4>
               </div>
             </div>
           ))}
-
           {/* Promoción especial */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
-            <picture>
-              <source srcSet="/assets/flayer-jotaye.webp" type="image/webp" />
-              <img
-                src="/assets/flayer-jotaye.jpg"
-                alt="Promoción"
-                className="w-full h-48 object-cover"
-                width={400}
-                height={240}
-                loading="lazy"
-              />
-            </picture>
+            <img
+              src={flyer}
+              alt="Promoción"
+              className="w-full h-48 object-cover"
+            />
             <div className="p-4 text-center">
               <h4 className="font-semibold">{t.promoTitle}</h4>
               <p className="text-gray-600">{t.promoText}</p>
