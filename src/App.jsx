@@ -1,19 +1,13 @@
 // src/App.jsx
-import React, { useState } from "react";
-import "./MainApp.css";
 
-// IMPORTS DE ICONOS Y COMPONENTES
-import {
-  FaWhatsapp,
-  FaEnvelope,
-  FaInstagram,
-  FaFacebook,
-} from "react-icons/fa";
+import React, { useState } from "react";
+import "./MainApp.css"; 
+import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook } from "react-icons/fa";
+import { FiMenu } from "react-icons/fi"; // Ícono hamburguesa
 import ServiceModal from "./components/ServiceModal";
 import ContactForm from "./components/ContactForm";
 import services from "./data/services";
 
-// TRADUCCIONES
 const translations = {
   en: {
     motto: "We build spaces and strengthen your trust...",
@@ -97,33 +91,35 @@ const translations = {
 export default function App() {
   const [selectedService, setSelectedService] = useState(null);
   const [lang, setLang] = useState("en");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Control para menú móvil
   const t = translations[lang];
 
   return (
     <div id="top" className="bg-white text-gray-800 font-sans relative">
-      {/* ======================
+      {/* ===========================
           HEADER
-          ====================== */}
+          =========================== */}
       <header className="bg-white shadow sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center">
+        {/* Contenedor general: en móvil es columna y en desktop fila */}
+        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center lg:flex-row lg:justify-between lg:items-center">
           {/* 1) LOGO */}
           <div className="flex-shrink-0">
             <a href="/" onClick={() => window.scrollTo(0, 0)}>
               <img
                 src="/assets/logo-header.png"
                 alt="Jotaye Group LLC"
-                className="h-16"
+                className="h-16 mx-auto"
               />
             </a>
           </div>
 
-          {/* 2) FRASE (MOTTO) */}
-          <div className="flex-1 text-center px-4">
+          {/* 2) FRASE (motto) */}
+          <div className="mt-2 text-center lg:mt-0 lg:mx-4">
             <p className="italic text-gray-600">{t.motto}</p>
           </div>
 
-          {/* 3) BOTONES DE IDIOMA */}
-          <div className="flex-shrink-0 space-x-2">
+          {/* 3) BOTONES DE IDIOMA (EN/ES) */}
+          <div className="mt-2 flex space-x-2 lg:mt-0">
             <button
               onClick={() => setLang("en")}
               className={`px-3 py-1 rounded ${
@@ -141,12 +137,16 @@ export default function App() {
               ES
             </button>
           </div>
-        </div>
 
-        {/* 4) MENÚ DE NAVEGACIÓN (en una línea, centrado o a la derecha) */}
-        <nav className="bg-white border-t border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 py-2 flex justify-center space-x-3">
-            {/* Cada enlace */}
+          {/* 4) ÍCONO HAMBURGUESA (solo en móvil) */}
+          <div className="mt-2 lg:hidden">
+            <button onClick={() => setMobileMenuOpen((prev) => !prev)}>
+              <FiMenu size={28} className="text-gray-700" />
+            </button>
+          </div>
+
+          {/* 5) MENÚ DE NAVEGACIÓN (solo en escritorio) */}
+          <nav className="hidden lg:flex lg:items-center lg:space-x-3 lg:ml-4">
             <a
               href="#top"
               className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
@@ -165,7 +165,8 @@ export default function App() {
               rel="noopener noreferrer"
               className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm inline-flex items-center"
             >
-              <FaInstagram className="mr-1" /> {t.gallery}
+              <FaInstagram className="mr-1" />
+              {t.gallery}
             </a>
             <a
               href="#testimonios"
@@ -185,13 +186,68 @@ export default function App() {
             >
               {t.visit}
             </a>
-          </div>
-        </nav>
+          </nav>
+        </div>
+
+        {/* ===========================
+            MENÚ RESPONSIVE (solo móvil)
+            =========================== */}
+        {mobileMenuOpen && (
+          <nav className="lg:hidden bg-white border-t border-gray-200">
+            <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col space-y-2">
+              <a
+                href="#top"
+                className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.home}
+              </a>
+              <a
+                href="#servicios"
+                className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.services}
+              </a>
+              <a
+                href="https://instagram.com/jotayegroup"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm inline-flex items-center"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <FaInstagram className="mr-1" />
+                {t.gallery}
+              </a>
+              <a
+                href="#testimonios"
+                className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.testimonials}
+              </a>
+              <a
+                href="#contacto"
+                className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.contact}
+              </a>
+              <a
+                href="#cotizacion"
+                className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t.visit}
+              </a>
+            </div>
+          </nav>
+        )}
       </header>
 
-      {/* ======================
+      {/* ===========================
           SECCIÓN: MISIÓN / VISIÓN / OBJETIVOS
-          ====================== */}
+          =========================== */}
       <section className="py-16 text-center">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-gray-100 rounded-lg shadow">
@@ -209,9 +265,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ======================
+      {/* ===========================
           SECCIÓN: SOBRE NOSOTROS
-          ====================== */}
+          =========================== */}
       <section className="bg-white py-16">
         <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow text-left">
           <h3 className="text-2xl font-bold mb-4">{t.aboutTitle}</h3>
@@ -222,16 +278,11 @@ export default function App() {
         </div>
       </section>
 
-      {/* ======================
+      {/* ===========================
           SECCIÓN: NUESTROS SERVICIOS
-          ====================== */}
-      <main
-        className="max-w-6xl mx-auto px-4 py-16"
-        id="servicios"
-      >
-        <h3 className="text-3xl font-bold text-center mb-12">
-          {t.services}
-        </h3>
+          =========================== */}
+      <main className="max-w-6xl mx-auto px-4 py-16" id="servicios">
+        <h3 className="text-3xl font-bold text-center mb-12">{t.services}</h3>
         <div className="grid md:grid-cols-3 gap-6">
           {services.map((service, i) => (
             <div
@@ -251,7 +302,6 @@ export default function App() {
           ))}
 
           {/* Promoción especial (flyer) */}
-          {/* IMPORTANTE: Aquí ya no usamos “import flyer from …”; usamos la ruta pública */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <img
               src="/assets/flayer-jotaye.webp"
@@ -266,16 +316,16 @@ export default function App() {
         </div>
       </main>
 
-      {/* ======================
+      {/* ===========================
           SECCIÓN: FORMULARIO DE CONTACTO
-          ====================== */}
+          =========================== */}
       <section id="cotizacion" className="py-16 bg-gray-50">
         <ContactForm language={lang} />
       </section>
 
-      {/* ======================
+      {/* ===========================
           SECCIÓN: CONTACTO RÁPIDO
-          ====================== */}
+          =========================== */}
       <section id="contacto" className="py-16 text-center">
         <h3 className="text-3xl font-bold mb-6">{t.contactTitle}</h3>
         <div className="flex justify-center gap-4">
@@ -296,9 +346,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ======================
+      {/* ===========================
           SECCIÓN: TESTIMONIOS
-          ====================== */}
+          =========================== */}
       <section id="testimonios" className="py-16 bg-gray-50 text-center">
         <h3 className="text-3xl font-bold mb-8">{t.testimonialsTitle}</h3>
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
@@ -315,9 +365,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ======================
+      {/* ===========================
           FOOTER
-          ====================== */}
+          =========================== */}
       <footer className="bg-[#1e293b] text-white py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
           <p className="mb-4 md:mb-0">
@@ -352,9 +402,9 @@ export default function App() {
         </div>
       </footer>
 
-      {/* ======================
+      {/* ===========================
           MODAL DE SERVICIO
-          ====================== */}
+          =========================== */}
       {selectedService && (
         <ServiceModal
           service={selectedService}
