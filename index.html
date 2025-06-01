@@ -1,8 +1,11 @@
+<!-- my‐project/index.html -->
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <!-- Nota: Ya no se incluye CSP aquí -->
+
+    <!-- NOTA: Hemos eliminado la meta CSP estricta con 'unsafe-eval' para evitar advertencias de Vite. -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -24,6 +27,7 @@
       property="og:description"
       content="Expertos en servicios de construcción residencial y comercial en South Florida."
     />
+    <!-- El archivo flayer-jotaye.jpg está en public/assets/ -->
     <meta property="og:image" content="/assets/flayer-jotaye.jpg" />
     <meta property="og:url" content="https://jotayegroupllc.com/" />
     <meta property="og:type" content="website" />
@@ -40,8 +44,7 @@
     />
     <meta name="twitter:image" content="/assets/flayer-jotaye.jpg" />
 
-    <!-- Gauge, Tawk, otros scripts si los hay… -->
-    <!-- Favicon: Apunta a /favicon.ico -->
+    <!-- Favicon: apunta a public/favicon.ico -->
     <link rel="icon" href="/favicon.ico" />
 
     <meta name="theme-color" content="#1e293b" />
@@ -49,7 +52,7 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- Vite inyectará automáticamente los estilos y scripts compilados -->
+    <!-- El bundle de Vite se inyectará aquí -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
