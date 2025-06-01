@@ -1,5 +1,4 @@
-// ServiceModal.jsx
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { FaWhatsapp, FaHome } from "react-icons/fa";
 
 const serviceTasks = {
@@ -64,29 +63,24 @@ const buttonLabels = {
 };
 
 export default function ServiceModal({ service, onClose, language = "es" }) {
-  const modalRef = useRef(null);
-
-  useEffect(() => {
-    // Scroll modal into view on open
-    modalRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // Prevent background scroll
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
-  }, []);
-
   if (!service) return null;
 
+  // Obtenemos título/descr segun idioma
   const title = service.title?.[language] || service.title;
   const description = service.description?.[language] || service.description;
-  const key = typeof service.title === 'object'
+
+  // Obtenemos la clave (español) para buscar tareas y labels
+  const key = typeof service.title === "object"
     ? Object.entries(service.title).find(([, val]) => val === title)?.[0]
     : service.title;
+
   const taskList = serviceTasks[key]?.[language] || [];
-  const buttonLabel = buttonLabels[key]?.[language] || (language === 'en' ? 'Contact us' : 'Contáctanos');
+  const buttonLabel =
+    buttonLabels[key]?.[language] || (language === "en" ? "Contact us" : "Contáctanos");
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-start z-50 p-4 overflow-auto">
-      <div ref={modalRef} className="bg-white rounded-lg max-w-md w-full p-6 relative shadow-xl animate-fadeIn border border-gray-200 overflow-y-auto max-h-screen">
+    <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 px-4">
+      <div className="bg-white rounded-lg max-w-md w-full p-6 relative shadow-xl animate-fadeIn border border-gray-200">
         <button
           onClick={onClose}
           className="absolute top-2 right-4 text-gray-600 text-2xl hover:text-red-500 transition"
@@ -100,7 +94,9 @@ export default function ServiceModal({ service, onClose, language = "es" }) {
           className="w-full h-48 object-cover rounded mb-4"
         />
         <h2 className="text-2xl font-bold mb-2 text-center text-gray-800">{title}</h2>
-        <p className="text-gray-700 text-sm leading-relaxed text-justify mb-2">{description}</p>
+        <p className="text-gray-700 text-sm leading-relaxed text-justify mb-2">
+          {description}
+        </p>
 
         {taskList.length > 0 && (
           <ul className="list-disc list-inside text-gray-600 text-sm mb-4">
@@ -112,7 +108,9 @@ export default function ServiceModal({ service, onClose, language = "es" }) {
 
         <div className="text-center mt-4 space-x-2">
           <a
-            href={`https://wa.me/13054172681?text=Hola,%20me%20interesa%20el%20servicio%20de%20${encodeURIComponent(title)}`}
+            href={`https://wa.me/13054172681?text=Hola,%20me%20interesa%20el%20servicio%20de%20${encodeURIComponent(
+              title
+            )}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full shadow button-rounded"
@@ -124,7 +122,7 @@ export default function ServiceModal({ service, onClose, language = "es" }) {
             className="inline-flex items-center bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-2 rounded-full shadow text-sm"
             onClick={onClose}
           >
-            <FaHome className="mr-2" /> {language === 'en' ? 'Home' : 'Inicio'}
+            <FaHome className="mr-2" /> {language === "en" ? "Home" : "Inicio"}
           </a>
         </div>
       </div>
