@@ -1,5 +1,3 @@
-/* src/MainApp.css */
-
 /* ======================================================
    Animaciones suaves para entrada de secciones y tarjetas
    ====================================================== */
@@ -49,19 +47,18 @@
    Ajustes responsivos generales
    ====================================================== */
 @media (max-width: 768px) {
-  /* Centrar texto en pantallas móviles si hace falta */
+  /* Si necesitas centrar texto en móviles */
   .mobile-center {
     text-align: center;
   }
 }
 
 /* ======================================================
-   Ajuste de separaciones verticales para que no quede
-   todo “flat” en algunas secciones
+   Ajuste de separaciones verticales para secciones
    ====================================================== */
 section {
-  /* Si quieres un fondo alternado suave, lo puedes
-     colgar aquí. Por ahora solo deja espacio. */
+  /* En caso de querer un “fondo alternado” suave, aquí podrías
+     aplicar background-colors o márgenes extras. */
 }
 
 @media (min-width: 768px) {
