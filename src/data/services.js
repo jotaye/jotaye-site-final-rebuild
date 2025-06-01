@@ -1,17 +1,3 @@
-// src/data/services.js
-
-import plomeriaImg from "../assets/plomería.jpg";
-import electricidadImg from "../assets/electricidad.jpg";
-import framingImg from "../assets/framing.jpg";
-import drywallImg from "../assets/drywall.jpg";
-import pinturaImg from "../assets/pintura.jpg";
-import finishImg from "../assets/finish.jpg";
-import baseboardImg from "../assets/baseboard.jpg";
-import demolicionImg from "../assets/demolición.jpg";
-import pisosImg from "../assets/pisos.jpg";
-import banosImg from "../assets/baños.jpg";
-import cocinasImg from "../assets/cocinas.jpg";
-
 const services = [
   {
     title: { es: "Plomería", en: "Plumbing" },
@@ -19,7 +5,7 @@ const services = [
       es: "Instalaciones y reparaciones de tuberías.",
       en: "Pipe installations and repairs.",
     },
-    image: plomeriaImg,
+    image: "/assets/plomeria.webp",
   },
   {
     title: { es: "Electricidad", en: "Electricity" },
@@ -27,7 +13,7 @@ const services = [
       es: "Instalaciones eléctricas residenciales y comerciales.",
       en: "Residential and commercial electrical installations.",
     },
-    image: electricidadImg,
+    image: "/assets/electricidad.webp",
   },
   {
     title: { es: "Framing", en: "Framing" },
@@ -35,7 +21,7 @@ const services = [
       es: "Estructuras sólidas para muros y techos.",
       en: "Solid structures for walls and roofs.",
     },
-    image: framingImg,
+    image: "/assets/framing.webp",
   },
   {
     title: { es: "Drywall", en: "Drywall" },
@@ -43,7 +29,7 @@ const services = [
       es: "Instalación y acabado de paneles de yeso.",
       en: "Drywall installation and finishing.",
     },
-    image: drywallImg,
+    image: "/assets/drywall.webp",
   },
   {
     title: { es: "Pintura", en: "Painting" },
@@ -51,7 +37,7 @@ const services = [
       es: "Aplicación de pintura interior y exterior.",
       en: "Interior and exterior painting services.",
     },
-    image: pinturaImg,
+    image: "/assets/pintura.webp",
   },
   {
     title: { es: "Finish", en: "Finish" },
@@ -59,7 +45,7 @@ const services = [
       es: "Acabados profesionales para detalles finos.",
       en: "Professional finishes for fine details.",
     },
-    image: finishImg,
+    image: "/assets/finish.webp",
   },
   {
     title: { es: "Baseboard", en: "Baseboard" },
@@ -67,7 +53,7 @@ const services = [
       es: "Instalación de zócalos decorativos.",
       en: "Installation of decorative baseboards.",
     },
-    image: baseboardImg,
+    image: "/assets/baseboard.webp",
   },
   {
     title: { es: "Demolición", en: "Demolition" },
@@ -75,7 +61,7 @@ const services = [
       es: "Demoliciones controladas y limpias.",
       en: "Controlled and clean demolitions.",
     },
-    image: demolicionImg,
+    image: "/assets/demolicion.webp",
   },
   {
     title: { es: "Pisos", en: "Flooring" },
@@ -83,7 +69,7 @@ const services = [
       es: "Instalación de cerámica, porcelanato y vinil.",
       en: "Ceramic, porcelain and vinyl flooring installation.",
     },
-    image: pisosImg,
+    image: "/assets/pisos.webp",
   },
   {
     title: { es: "Baños", en: "Bathrooms" },
@@ -91,7 +77,7 @@ const services = [
       es: "Remodelación completa de baños.",
       en: "Complete bathroom remodeling.",
     },
-    image: banosImg,
+    image: "/assets/banos.webp",
   },
   {
     title: { es: "Cocinas", en: "Kitchens" },
@@ -99,7 +85,7 @@ const services = [
       es: "Diseño e instalación de cocinas modernas.",
       en: "Modern kitchen design and installation.",
     },
-    image: cocinasImg,
+    image: "/assets/cocinas.webp",
   },
 ];
 
