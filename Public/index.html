@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <!-- 
-      NOTA: Hemos eliminado la política CSP estricta para que Vite no arroje
-      advertencias de 'eval'. Si en el futuro necesitas CSP, tendrás que
-      reintroducirla aquí y añadir 'unsafe-eval' a script-src.
+      NOTA: Eliminamos la meta CSP para que Vite no arroje advertencias de 'eval'.
+      Si en algún momento requieres CSP estricta, tendrás que reintroducirla y
+      añadir 'unsafe-eval' adecuadamente en script-src.
     -->
     <!--
     <meta http-equiv="Content-Security-Policy"
@@ -15,7 +15,6 @@
                    img-src 'self' data:;
                    connect-src 'self';" />
     -->
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -37,7 +36,7 @@
       property="og:description"
       content="Expertos en servicios de construcción residencial y comercial en South Florida."
     />
-    <!-- Apunta a public/assets/flayer-jotaye.jpg -->
+    <!-- Ruta pública: “/assets/flayer-jotaye.jpg” -->
     <meta property="og:image" content="/assets/flayer-jotaye.jpg" />
     <meta property="og:url" content="https://jotayegroupllc.com/" />
     <meta property="og:type" content="website" />
@@ -52,14 +51,13 @@
       name="twitter:description"
       content="Servicios integrales de remodelación en cocinas, baños, plomería, electricidad y más."
     />
-    <!--También apunta a public/assets/flayer-jotaye.jpg-->
     <meta name="twitter:image" content="/assets/flayer-jotaye.jpg" />
 
-    <!-- Redes sociales (opcional) -->
+    <!-- Opcional: enlaces “rel=me” a RRSS -->
     <link rel="me" href="https://www.instagram.com/tuusuario" />
     <link rel="me" href="https://www.facebook.com/tuusuario" />
 
-    <!-- Favicon (logo) apuntando a public/assets/logo-header.png -->
+    <!-- Favicon: /assets/logo-header.png -->
     <link rel="icon" type="image/png" href="/assets/logo-header.png" />
 
     <meta name="theme-color" content="#1e293b" />
