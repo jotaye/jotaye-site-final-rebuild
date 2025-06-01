@@ -1,12 +1,18 @@
 // src/App.jsx
 
 import React, { useState } from "react";
-import "./MainApp.css"; 
+import "./MainApp.css";
 import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi"; // Ícono hamburguesa
 import ServiceModal from "./components/ServiceModal";
 import ContactForm from "./components/ContactForm";
 import services from "./data/services";
+
+// Asegúrate de tener imágenes de construcción en src/assets/,
+// por ejemplo: construcción1.jpg, construcción2.jpg, etc.
+// En este ejemplo usaré: construcción1.jpg y construcción2.jpg (añádelas a src/assets/)
+import construccion1 from "./assets/construccion1.jpg";
+import construccion2 from "./assets/construccion2.jpg";
 
 const translations = {
   en: {
@@ -38,12 +44,9 @@ const translations = {
     whatsapp: "WhatsApp",
     email: "Email",
     testimonialsTitle: "What our clients say",
-    testimonial1:
-      "Excellent service and attention to detail. Highly recommended.",
-    testimonial2:
-      "The team was punctual, professional, and left everything spotless.",
-    testimonial3:
-      "They transformed my kitchen and bathroom — I loved the final result!",
+    testimonial1: "Excellent service and attention to detail. Highly recommended.",
+    testimonial2: "The team was punctual, professional, and left everything spotless.",
+    testimonial3: "They transformed my kitchen and bathroom — I loved the final result!",
     copyright: "Jotaye Group LLC",
   },
   es: {
@@ -55,14 +58,11 @@ const translations = {
     contact: "Contacto",
     visit: "Solicita una visita",
     mission: "Misión",
-    missionText:
-      "Brindar servicios de construcción con altos estándares de calidad.",
+    missionText: "Brindar servicios de construcción con altos estándares de calidad.",
     vision: "Visión",
-    visionText:
-      "Ser líderes en remodelación y construcción en South Florida.",
+    visionText: "Ser líderes en remodelación y construcción en South Florida.",
     goals: "Objetivos",
-    goalsText:
-      "Cumplir expectativas, plazos y calidad en cada proyecto.",
+    goalsText: "Cumplir expectativas, plazos y calidad en cada proyecto.",
     aboutTitle: "Jotaye Group LLC: más que construcción",
     about1:
       "Somos una empresa con base en el Sur de la Florida que combina experiencia en obra con innovación digital para crear espacios únicos.",
@@ -78,12 +78,9 @@ const translations = {
     whatsapp: "WhatsApp",
     email: "Correo",
     testimonialsTitle: "Lo que dicen nuestros clientes",
-    testimonial1:
-      "Excelente servicio y atención al detalle. Muy recomendados.",
-    testimonial2:
-      "El equipo fue puntual, profesional y dejaron todo impecable.",
-    testimonial3:
-      "Transformaron mi cocina y baño, ¡me encantó el resultado final!",
+    testimonial1: "Excelente servicio y atención al detalle. Muy recomendados.",
+    testimonial2: "El equipo fue puntual, profesional y dejaron todo impecable.",
+    testimonial3: "Transformaron mi cocina y baño, ¡me encantó el resultado final!",
     copyright: "Jotaye Group LLC",
   },
 };
@@ -91,18 +88,17 @@ const translations = {
 export default function App() {
   const [selectedService, setSelectedService] = useState(null);
   const [lang, setLang] = useState("en");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Control para menú móvil
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const t = translations[lang];
 
   return (
     <div id="top" className="bg-white text-gray-800 font-sans relative">
       {/* ===========================
-          HEADER
+          HEADER (sin cambios respecto a la última versión aprobada)
           =========================== */}
       <header className="bg-white shadow sticky top-0 z-50">
-        {/* Contenedor general: en móvil es columna y en desktop fila */}
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center lg:flex-row lg:justify-between lg:items-center">
-          {/* 1) LOGO */}
+          {/* LOGO */}
           <div className="flex-shrink-0">
             <a href="/" onClick={() => window.scrollTo(0, 0)}>
               <img
@@ -113,12 +109,12 @@ export default function App() {
             </a>
           </div>
 
-          {/* 2) FRASE (motto) */}
+          {/* FRASE (motto) */}
           <div className="mt-2 text-center lg:mt-0 lg:mx-4">
             <p className="italic text-gray-600">{t.motto}</p>
           </div>
 
-          {/* 3) BOTONES DE IDIOMA (EN/ES) */}
+          {/* BOTONES DE IDIOMA (EN/ES) */}
           <div className="mt-2 flex space-x-2 lg:mt-0">
             <button
               onClick={() => setLang("en")}
@@ -138,14 +134,14 @@ export default function App() {
             </button>
           </div>
 
-          {/* 4) ÍCONO HAMBURGUESA (solo en móvil) */}
+          {/* ÍCONO HAMBURGUESA (solo en móvil) */}
           <div className="mt-2 lg:hidden">
             <button onClick={() => setMobileMenuOpen((prev) => !prev)}>
               <FiMenu size={28} className="text-gray-700" />
             </button>
           </div>
 
-          {/* 5) MENÚ DE NAVEGACIÓN (solo en escritorio) */}
+          {/* MENÚ DE NAVEGACIÓN (solo en escritorio) */}
           <nav className="hidden lg:flex lg:items-center lg:space-x-3 lg:ml-4">
             <a
               href="#top"
@@ -189,9 +185,7 @@ export default function App() {
           </nav>
         </div>
 
-        {/* ===========================
-            MENÚ RESPONSIVE (solo móvil)
-            =========================== */}
+        {/* MENÚ RESPONSIVE (solo en móvil) */}
         {mobileMenuOpen && (
           <nav className="lg:hidden bg-white border-t border-gray-200">
             <div className="max-w-7xl mx-auto px-4 py-2 flex flex-col space-y-2">
@@ -246,7 +240,7 @@ export default function App() {
       </header>
 
       {/* ===========================
-          SECCIÓN: MISIÓN / VISIÓN / OBJETIVOS
+          SECCIÓN: MISIÓN – VISIÓN – OBJETIVOS (sin cambios)
           =========================== */}
       <section className="py-16 text-center">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
@@ -266,20 +260,49 @@ export default function App() {
       </section>
 
       {/* ===========================
-          SECCIÓN: SOBRE NOSOTROS
+          SECCIÓN: SOBRE NOSOTROS (ACTUALIZADA para ser más dinámica)
           =========================== */}
       <section className="bg-white py-16">
-        <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow text-left">
-          <h3 className="text-2xl font-bold mb-4">{t.aboutTitle}</h3>
-          <p className="mb-4">{t.about1}</p>
-          <p className="mb-4">{t.about2}</p>
-          <p className="mb-4">{t.about3}</p>
-          <p className="italic">{t.about4}</p>
+        <div className="max-w-6xl mx-auto fade-in px-4">
+          <h3 className="text-3xl font-bold text-center mb-8">{t.aboutTitle}</h3>
+          {/* Usamos Grid para dos columnas: 1) Imagen  2) Texto */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            {/* COLUMNA DE IMAGEN 1 */}
+            <div className="order-2 md:order-1 flex justify-center">
+              <img
+                src={construccion1}
+                alt="Construcción 1"
+                className="rounded-lg shadow-lg object-cover w-full h-64 md:h-80"
+              />
+            </div>
+            {/* COLUMNA DE TEXTO (PÁRRAFOS) */}
+            <div className="order-1 md:order-2 space-y-4 text-gray-700">
+              <p>{t.about1}</p>
+              <p>{t.about2}</p>
+            </div>
+          </div>
+
+          {/* Espacio inferior antes de la segunda fila */}
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            {/* Segunda columna de texto */}
+            <div className="space-y-4 text-gray-700">
+              <p>{t.about3}</p>
+              <p className="italic font-medium">{t.about4}</p>
+            </div>
+            {/* Segunda imagen */}
+            <div className="flex justify-center">
+              <img
+                src={construccion2}
+                alt="Construcción 2"
+                className="rounded-lg shadow-lg object-cover w-full h-64 md:h-80"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ===========================
-          SECCIÓN: NUESTROS SERVICIOS
+          SECCIÓN: NUESTROS SERVICIOS (sin cambios)
           =========================== */}
       <main className="max-w-6xl mx-auto px-4 py-16" id="servicios">
         <h3 className="text-3xl font-bold text-center mb-12">{t.services}</h3>
@@ -317,14 +340,14 @@ export default function App() {
       </main>
 
       {/* ===========================
-          SECCIÓN: FORMULARIO DE CONTACTO
+          SECCIÓN: FORMULARIO DE CONTACTO (sin cambios)
           =========================== */}
       <section id="cotizacion" className="py-16 bg-gray-50">
         <ContactForm language={lang} />
       </section>
 
       {/* ===========================
-          SECCIÓN: CONTACTO RÁPIDO
+          SECCIÓN: CONTACTO RÁPIDO (sin cambios)
           =========================== */}
       <section id="contacto" className="py-16 text-center">
         <h3 className="text-3xl font-bold mb-6">{t.contactTitle}</h3>
@@ -347,7 +370,7 @@ export default function App() {
       </section>
 
       {/* ===========================
-          SECCIÓN: TESTIMONIOS
+          SECCIÓN: TESTIMONIOS (sin cambios)
           =========================== */}
       <section id="testimonios" className="py-16 bg-gray-50 text-center">
         <h3 className="text-3xl font-bold mb-8">{t.testimonialsTitle}</h3>
@@ -366,7 +389,7 @@ export default function App() {
       </section>
 
       {/* ===========================
-          FOOTER
+          FOOTER (sin cambios)
           =========================== */}
       <footer className="bg-[#1e293b] text-white py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
@@ -402,9 +425,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* ===========================
-          MODAL DE SERVICIO
-          =========================== */}
+      {/* MODAL DE SERVICIO */}
       {selectedService && (
         <ServiceModal
           service={selectedService}
@@ -415,3 +436,4 @@ export default function App() {
     </div>
   );
 }
+
