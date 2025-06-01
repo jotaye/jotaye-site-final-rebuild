@@ -1,67 +1,10 @@
-/* src/MainApp.css */
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
 
-/* ======================================================
-   Animaciones suaves para entrada de secciones y tarjetas
-   ====================================================== */
-.fade-in {
-  animation: fadeIn 1s ease-in-out both;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ======================================================
-   Sombra y transición suave en tarjetas (card-hover)
-   ====================================================== */
-.card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* ======================================================
-   Botones con bordes totalmente redondeados
-   ====================================================== */
-.button-rounded {
-  border-radius: 9999px;
-}
-
-/* ======================================================
-   Texto destacado (para uso puntual)
-   ====================================================== */
-.text-highlight {
-  color: #f97316; /* Tailwind orange-500 */
-  font-weight: 600;
-}
-
-/* ======================================================
-   Ajustes responsivos generales
-   ====================================================== */
-@media (max-width: 768px) {
-  /* Centrar texto en pantallas móviles si hace falta */
-  .mobile-center {
-    text-align: center;
-  }
-}
-
-/* ======================================================
-   Ajuste de separaciones verticales para que no quede
-   todo “flat” en algunas secciones
-   ====================================================== */
-@media (min-width: 768px) {
-  section {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-}
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
