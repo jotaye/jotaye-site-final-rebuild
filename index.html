@@ -2,8 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <!-- Nota: Ya no incluimos CSP aquí para evitar “eval” bloqueado en dev -->
-
+    <!-- Nota: Ya no se incluye CSP aquí -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -41,7 +40,8 @@
     />
     <meta name="twitter:image" content="/assets/flayer-jotaye.jpg" />
 
-    <!-- Favicon: ya existe en public/favicon.ico -->
+    <!-- Gauge, Tawk, otros scripts si los hay… -->
+    <!-- Favicon: Apunta a /favicon.ico -->
     <link rel="icon" href="/favicon.ico" />
 
     <meta name="theme-color" content="#1e293b" />
@@ -49,6 +49,7 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Vite inyectará automáticamente los estilos y scripts compilados -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
