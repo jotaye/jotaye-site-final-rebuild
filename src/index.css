@@ -1,5 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* index.css */
 
-/* Aquí puedes añadir estilos globales adicionales si los necesitas */
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+
+/* Luego importamos nuestro MainApp.css para que cargue el degradado, tilt, etc. */
+@import "./MainApp.css";
