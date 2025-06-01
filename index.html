@@ -1,19 +1,15 @@
-<!-- my‐project/index.html -->
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-
-    <!-- NOTA: Hemos eliminado la meta CSP estricta con 'unsafe-eval' para evitar advertencias de Vite. -->
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Servicios profesionales de construcción y remodelación en South Florida por Jotaye Group LLC. Electricidad, plomería, pintura, cocinas y más."
+      content="Servicios profesionales de construcción y remodelación en South Florida por Jotaye Group LLC."
     />
     <meta
       name="keywords"
-      content="construcción, remodelación, electricidad, plomería, drywall, pintura, Jotaye Group LLC, Florida"
+      content="construcción, remodelación, electricidad, plomería, pintura, Jotaye Group LLC, Florida"
     />
     <meta name="author" content="Jotaye Group LLC" />
     <meta name="robots" content="index, follow" />
@@ -27,7 +23,7 @@
       property="og:description"
       content="Expertos en servicios de construcción residencial y comercial en South Florida."
     />
-    <!-- El archivo flayer-jotaye.jpg está en public/assets/ -->
+    <!-- Este flayer-jotaye.jpg debe estar en public/assets/ -->
     <meta property="og:image" content="/assets/flayer-jotaye.jpg" />
     <meta property="og:url" content="https://jotayegroupllc.com/" />
     <meta property="og:type" content="website" />
@@ -44,15 +40,14 @@
     />
     <meta name="twitter:image" content="/assets/flayer-jotaye.jpg" />
 
-    <!-- Favicon: apunta a public/favicon.ico -->
-    <link rel="icon" href="/favicon.ico" />
+    <!-- Favicon: Debes tener favicon.ico en public/ -->
+    <link rel="icon" type="image/png" href="/favicon.ico" />
 
     <meta name="theme-color" content="#1e293b" />
     <title>Jotaye Group LLC | Construcción y Remodelación en Florida</title>
   </head>
   <body>
     <div id="root"></div>
-    <!-- El bundle de Vite se inyectará aquí -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
