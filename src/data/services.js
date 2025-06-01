@@ -1,3 +1,4 @@
+// src/data/services.js
 const services = [
   {
     title: { es: "Plomería", en: "Plumbing" },
