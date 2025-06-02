@@ -1,4 +1,6 @@
-/* Animaciones suaves para entradas */
+/* ============================= */
+/*   ANIMACIONES / TRANSICIONES   */
+/* ============================= */
 .fade-in {
   animation: fadeIn 1s ease-in-out both;
 }
@@ -14,7 +16,9 @@
   }
 }
 
-/* Sombra y transición suave en tarjetas */
+/* ============================= */
+/*      CARD HOVER / SOMBRAS      */
+/* ============================= */
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -24,35 +28,43 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Botones totalmente redondeados */
+/* ============================= */
+/*    BOTONES REDONDEADOS (GEN)   */
+/* ============================= */
 .button-rounded {
   border-radius: 9999px;
 }
 
-/* Texto destacado */
+/* ============================= */
+/*    TEXTO DESTACADO PUNTUAL     */
+/* ============================= */
 .text-highlight {
   color: #f97316; /* Tailwind orange-500 */
   font-weight: 600;
 }
 
-/* Ajustes responsivos generales */
+/* ============================= */
+/*            RESPONSIVE          */
+/* ============================= */
 @media (max-width: 768px) {
-  /* En móvil, forzamos centrar ciertos textos si es necesario */
+  /* Centrar texto en pantallas móviles si hace falta */
   .mobile-center {
     text-align: center;
   }
 }
 
-/* Ajuste de separaciones verticales */
-section {
-  /* Para dar un poco de “aire” entre bloques, pero no demasiado */
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+/* ============================= */
+/*   ESPACIADO ENTRE SECCIONES    */
+/* ============================= */
+@media (min-width: 768px) {
+  section {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
-/* Opcional: si quieres que el fondo no sea totalmente blanco, descomenta: */
-/*
-body {
-  background-color: #f7f7f7;
-}
-*/
+/* ============================= */
+/*    MENÚ MÓVIL: COLOCAR POR      */
+/*    DEBAJO DE BOTONES EN/ES      */
+/* ============================= */
+/* Ya se maneja en App.jsx con flex-col en <nav> móvil, no hace falta CSS extra aquí */
