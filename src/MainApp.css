@@ -1,10 +1,49 @@
-/* ======================================================
-   Animaciones suaves para entrada de secciones y tarjetas
-   ====================================================== */
+/* src/MainApp.css */
+
+/* -------------------------------------------------------------
+   1) Fondo global en degradado (en lugar de blanco puro)
+   ------------------------------------------------------------- */
+body {
+  @apply bg-gradient-to-b from-gray-50 to-gray-100;
+}
+
+/* -------------------------------------------------------------
+   2) Efecto tilt-wrapper (transición suave para el “tilt” 3D)
+   ------------------------------------------------------------- */
+.tilt-wrapper {
+  transition: transform 0.2s ease-out;
+}
+
+/* -------------------------------------------------------------
+   3) Tarjeta 3D con hover más pronunciado
+   ------------------------------------------------------------- */
+.card-3d {
+  @apply bg-white rounded-lg shadow-xl overflow-hidden transform transition-transform duration-300;
+}
+.card-3d:hover {
+  @apply shadow-2xl scale-105;
+}
+
+/* -------------------------------------------------------------
+   4) Ajustes específicos de Swiper
+   ------------------------------------------------------------- */
+.swiper-container {
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* -------------------------------------------------------------
+   5) Animación fade-in para secciones
+   ------------------------------------------------------------- */
 .fade-in {
   animation: fadeIn 1s ease-in-out both;
 }
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -16,55 +55,9 @@
   }
 }
 
-/* ======================================================
-   Sombra y transición suave en tarjetas (card-hover)
-   ====================================================== */
-.card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* ======================================================
-   Botones con bordes totalmente redondeados
-   ====================================================== */
-.button-rounded {
-  border-radius: 9999px;
-}
-
-/* ======================================================
-   Texto destacado (para uso puntual)
-   ====================================================== */
-.text-highlight {
-  color: #f97316; /* Tailwind orange-500 */
-  font-weight: 600;
-}
-
-/* ======================================================
-   Ajustes responsivos generales
-   ====================================================== */
-@media (max-width: 768px) {
-  /* Centrar texto en pantallas móviles si hace falta */
-  .mobile-center {
-    text-align: center;
-  }
-}
-
-/* ======================================================
-   Ajuste de separaciones verticales para que no quede
-   todo “flat” en algunas secciones
-   ====================================================== */
-section {
-  /* Si quieres un fondo alternado suave, lo puedes
-     colgar aquí. Por ahora solo deja espacio. */
-}
-
-@media (min-width: 768px) {
-  section {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
+/* -------------------------------------------------------------
+   6) Título de sección centrado
+   ------------------------------------------------------------- */
+.section-title {
+  @apply text-3xl font-bold text-center mb-8;
 }
