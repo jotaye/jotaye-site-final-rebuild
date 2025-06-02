@@ -1,10 +1,19 @@
+// src/components/ServiceModal.jsx
 import React from "react";
 import { FaWhatsapp, FaHome } from "react-icons/fa";
 
 const serviceTasks = {
   Plomería: {
-    en: ["Faucet repair and installation", "Garbage disposal installation", "Full plumbing for kitchens and bathrooms"],
-    es: ["Reparación e instalación de faucets", "Instalación de garbage disposal", "Plomería completa para baños y cocinas"],
+    en: [
+      "Faucet repair and installation",
+      "Garbage disposal installation",
+      "Full plumbing for kitchens and bathrooms",
+    ],
+    es: [
+      "Reparación e instalación de faucets",
+      "Instalación de garbage disposal",
+      "Plomería completa para baños y cocinas",
+    ],
   },
   Electricidad: {
     en: ["Outlet and breaker installation", "LED lights and fans", "Diagnostics and repairs"],
@@ -65,18 +74,19 @@ const buttonLabels = {
 export default function ServiceModal({ service, onClose, language = "es" }) {
   if (!service) return null;
 
-  // Obtenemos título/descr segun idioma
-  const title = service.title?.[language] || service.title;
-  const description = service.description?.[language] || service.description;
+  // Determinar título y descripción según idioma
+  const title = service.title?.[language] ?? service.title;
+  const description = service.description?.[language] ?? service.description;
 
-  // Obtenemos la clave (español) para buscar tareas y labels
-  const key = typeof service.title === "object"
-    ? Object.entries(service.title).find(([, val]) => val === title)?.[0]
-    : service.title;
+  // Encontrar la clave en español para mapear tareas y botones
+  const key =
+    typeof service.title === "object"
+      ? Object.entries(service.title).find(([, val]) => val === title)?.[0]
+      : service.title;
 
   const taskList = serviceTasks[key]?.[language] || [];
   const buttonLabel =
-    buttonLabels[key]?.[language] || (language === "en" ? "Contact us" : "Contáctanos");
+    buttonLabels[key]?.[language] ?? (language === "en" ? "Contact us" : "Contáctanos");
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 px-4">
@@ -94,9 +104,7 @@ export default function ServiceModal({ service, onClose, language = "es" }) {
           className="w-full h-48 object-cover rounded mb-4"
         />
         <h2 className="text-2xl font-bold mb-2 text-center text-gray-800">{title}</h2>
-        <p className="text-gray-700 text-sm leading-relaxed text-justify mb-2">
-          {description}
-        </p>
+        <p className="text-gray-700 text-sm leading-relaxed text-justify mb-2">{description}</p>
 
         {taskList.length > 0 && (
           <ul className="list-disc list-inside text-gray-600 text-sm mb-4">
