@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, A11y } from "swiper";
+import { Navigation, Pagination, A11y } from "swiper/modules";
 import ServiceModal from "./components/ServiceModal";
 import ContactForm from "./components/ContactForm";
-import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook } from "react-icons/fa";
 import services from "./data/services";
-import "./index.css";
+import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook } from "react-icons/fa";
+
+// Importa Swiper estilos adicionales (ya en index.css)
+// import "swiper/css";
+// import "swiper/css/navigation";
+// import "swiper/css/pagination";
 
 const translations = {
   en: {
@@ -36,9 +40,12 @@ const translations = {
     whatsapp: "WhatsApp",
     email: "Email",
     testimonialsTitle: "What our clients say",
-    testimonial1: "Excellent service and attention to detail. Highly recommended.",
-    testimonial2: "The team was punctual, professional, and left everything spotless.",
-    testimonial3: "They transformed my kitchen and bathroom — I loved the final result!",
+    testimonial1:
+      "Excellent service and attention to detail. Highly recommended.",
+    testimonial2:
+      "The team was punctual, professional, and left everything spotless.",
+    testimonial3:
+      "They transformed my kitchen and bathroom — I loved the final result!",
     copyright: "Jotaye Group LLC",
   },
   es: {
@@ -70,74 +77,173 @@ const translations = {
     email: "Correo",
     testimonialsTitle: "Lo que dicen nuestros clientes",
     testimonial1: "Excelente servicio y atención al detalle. Muy recomendados.",
-    testimonial2: "El equipo fue puntual, profesional y dejaron todo impecable.",
-    testimonial3: "Transformaron mi cocina y baño, ¡me encantó el resultado final!",
+    testimonial2:
+      "El equipo fue puntual, profesional y dejaron todo impecable.",
+    testimonial3:
+      "Transformaron mi cocina y baño, ¡me encantó el resultado final!",
     copyright: "Jotaye Group LLC",
   },
 };
 
 export default function App() {
-  const [lang, setLang] = useState("en");
   const [selectedService, setSelectedService] = useState(null);
+  const [lang, setLang] = useState("en");
   const t = translations[lang];
 
   return (
     <div id="top" className="bg-white text-gray-800 font-sans relative">
-      {/* ======== HEADER ======== */}
-      <header>
-        <div className="header-wrapper fade-in">
-          <div className="header-top">
-            {/* LOGO */}
-            <div className="header-logo">
+      {/* ================= HEADER ================= */}
+      <header className="bg-white shadow sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
+          {/* Desktop & Mobile: Logo + frase + EN/ES + menú */}
+          <div className="flex flex-wrap items-center justify-between w-full mb-2">
+            {/* ► Logo */}
+            <div className="flex-shrink-0 w-full md:w-auto text-center md:text-left">
               <a href="/" onClick={() => window.scrollTo(0, 0)}>
                 <img
                   src="/assets/logo-header.webp"
                   alt="Jotaye Group LLC"
-                  className="h-16"
+                  className="h-20 md:h-24 mx-auto md:mx-0"
                 />
               </a>
             </div>
 
-            {/* FRASE (motto) */}
-            <div className="header-motto">{t.motto}</div>
+            {/* ► Frase: en desktop va a la derecha del logo, en mobile va debajo */}
+            <div className="w-full md:w-auto mt-2 md:mt-0 text-center md:text-left">
+              <p className="italic text-gray-600">{t.motto}</p>
+            </div>
 
-            {/* MENÚ principal (desktop) */}
-            <nav className="header-nav">
-              <a href="#top">{t.home}</a>
-              <a href="#servicios">{t.services}</a>
-              <a
-                href="https://instagram.com/jotayegroup"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaInstagram className="inline-block mr-1" />
-                {t.gallery}
-              </a>
-              <a href="#testimonios">{t.testimonials}</a>
-              <a href="#contacto">{t.contact}</a>
-              <a href="#cotizacion">{t.visit}</a>
-            </nav>
-
-            {/* BOTONES DE IDIOMA */}
-            <div className="header-lang">
+            {/* ► Botones EN/ES */}
+            <div className="w-full md:w-auto flex justify-center md:justify-end mt-2 md:mt-0">
               <button
                 onClick={() => setLang("en")}
-                className={lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200"}
+                className={`mx-1 px-2 py-1 rounded text-sm ${
+                  lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200"
+                }`}
               >
                 EN
               </button>
               <button
                 onClick={() => setLang("es")}
-                className={lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200"}
+                className={`mx-1 px-2 py-1 rounded text-sm ${
+                  lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200"
+                }`}
               >
                 ES
               </button>
+            </div>
+
+            {/* ► Menú Horizontal (visible en desktop) */}
+            <nav className="hidden md:flex flex-wrap justify-center gap-2 mt-2 md:mt-0">
+              {[
+                { href: "#top", label: t.home },
+                { href: "#servicios", label: t.services },
+                {
+                  href: "https://instagram.com/jotayegroup",
+                  label: t.gallery,
+                  icon: <FaInstagram className="inline-block mr-1" />,
+                  external: true,
+                },
+                { href: "#testimonios", label: t.testimonials },
+                { href: "#contacto", label: t.contact },
+                { href: "#cotizacion", label: t.visit },
+              ].map((link, i) =>
+                link.external ? (
+                  <a
+                    key={i}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                  >
+                    {link.icon}
+                    {link.label}
+                  </a>
+                ) : (
+                  <a
+                    key={i}
+                    href={link.href}
+                    className="px-3 py-1 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
+            </nav>
+
+            {/* ► Icono hamburguesa (visible en mobile) */}
+            <div className="w-full flex justify-center md:hidden mt-2">
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("mobile-menu")
+                    .classList.toggle("hidden")
+                }
+                aria-label="Menu"
+              >
+                {/* Simple “hamburger” */}
+                <svg
+                  className="h-8 w-8 text-gray-800"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+
+            {/* ► Menú Vertical Mobile (oculto inicialmente) */}
+            <div
+              id="mobile-menu"
+              className="hidden w-full bg-white flex flex-col items-center py-2"
+            >
+              {[
+                { href: "#top", label: t.home },
+                { href: "#servicios", label: t.services },
+                {
+                  href: "https://instagram.com/jotayegroup",
+                  label: t.gallery,
+                  icon: <FaInstagram className="inline-block mr-1" />,
+                  external: true,
+                },
+                { href: "#testimonios", label: t.testimonials },
+                { href: "#contacto", label: t.contact },
+                { href: "#cotizacion", label: t.visit },
+              ].map((link, i) =>
+                link.external ? (
+                  <a
+                    key={i}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="my-1 px-4 py-2 w-full text-center bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                  >
+                    {link.icon}
+                    {link.label}
+                  </a>
+                ) : (
+                  <a
+                    key={i}
+                    href={link.href}
+                    className="my-1 px-4 py-2 w-full text-center bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
             </div>
           </div>
         </div>
       </header>
 
-      {/* ======== MISIÓN – VISIÓN – OBJETIVOS ======== */}
+      {/* ================= Misión – Visión – Objetivos ================= */}
       <section className="py-16 text-center">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-gray-100 rounded-lg shadow">
@@ -155,26 +261,31 @@ export default function App() {
         </div>
       </section>
 
-      {/* ======== SOBRE NOSOTROS ======== */}
+      {/* ================= Sobre Nosotros ================= */}
       <section className="bg-white py-16">
-        <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow text-left">
-          <h3 className="text-2xl font-bold mb-4">{t.aboutTitle}</h3>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <p className="mb-4">{t.about1}</p>
-              <p className="mb-4">{t.about2}</p>
-            </div>
-            <div>
-              <p className="mb-4">{t.about3}</p>
-              <p className="italic">{t.about4}</p>
-            </div>
+        <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow text-left flex flex-col md:flex-row gap-4 items-center">
+          <div className="md:w-1/2">
+            <h3 className="text-2xl font-bold mb-4">{t.aboutTitle}</h3>
+            <p className="mb-4">{t.about1}</p>
+            <p className="mb-4">{t.about2}</p>
+            <p className="mb-4">{t.about3}</p>
+            <p className="italic">{t.about4}</p>
+          </div>
+          <div className="md:w-1/2 flex justify-center">
+            {/* Puedes reemplazar estas imágenes con otras de “construcción” en src/assets/ */}
+            <img
+              src="/assets/construccion1.jpg"
+              alt="Construcción"
+              className="rounded-lg shadow-lg w-full object-cover h-64"
+            />
           </div>
         </div>
       </section>
 
-      {/* ======== NUESTROS SERVICIOS (Swiper Carousel) ======== */}
+      {/* ================= Nuestros Servicios (Swiper Carousel) ================= */}
       <main className="max-w-6xl mx-auto px-4 py-16" id="servicios">
         <h3 className="text-3xl font-bold text-center mb-12">{t.services}</h3>
+
         <Swiper
           modules={[Navigation, Pagination, A11y]}
           spaceBetween={20}
@@ -182,14 +293,15 @@ export default function App() {
           navigation
           pagination={{ clickable: true }}
           breakpoints={{
-            640: { slidesPerView: 2 },
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
         >
-          {services.map((service, idx) => (
-            <SwiperSlide key={idx}>
+          {services.map((service, i) => (
+            <SwiperSlide key={i}>
               <div
-                className="bg-white rounded-lg shadow card-hover overflow-hidden cursor-pointer"
+                className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden cursor-pointer"
                 onClick={() => setSelectedService(service)}
               >
                 <img
@@ -203,6 +315,8 @@ export default function App() {
               </div>
             </SwiperSlide>
           ))}
+
+          {/* Promoción especial (Slide fijo al final) */}
           <SwiperSlide>
             <div className="bg-white rounded-lg shadow overflow-hidden">
               <img
@@ -219,15 +333,15 @@ export default function App() {
         </Swiper>
       </main>
 
-      {/* ======== FORMULARIO DE CONTACTO ======== */}
+      {/* ================= Formulario de Contacto ================= */}
       <section id="cotizacion" className="py-16 bg-gray-50">
         <ContactForm language={lang} />
       </section>
 
-      {/* ======== CONTACTO RÁPIDO ======== */}
+      {/* ================= Contacto Rápido ================= */}
       <section id="contacto" className="py-16 text-center">
         <h3 className="text-3xl font-bold mb-6">{t.contactTitle}</h3>
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-4 flex-wrap">
           <a
             href="https://wa.me/13054172681"
             target="_blank"
@@ -245,45 +359,62 @@ export default function App() {
         </div>
       </section>
 
-      {/* ======== TESTIMONIOS ======== */}
+      {/* ================= Testimonios ================= */}
       <section id="testimonios" className="py-16 bg-gray-50 text-center">
         <h3 className="text-3xl font-bold mb-8">{t.testimonialsTitle}</h3>
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
-          {[t.testimonial1, t.testimonial2, t.testimonial3].map((text, idx) => (
-            <div key={idx} className="p-6 bg-white rounded-lg shadow">
-              <p className="italic mb-4">“{text}”</p>
-              <p className="font-semibold">
-                {["Carlos M.", "Ana R.", "Luis F."][idx]}
-              </p>
-            </div>
-          ))}
+          {[t.testimonial1, t.testimonial2, t.testimonial3].map(
+            (text, idx) => (
+              <div
+                key={idx}
+                className="p-6 bg-white rounded-lg shadow"
+              >
+                <p className="italic mb-4">“{text}”</p>
+                <p className="font-semibold">
+                  {["Carlos M.", "Ana R.", "Luis F."][idx]}
+                </p>
+              </div>
+            )
+          )}
         </div>
       </section>
 
-      {/* ======== FOOTER ======== */}
+      {/* ================= Footer ================= */}
       <footer className="bg-[#1e293b] text-white py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
           <p className="mb-4 md:mb-0">
             &copy; {new Date().getFullYear()} {t.copyright}
           </p>
           <div className="flex gap-4">
-            <a href="https://wa.me/13054172681" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://wa.me/13054172681"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaWhatsapp size={20} />
             </a>
             <a href="mailto:jotayegroupllc@gmail.com">
               <FaEnvelope size={20} />
             </a>
-            <a href="https://instagram.com/jotayegroup" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://instagram.com/jotayegroup"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaInstagram size={20} />
             </a>
-            <a href="https://facebook.com/JotayeGroupLLC" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://facebook.com/JotayeGroupLLC"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaFacebook size={20} />
             </a>
           </div>
         </div>
       </footer>
 
-      {/* ======== MODAL DE SERVICIO ======== */}
+      {/* ================= Modal de Servicio ================= */}
       {selectedService && (
         <ServiceModal
           service={selectedService}
