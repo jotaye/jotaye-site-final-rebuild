@@ -2,5 +2,5 @@
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 
-/* Importamos nuestro MainApp.css para estilos personalizados */
+/* Luego importamos nuestro MainApp.css para animaciones, tilt, etc. */
 @import "./MainApp.css";
