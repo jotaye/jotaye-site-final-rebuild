@@ -1,13 +1,6 @@
-/* src/index.css */
-
 @import "swiper/css";
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 
-/* Luego importamos nuestro MainApp.css para que cargue el degradado, tilt, etc. */
+/* Importamos nuestro MainApp.css para estilos personalizados */
 @import "./MainApp.css";
-
-/* Tailwind base, componentes y utilidades */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
