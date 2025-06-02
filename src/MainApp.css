@@ -1,109 +1,10 @@
 /* ======================================================
-   HEADER
+   Animaciones suaves para entrada de secciones y tarjetas
    ====================================================== */
-
-/* Wrapper general del header */
-.header-wrapper {
-  max-width: 1120px;   /* equivalente a Tailwind’s max-w-7xl */
-  margin: 0 auto;
-  padding: 1rem;       /* px-4 py-4 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Fila superior: LOGO – frase – menú – idiomas */
-.header-top {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Logo a la izquierda */
-.header-logo img {
-  height: 4rem; /* h-16 */
-}
-
-/* Frase (motto), centrada en desktop */
-.header-motto {
-  flex: 1;
-  text-align: center;
-  font-style: italic;
-  color: #4B5563; /* gray-600 */
-  margin: 0 1rem;
-}
-
-/* Botones EN/ES */
-.header-lang {
-  display: flex;
-  gap: 0.5rem;
-}
-.header-lang button {
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.875rem; /* text-sm */
-}
-
-/* Menú de navegación (desktop) */
-.header-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-left: 1rem;
-}
-.header-nav a {
-  padding: 0.5rem 1rem;
-  background-color: #F3F4F6; /* gray-100 */
-  border-radius: 0.25rem;
-  font-size: 0.875rem;
-}
-.header-nav a:hover {
-  background-color: #F97316; /* orange-500 */
-  color: white;
-}
-
-/* ----------------------------
-   Ajustes responsivos
-   ---------------------------- */
-
-/* Desktop: de 768px en adelante */
-@media (min-width: 768px) {
-  .header-wrapper {
-    flex-direction: column;
-  }
-  .header-top {
-    flex-direction: row;
-  }
-  .header-nav {
-    margin-top: 0.5rem;
-  }
-}
-
-/* Móvil: hasta 767px */
-@media (max-width: 767px) {
-  .header-top {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .header-motto {
-    margin: 0;
-  }
-  .header-nav {
-    display: none; /* Opcional: mostrar/ocultar con JS si se usa hamburguesa */
-  }
-}
-
-/* ======================================================
-   ANIMACIONES / CARDS / BOTONES GENÉRICOS
-   ====================================================== */
-
-/* Fade-in para secciones */
 .fade-in {
   animation: fadeIn 1s ease-in-out both;
 }
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -115,39 +16,50 @@
   }
 }
 
-/* Tarjetas con hover */
+/* ======================================================
+   Sombra y transición suave en tarjetas (card-hover)
+   ====================================================== */
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .card-hover:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Botones redondos (genéricos) */
+/* ======================================================
+   Botones con bordes totalmente redondeados
+   ====================================================== */
 .button-rounded {
   border-radius: 9999px;
 }
 
-/* Texto destacado puntual */
+/* ======================================================
+   Texto destacado (para uso puntual)
+   ====================================================== */
 .text-highlight {
-  color: #F97316; /* orange-500 */
+  color: #f97316; /* Tailwind orange-500 */
   font-weight: 600;
 }
 
-/* Secciones con un poquito de espaciado para no verse “flat” */
-@media (min-width: 768px) {
-  section {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+/* ======================================================
+   Ajustes responsivos generales
+   ====================================================== */
+@media (max-width: 768px) {
+  /* Centrar texto en pantallas móviles si hace falta */
+  .mobile-center {
+    text-align: center;
   }
 }
 
-/* Swiper (flechas/paginación) */
-.swiper-button-prev,
-.swiper-button-next {
-  color: #1F2937; /* gray-800 */
+/* Para dar espacios verticales más suaves entre secciones */
+section {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
-.swiper-pagination-bullet-active {
-  background-color: #F97316; /* orange-500 */
-}
+
+/* Si quieres agregar un fondo “menos blanco”, por ejemplo un gris clarito: */
+/* body {
+  background-color: #f9fafb;
+} */
