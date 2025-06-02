@@ -1,3 +1,4 @@
+// src/components/ContactForm.jsx
 import React, { useState } from "react";
 
 export default function ContactForm({ language = "es" }) {
@@ -80,7 +81,7 @@ export default function ContactForm({ language = "es" }) {
           >
             {texts.submit[language]}
           </button>
-          <input type="hidden" name="_next" value="https://jotayegroupllc.com/gracias" />
+          <input type="hidden" name="_next" value="https://www.jotayegroupllc.com/gracias" />
           <input type="hidden" name="_captcha" value="false" />
         </form>
       ) : (
