@@ -1,34 +1,15 @@
-// src/components/ContactForm.jsx
 import React, { useState } from "react";
 
 export default function ContactForm({ language = "es" }) {
   const [submitted, setSubmitted] = useState(false);
 
   const texts = {
-    title: {
-      es: "Solicita tu Cotización",
-      en: "Request a Quote",
-    },
-    name: {
-      es: "Nombre completo",
-      en: "Full name",
-    },
-    email: {
-      es: "Correo electrónico",
-      en: "Email address",
-    },
-    phone: {
-      es: "Teléfono",
-      en: "Phone number",
-    },
-    message: {
-      es: "Describe tu proyecto",
-      en: "Describe your project",
-    },
-    submit: {
-      es: "Enviar Solicitud",
-      en: "Send Request",
-    },
+    title: { es: "Solicita tu Cotización", en: "Request a Quote" },
+    name: { es: "Nombre completo", en: "Full name" },
+    email: { es: "Correo electrónico", en: "Email address" },
+    phone: { es: "Teléfono", en: "Phone number" },
+    message: { es: "Describe tu proyecto", en: "Describe your project" },
+    submit: { es: "Enviar Solicitud", en: "Send Request" },
     thankyou: {
       es: "¡Gracias por tu solicitud! Te contactaremos pronto.",
       en: "Thank you for your request! We'll contact you soon.",
@@ -81,7 +62,7 @@ export default function ContactForm({ language = "es" }) {
           >
             {texts.submit[language]}
           </button>
-          <input type="hidden" name="_next" value="https://www.jotayegroupllc.com/gracias" />
+          <input type="hidden" name="_next" value="https://jotaye.vercel.app/gracias" />
           <input type="hidden" name="_captcha" value="false" />
         </form>
       ) : (
