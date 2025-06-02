@@ -1,6 +1,8 @@
-/* ============================= */
-/*   ANIMACIONES / TRANSICIONES   */
-/* ============================= */
+/* src/MainApp.css */
+
+/* =======================
+   Animaciones suaves
+   ======================= */
 .fade-in {
   animation: fadeIn 1s ease-in-out both;
 }
@@ -16,55 +18,131 @@
   }
 }
 
-/* ============================= */
-/*      CARD HOVER / SOMBRAS      */
-/* ============================= */
+/* =======================
+   Sombras y transición
+   ======================= */
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .card-hover:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* ============================= */
-/*    BOTONES REDONDEADOS (GEN)   */
-/* ============================= */
+/* =======================
+   Botones totalmente redondos
+   ======================= */
 .button-rounded {
-  border-radius: 9999px;
+  border-radius: 9999px; /* full rounded */
 }
 
-/* ============================= */
-/*    TEXTO DESTACADO PUNTUAL     */
-/* ============================= */
+/* =======================
+   Texto destacado
+   ======================= */
 .text-highlight {
   color: #f97316; /* Tailwind orange-500 */
   font-weight: 600;
 }
 
-/* ============================= */
-/*            RESPONSIVE          */
-/* ============================= */
-@media (max-width: 768px) {
-  /* Centrar texto en pantallas móviles si hace falta */
-  .mobile-center {
-    text-align: center;
-  }
+/* =======================
+   Ajuste de fondo
+   ======================= */
+body {
+  background-color: #f9fafb; /* ligero gris para romper el blanco puro */
 }
 
-/* ============================= */
-/*   ESPACIADO ENTRE SECCIONES    */
-/* ============================= */
+/* =======================
+   Ajustes de espaciado vertical entre secciones
+   ======================= */
 @media (min-width: 768px) {
   section {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 }
 
-/* ============================= */
-/*    MENÚ MÓVIL: COLOCAR POR      */
-/*    DEBAJO DE BOTONES EN/ES      */
-/* ============================= */
-/* Ya se maneja en App.jsx con flex-col en <nav> móvil, no hace falta CSS extra aquí */
+/* =======================
+   Estilos del Header (desktop y móvil)
+   ======================= */
+
+/* Contenedor general del header */
+header {
+  background-color: white;
+}
+
+/* ---------- VERSIÓN ESCRITORIO ---------- */
+@media (min-width: 768px) {
+  /* Contenedor interior: logo, frase, menú y botones de idioma alineados */
+  .header-desktop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-desktop .logo {
+    flex: 0 0 auto;
+  }
+  .header-desktop .motto {
+    flex: 1 1 auto;
+    text-align: center;
+    font-style: italic;
+    color: #4b5563; /* gray-600 */
+    margin: 0 1rem;
+  }
+  .header-desktop nav {
+    flex: 0 0 auto;
+  }
+  .header-desktop .lang-buttons {
+    flex: 0 0 auto;
+  }
+
+  /* Asegura que el menú horizontal sea compacto */
+  .header-desktop nav a {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    font-size: 0.875rem; /* text-sm */
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Botones de idioma más pequeños */
+  .header-desktop .lang-buttons button {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+/* ---------- VERSIÓN MÓVIL ---------- */
+@media (max-width: 767px) {
+  /* Logo centrado */
+  .header-mobile .logo {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Frase centrada */
+  .header-mobile .motto {
+    text-align: center;
+    font-style: italic;
+    color: #4b5563; /* gray-600 */
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem; /* text-sm */
+  }
+
+  /* Botones EN/ES centrados debajo de la frase */
+  .header-mobile .lang-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .header-mobile .lang-buttons button {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  /* Botón de menú hamburguesa centrado */
+  .header-mobile .menu-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+}
