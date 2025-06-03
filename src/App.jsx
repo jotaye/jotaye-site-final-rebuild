@@ -1,6 +1,13 @@
 // src/App.jsx
 import React, { useState } from "react";
-import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook, FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaWhatsapp,
+  FaEnvelope,
+  FaInstagram,
+  FaFacebook,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/css";
@@ -25,11 +32,9 @@ const translations = {
     mission: "Mission",
     missionText: "Provide high-standard construction services.",
     vision: "Vision",
-    visionText:
-      "Be leaders in remodeling and construction in South Florida.",
+    visionText: "Be leaders in remodeling and construction in South Florida.",
     goals: "Goals",
-    goalsText:
-      "Meet expectations, deadlines, and quality in every project.",
+    goalsText: "Meet expectations, deadlines, and quality in every project.",
     aboutTitle: "Jotaye Group LLC: more than construction",
     about1:
       "We are a South Florida-based company combining construction experience with digital innovation to create unique spaces.",
@@ -61,14 +66,11 @@ const translations = {
     contact: "Contacto",
     visit: "Solicita una visita",
     mission: "Misión",
-    missionText:
-      "Brindar servicios de construcción con altos estándares de calidad.",
+    missionText: "Brindar servicios de construcción con altos estándares de calidad.",
     vision: "Visión",
-    visionText:
-      "Ser líderes en remodelación y construcción en South Florida.",
+    visionText: "Ser líderes en remodelación y construcción en South Florida.",
     goals: "Objetivos",
-    goalsText:
-      "Cumplir expectativas, plazos y calidad en cada proyecto.",
+    goalsText: "Cumplir expectativas, plazos y calidad en cada proyecto.",
     aboutTitle: "Jotaye Group LLC: más que construcción",
     about1:
       "Somos una empresa con base en el Sur de la Florida que combina experiencia en obra con innovación digital para crear espacios únicos.",
@@ -102,7 +104,7 @@ export default function App() {
   return (
     <div id="top" className="font-sans text-gray-800">
       {/* HEADER */}
-      <header className="bg-white shadow sticky top-0 z-50">
+      <header className="bg-white/80 backdrop-blur-md shadow sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center md:items-stretch">
           {/* Escritorio: logo-frase-menu-idioma en una sola línea */}
           <div className="flex-1 flex flex-row items-center justify-center md:justify-start">
@@ -113,13 +115,11 @@ export default function App() {
                 className="h-16 w-auto"
               />
             </a>
-            <p className="hidden md:block italic text-gray-600 ml-4">
-              {t.motto}
-            </p>
+            <p className="hidden md:block italic text-gray-600 ml-4">{t.motto}</p>
           </div>
           {/* Menú en escritorio */}
           <nav className="hidden md:flex gap-2 items-center">
-            {[ 
+            {[
               { href: "#top", label: t.home },
               { href: "#servicios", label: t.services },
               {
@@ -185,7 +185,7 @@ export default function App() {
 
           {/* Móvil: menú desplegable */}
           {menuOpen && (
-            <div className="md:hidden w-full mt-4 space-y-2 text-center">
+            <div className="md:hidden w-full mt-4 space-y-2 text-center bg-white/90 backdrop-blur-md rounded-lg py-4">
               <p className="italic text-gray-600">{t.motto}</p>
               <div className="flex justify-center gap-2 mb-2">
                 <button
@@ -205,7 +205,7 @@ export default function App() {
                   ES
                 </button>
               </div>
-              {[ 
+              {[
                 { href: "#top", label: t.home },
                 { href: "#servicios", label: t.services },
                 {
@@ -273,11 +273,14 @@ export default function App() {
             <p className="italic">{t.about4}</p>
           </div>
           <div className="md:w-1/2 flex items-center justify-center">
-            {/* Reemplaza con alguna imagen de construcción desde src/assets */}
-            <img
-              src="/assets/construccion1.jpg"
-              alt="Construcción"
-              className="w-full h-auto rounded-lg shadow"
+            {/* Ahora se usa un vídeo en lugar de imagen */}
+            <video
+              src="/assets/construccion1.mov"
+              className="w-full h-auto rounded-lg shadow object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
             />
           </div>
         </div>
@@ -296,7 +299,7 @@ export default function App() {
           breakpoints={{
             640: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 }
+            1024: { slidesPerView: 3 },
           }}
         >
           {services.map((service, i) => (
@@ -305,11 +308,23 @@ export default function App() {
                 className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden cursor-pointer card-hover"
                 onClick={() => setSelectedService(service)}
               >
-                <img
-                  src={service.image}
-                  alt={service.title[lang]}
-                  className="w-full h-48 object-cover"
-                />
+                {/* Si existe video, mostrarlo; sino, usar imagen como fallback */}
+                {service.video ? (
+                  <video
+                    src={service.video}
+                    className="w-full h-48 object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <img
+                    src={service.image}
+                    alt={service.title[lang]}
+                    className="w-full h-48 object-cover"
+                  />
+                )}
                 <div className="p-4 text-center">
                   <h4 className="font-semibold">{service.title[lang]}</h4>
                 </div>
