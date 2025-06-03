@@ -1,11 +1,12 @@
 /* ======================================================
-   Fondo de página (ajustado con Tailwind en <body>):
+   Asegurar que <video> escale correctamente
    ====================================================== */
-/* Si quieres un degradado diferente, puedes personalizarlo en tailwind.config.js */
+video {
+  object-fit: cover;
+}
 
-/* ======================================================
-   Animaciones suaves para entrada de secciones y tarjetas
-   ====================================================== */
+/* ...el resto de tu CSS... */
+
 .fade-in {
   animation: fadeIn 1s ease-in-out both;
 }
@@ -21,53 +22,4 @@
   }
 }
 
-/* ======================================================
-   Sombra y transición suave en tarjetas (card-hover)
-   ====================================================== */
-.card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* ======================================================
-   Botones con bordes totalmente redondeados
-   ====================================================== */
-.button-rounded {
-  border-radius: 9999px;
-}
-
-/* ======================================================
-   Texto destacado (para uso puntual)
-   ====================================================== */
-.text-highlight {
-  color: #f97316; /* Tailwind orange-500 */
-  font-weight: 600;
-}
-
-/* ======================================================
-   Ajustes responsivos generales
-   ====================================================== */
-@media (max-width: 768px) {
-  .mobile-center {
-    text-align: center;
-  }
-}
-
-/* ======================================================
-   Ajuste de separaciones verticales para que no quede
-   todo “flat” en algunas secciones
-   ====================================================== */
-section {
-  /* Espaciado adicional si se desea */
-}
-
-@media (min-width: 768px) {
-  section {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-}
+/* ... */
