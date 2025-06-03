@@ -1,6 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Importamos Swiper CSS */
 @import "swiper/css";
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 
-/* Luego importamos nuestro MainApp.css para animaciones, tilt, etc. */
+/* Luego importamos nuestro MainApp.css */
 @import "./MainApp.css";
