@@ -1,15 +1,17 @@
+// src/App.jsx
 import React, { useState } from "react";
+import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook, FaBars, FaTimes } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, A11y } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "./MainApp.css";
+
 import ServiceModal from "./components/ServiceModal";
 import ContactForm from "./components/ContactForm";
 import services from "./data/services";
-import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook } from "react-icons/fa";
-
-// Importa Swiper estilos adicionales (ya en index.css)
-// import "swiper/css";
-// import "swiper/css/navigation";
-// import "swiper/css/pagination";
+import flyer from "/assets/flayer-jotaye.webp";
 
 const translations = {
   en: {
@@ -23,9 +25,11 @@ const translations = {
     mission: "Mission",
     missionText: "Provide high-standard construction services.",
     vision: "Vision",
-    visionText: "Be leaders in remodeling and construction in South Florida.",
+    visionText:
+      "Be leaders in remodeling and construction in South Florida.",
     goals: "Goals",
-    goalsText: "Meet expectations, deadlines, and quality in every project.",
+    goalsText:
+      "Meet expectations, deadlines, and quality in every project.",
     aboutTitle: "Jotaye Group LLC: more than construction",
     about1:
       "We are a South Florida-based company combining construction experience with digital innovation to create unique spaces.",
@@ -57,11 +61,14 @@ const translations = {
     contact: "Contacto",
     visit: "Solicita una visita",
     mission: "Misión",
-    missionText: "Brindar servicios de construcción con altos estándares de calidad.",
+    missionText:
+      "Brindar servicios de construcción con altos estándares de calidad.",
     vision: "Visión",
-    visionText: "Ser líderes en remodelación y construcción en South Florida.",
+    visionText:
+      "Ser líderes en remodelación y construcción en South Florida.",
     goals: "Objetivos",
-    goalsText: "Cumplir expectativas, plazos y calidad en cada proyecto.",
+    goalsText:
+      "Cumplir expectativas, plazos y calidad en cada proyecto.",
     aboutTitle: "Jotaye Group LLC: más que construcción",
     about1:
       "Somos una empresa con base en el Sur de la Florida que combina experiencia en obra con innovación digital para crear espacios únicos.",
@@ -76,7 +83,8 @@ const translations = {
     whatsapp: "WhatsApp",
     email: "Correo",
     testimonialsTitle: "Lo que dicen nuestros clientes",
-    testimonial1: "Excelente servicio y atención al detalle. Muy recomendados.",
+    testimonial1:
+      "Excelente servicio y atención al detalle. Muy recomendados.",
     testimonial2:
       "El equipo fue puntual, profesional y dejaron todo impecable.",
     testimonial3:
@@ -86,184 +94,177 @@ const translations = {
 };
 
 export default function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   const [lang, setLang] = useState("en");
   const t = translations[lang];
 
   return (
-    <div id="top" className="bg-white text-gray-800 font-sans relative">
-      {/* ================= HEADER ================= */}
+    <div id="top" className="font-sans text-gray-800">
+      {/* HEADER */}
       <header className="bg-white shadow sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
-          {/* Desktop & Mobile: Logo + frase + EN/ES + menú */}
-          <div className="flex flex-wrap items-center justify-between w-full mb-2">
-            {/* ► Logo */}
-            <div className="flex-shrink-0 w-full md:w-auto text-center md:text-left">
-              <a href="/" onClick={() => window.scrollTo(0, 0)}>
-                <img
-                  src="/assets/logo-header.webp"
-                  alt="Jotaye Group LLC"
-                  className="h-20 md:h-24 mx-auto md:mx-0"
-                />
-              </a>
-            </div>
-
-            {/* ► Frase: en desktop va a la derecha del logo, en mobile va debajo */}
-            <div className="w-full md:w-auto mt-2 md:mt-0 text-center md:text-left">
-              <p className="italic text-gray-600">{t.motto}</p>
-            </div>
-
-            {/* ► Botones EN/ES */}
-            <div className="w-full md:w-auto flex justify-center md:justify-end mt-2 md:mt-0">
-              <button
-                onClick={() => setLang("en")}
-                className={`mx-1 px-2 py-1 rounded text-sm ${
-                  lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200"
-                }`}
-              >
-                EN
-              </button>
-              <button
-                onClick={() => setLang("es")}
-                className={`mx-1 px-2 py-1 rounded text-sm ${
-                  lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200"
-                }`}
-              >
-                ES
-              </button>
-            </div>
-
-            {/* ► Menú Horizontal (visible en desktop) */}
-            <nav className="hidden md:flex flex-wrap justify-center gap-2 mt-2 md:mt-0">
-              {[
-                { href: "#top", label: t.home },
-                { href: "#servicios", label: t.services },
-                {
-                  href: "https://instagram.com/jotayegroup",
-                  label: t.gallery,
-                  icon: <FaInstagram className="inline-block mr-1" />,
-                  external: true,
-                },
-                { href: "#testimonios", label: t.testimonials },
-                { href: "#contacto", label: t.contact },
-                { href: "#cotizacion", label: t.visit },
-              ].map((link, i) =>
-                link.external ? (
-                  <a
-                    key={i}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 py-1 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
-                  >
-                    {link.icon}
-                    {link.label}
-                  </a>
-                ) : (
-                  <a
-                    key={i}
-                    href={link.href}
-                    className="px-3 py-1 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
-                  >
-                    {link.label}
-                  </a>
-                )
-              )}
-            </nav>
-
-            {/* ► Icono hamburguesa (visible en mobile) */}
-            <div className="w-full flex justify-center md:hidden mt-2">
-              <button
-                onClick={() =>
-                  document
-                    .getElementById("mobile-menu")
-                    .classList.toggle("hidden")
-                }
-                aria-label="Menu"
-              >
-                {/* Simple “hamburger” */}
-                <svg
-                  className="h-8 w-8 text-gray-800"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-
-            {/* ► Menú Vertical Mobile (oculto inicialmente) */}
-            <div
-              id="mobile-menu"
-              className="hidden w-full bg-white flex flex-col items-center py-2"
-            >
-              {[
-                { href: "#top", label: t.home },
-                { href: "#servicios", label: t.services },
-                {
-                  href: "https://instagram.com/jotayegroup",
-                  label: t.gallery,
-                  icon: <FaInstagram className="inline-block mr-1" />,
-                  external: true,
-                },
-                { href: "#testimonios", label: t.testimonials },
-                { href: "#contacto", label: t.contact },
-                { href: "#cotizacion", label: t.visit },
-              ].map((link, i) =>
-                link.external ? (
-                  <a
-                    key={i}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="my-1 px-4 py-2 w-full text-center bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
-                  >
-                    {link.icon}
-                    {link.label}
-                  </a>
-                ) : (
-                  <a
-                    key={i}
-                    href={link.href}
-                    className="my-1 px-4 py-2 w-full text-center bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
-                  >
-                    {link.label}
-                  </a>
-                )
-              )}
-            </div>
+        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center md:items-stretch">
+          {/* Escritorio: logo-frase-menu-idioma en una sola línea */}
+          <div className="flex-1 flex flex-row items-center justify-center md:justify-start">
+            <a href="/" className="flex-shrink-0">
+              <img
+                src="/assets/logo-header.webp"
+                alt="Jotaye Group LLC"
+                className="h-16 w-auto"
+              />
+            </a>
+            <p className="hidden md:block italic text-gray-600 ml-4">
+              {t.motto}
+            </p>
           </div>
+          {/* Menú en escritorio */}
+          <nav className="hidden md:flex gap-2 items-center">
+            {[ 
+              { href: "#top", label: t.home },
+              { href: "#servicios", label: t.services },
+              {
+                href: "https://instagram.com/jotayegroup",
+                label: t.gallery,
+                icon: <FaInstagram className="inline-block mr-1" />,
+                external: true,
+              },
+              { href: "#testimonios", label: t.testimonials },
+              { href: "#contacto", label: t.contact },
+              { href: "#cotizacion", label: t.visit },
+            ].map((link, i) =>
+              link.external ? (
+                <a
+                  key={i}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                >
+                  {link.icon}
+                  {link.label}
+                </a>
+              ) : (
+                <a
+                  key={i}
+                  href={link.href}
+                  className="px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
+          </nav>
+          {/* Botones de idioma en escritorio */}
+          <div className="hidden md:flex items-center ml-4">
+            <button
+              onClick={() => setLang("en")}
+              className={`mx-1 px-2 py-1 rounded text-sm ${
+                lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200"
+              }`}
+            >
+              EN
+            </button>
+            <button
+              onClick={() => setLang("es")}
+              className={`mx-1 px-2 py-1 rounded text-sm ${
+                lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200"
+              }`}
+            >
+              ES
+            </button>
+          </div>
+
+          {/* Icono hamburguesa móvil */}
+          <button
+            className="md:hidden ml-auto text-2xl"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Abrir menú"
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+
+          {/* Móvil: menú desplegable */}
+          {menuOpen && (
+            <div className="md:hidden w-full mt-4 space-y-2 text-center">
+              <p className="italic text-gray-600">{t.motto}</p>
+              <div className="flex justify-center gap-2 mb-2">
+                <button
+                  onClick={() => setLang("en")}
+                  className={`mx-1 px-3 py-1 rounded text-sm ${
+                    lang === "en" ? "bg-orange-500 text-white" : "bg-gray-200"
+                  }`}
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => setLang("es")}
+                  className={`mx-1 px-3 py-1 rounded text-sm ${
+                    lang === "es" ? "bg-orange-500 text-white" : "bg-gray-200"
+                  }`}
+                >
+                  ES
+                </button>
+              </div>
+              {[ 
+                { href: "#top", label: t.home },
+                { href: "#servicios", label: t.services },
+                {
+                  href: "https://instagram.com/jotayegroup",
+                  label: t.gallery,
+                  icon: <FaInstagram className="inline-block mr-1" />,
+                  external: true,
+                },
+                { href: "#testimonios", label: t.testimonials },
+                { href: "#contacto", label: t.contact },
+                { href: "#cotizacion", label: t.visit },
+              ].map((link, i) =>
+                link.external ? (
+                  <a
+                    key={i}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                  >
+                    {link.icon}
+                    {link.label}
+                  </a>
+                ) : (
+                  <a
+                    key={i}
+                    href={link.href}
+                    className="block px-4 py-2 bg-gray-100 rounded hover:bg-orange-500 hover:text-white transition text-sm"
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
+            </div>
+          )}
         </div>
       </header>
 
-      {/* ================= Misión – Visión – Objetivos ================= */}
-      <section className="py-16 text-center">
+      {/* MISIÓN – VISIÓN – OBJETIVOS */}
+      <section className="py-12 text-center">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
-          <div className="p-6 bg-gray-100 rounded-lg shadow">
+          <div className="p-6 bg-gray-100 rounded-lg shadow card-hover fade-in">
             <h4 className="text-xl font-semibold mb-2">{t.mission}</h4>
             <p className="text-gray-600">{t.missionText}</p>
           </div>
-          <div className="p-6 bg-gray-100 rounded-lg shadow">
+          <div className="p-6 bg-gray-100 rounded-lg shadow card-hover fade-in">
             <h4 className="text-xl font-semibold mb-2">{t.vision}</h4>
             <p className="text-gray-600">{t.visionText}</p>
           </div>
-          <div className="p-6 bg-gray-100 rounded-lg shadow">
+          <div className="p-6 bg-gray-100 rounded-lg shadow card-hover fade-in">
             <h4 className="text-xl font-semibold mb-2">{t.goals}</h4>
             <p className="text-gray-600">{t.goalsText}</p>
           </div>
         </div>
       </section>
 
-      {/* ================= Sobre Nosotros ================= */}
+      {/* SOBRE NOSOTROS */}
       <section className="bg-white py-16">
-        <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow text-left flex flex-col md:flex-row gap-4 items-center">
+        <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow fade-in flex flex-col md:flex-row gap-6">
           <div className="md:w-1/2">
             <h3 className="text-2xl font-bold mb-4">{t.aboutTitle}</h3>
             <p className="mb-4">{t.about1}</p>
@@ -271,37 +272,37 @@ export default function App() {
             <p className="mb-4">{t.about3}</p>
             <p className="italic">{t.about4}</p>
           </div>
-          <div className="md:w-1/2 flex justify-center">
-            {/* Puedes reemplazar estas imágenes con otras de “construcción” en src/assets/ */}
+          <div className="md:w-1/2 flex items-center justify-center">
+            {/* Reemplaza con alguna imagen de construcción desde src/assets */}
             <img
               src="/assets/construccion1.jpg"
               alt="Construcción"
-              className="rounded-lg shadow-lg w-full object-cover h-64"
+              className="w-full h-auto rounded-lg shadow"
             />
           </div>
         </div>
       </section>
 
-      {/* ================= Nuestros Servicios (Swiper Carousel) ================= */}
+      {/* NUESTROS SERVICIOS */}
       <main className="max-w-6xl mx-auto px-4 py-16" id="servicios">
         <h3 className="text-3xl font-bold text-center mb-12">{t.services}</h3>
-
         <Swiper
-          modules={[Navigation, Pagination, A11y]}
+          modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={20}
           slidesPerView={1}
           navigation
           pagination={{ clickable: true }}
+          autoplay={{ delay: 3000 }}
           breakpoints={{
             640: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
+            1024: { slidesPerView: 3 }
           }}
         >
           {services.map((service, i) => (
             <SwiperSlide key={i}>
               <div
-                className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden cursor-pointer"
+                className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden cursor-pointer card-hover"
                 onClick={() => setSelectedService(service)}
               >
                 <img
@@ -315,12 +316,11 @@ export default function App() {
               </div>
             </SwiperSlide>
           ))}
-
-          {/* Promoción especial (Slide fijo al final) */}
+          {/* Promoción especial como último slide */}
           <SwiperSlide>
             <div className="bg-white rounded-lg shadow overflow-hidden">
               <img
-                src="/assets/flayer-jotaye.webp"
+                src={flyer}
                 alt="Promoción"
                 className="w-full h-48 object-cover"
               />
@@ -333,15 +333,15 @@ export default function App() {
         </Swiper>
       </main>
 
-      {/* ================= Formulario de Contacto ================= */}
+      {/* FORMULARIO DE CONTACTO */}
       <section id="cotizacion" className="py-16 bg-gray-50">
         <ContactForm language={lang} />
       </section>
 
-      {/* ================= Contacto Rápido ================= */}
+      {/* CONTACTO RÁPIDO */}
       <section id="contacto" className="py-16 text-center">
         <h3 className="text-3xl font-bold mb-6">{t.contactTitle}</h3>
-        <div className="flex justify-center gap-4 flex-wrap">
+        <div className="flex justify-center gap-4">
           <a
             href="https://wa.me/13054172681"
             target="_blank"
@@ -359,7 +359,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* ================= Testimonios ================= */}
+      {/* TESTIMONIOS */}
       <section id="testimonios" className="py-16 bg-gray-50 text-center">
         <h3 className="text-3xl font-bold mb-8">{t.testimonialsTitle}</h3>
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
@@ -367,7 +367,7 @@ export default function App() {
             (text, idx) => (
               <div
                 key={idx}
-                className="p-6 bg-white rounded-lg shadow"
+                className="p-6 bg-white rounded-lg shadow fade-in"
               >
                 <p className="italic mb-4">“{text}”</p>
                 <p className="font-semibold">
@@ -379,42 +379,42 @@ export default function App() {
         </div>
       </section>
 
-      {/* ================= Footer ================= */}
+      {/* FOOTER */}
       <footer className="bg-[#1e293b] text-white py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
           <p className="mb-4 md:mb-0">
             &copy; {new Date().getFullYear()} {t.copyright}
           </p>
-          <div className="flex gap-4">
+          <div className="flex gap-4 text-xl">
             <a
               href="https://wa.me/13054172681"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaWhatsapp size={20} />
+              <FaWhatsapp />
             </a>
             <a href="mailto:jotayegroupllc@gmail.com">
-              <FaEnvelope size={20} />
+              <FaEnvelope />
             </a>
             <a
               href="https://instagram.com/jotayegroup"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaInstagram size={20} />
+              <FaInstagram />
             </a>
             <a
               href="https://facebook.com/JotayeGroupLLC"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaFacebook size={20} />
+              <FaFacebook />
             </a>
           </div>
         </div>
       </footer>
 
-      {/* ================= Modal de Servicio ================= */}
+      {/* MODAL DE SERVICIO */}
       {selectedService && (
         <ServiceModal
           service={selectedService}
