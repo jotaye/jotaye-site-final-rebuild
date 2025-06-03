@@ -1,3 +1,4 @@
+// src/components/Estimator.jsx
 import React, { useState } from "react";
 
 export default function Estimator() {
@@ -24,7 +25,7 @@ export default function Estimator() {
   };
 
   return (
-    <section id="presupuesto" className="py-16 bg-gray-50">
+    <section id="presupuesto" className="py-16 bg-gray-50 fade-in">
       <h3 className="text-3xl font-bold text-center mb-8">Estimador de Presupuesto</h3>
       <form
         onSubmit={calcular}
@@ -35,26 +36,32 @@ export default function Estimator() {
           name="metros"
           placeholder="Cantidad de metros cuadrados"
           required
-          className="w-full border px-3 py-2 rounded"
+          className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
           value={form.metros}
           onChange={(e) => setForm({ ...form, metros: e.target.value })}
         />
         <select
           name="servicio"
-          className="w-full border px-3 py-2 rounded"
+          className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
           value={form.servicio}
           onChange={(e) => setForm({ ...form, servicio: e.target.value })}
         >
           {Object.keys(precios).map((servicio, i) => (
-            <option key={i} value={servicio}>{servicio}</option>
+            <option key={i} value={servicio}>
+              {servicio}
+            </option>
           ))}
         </select>
-        <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
+        <button
+          type="submit"
+          className="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition"
+        >
           Calcular estimado
         </button>
-        {resultado && <p className="text-center font-semibold text-green-600">{resultado}</p>}
+        {resultado && (
+          <p className="text-center font-semibold text-green-600 mt-4">{resultado}</p>
+        )}
       </form>
     </section>
   );
 }
-
