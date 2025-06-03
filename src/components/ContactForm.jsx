@@ -36,7 +36,7 @@ export default function ContactForm({ language = "es" }) {
   };
 
   return (
-    <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md border border-gray-100">
+    <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md border border-gray-100 fade-in">
       <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">
         {texts.title[language]}
       </h3>
