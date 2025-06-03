@@ -1,4 +1,9 @@
 /* ======================================================
+   Fondo de página (ajustado con Tailwind en <body>):
+   ====================================================== */
+/* Si quieres un degradado diferente, puedes personalizarlo en tailwind.config.js */
+
+/* ======================================================
    Animaciones suaves para entrada de secciones y tarjetas
    ====================================================== */
 .fade-in {
@@ -47,19 +52,22 @@
    Ajustes responsivos generales
    ====================================================== */
 @media (max-width: 768px) {
-  /* Centrar texto en pantallas móviles si hace falta */
   .mobile-center {
     text-align: center;
   }
 }
 
-/* Para dar espacios verticales más suaves entre secciones */
+/* ======================================================
+   Ajuste de separaciones verticales para que no quede
+   todo “flat” en algunas secciones
+   ====================================================== */
 section {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  /* Espaciado adicional si se desea */
 }
 
-/* Si quieres agregar un fondo “menos blanco”, por ejemplo un gris clarito: */
-/* body {
-  background-color: #f9fafb;
-} */
+@media (min-width: 768px) {
+  section {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
