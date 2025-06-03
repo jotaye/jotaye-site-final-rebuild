@@ -13,9 +13,7 @@ export default function ServiceDetail({ language }) {
     return (
       <div className="py-16 text-center">
         <h2 className="text-2xl font-semibold">
-          {lang === "es"
-            ? "Servicio no encontrado"
-            : "Service not found"}
+          {lang === "es" ? "Servicio no encontrado" : "Service not found"}
         </h2>
         <Link
           to="/services"
@@ -31,15 +29,15 @@ export default function ServiceDetail({ language }) {
     <section className="py-16 bg-white text-gray-800">
       <div className="max-w-4xl mx-auto px-4">
         {/* Título */}
-        <h2 className="text-3xl font-bold mb-6">
-          {service.title[lang]}
-        </h2>
+        <h2 className="text-3xl font-bold mb-6">{service.title[lang]}</h2>
 
         {/* Descripción larga */}
         <div className="prose prose-lg mb-12">
-          {service.longDescription[lang].split("\n").map((line, i) =>
-            line.trim() ? <p key={i}>{line.trim()}</p> : <br key={i} />
-          )}
+          {service.longDescription[lang]
+            .split("\n")
+            .map((line, i) =>
+              line.trim() ? <p key={i}>{line.trim()}</p> : <br key={i} />
+            )}
         </div>
 
         {/* Galería de imágenes de trabajos */}
