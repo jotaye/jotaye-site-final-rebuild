@@ -69,8 +69,9 @@ export default function ServiceModal({ service, onClose, language = "es" }) {
   const title = service.title?.[language] || service.title;
   const description = service.description?.[language] || service.description;
 
-  // Encontrar la clave (en “es”) para mapear tareas y botones
-  const key = Object.entries(service.title).find(([, val]) => val === title)?.[0] || service.title;
+  // Encontrar la clave (es) para mapear tareas y botones
+  const key =
+    Object.entries(service.title).find(([, val]) => val === title)?.[0] || service.title;
 
   const taskList = serviceTasks[key]?.[language] || [];
   const buttonLabel = buttonLabels[key]?.[language] || (language === "en" ? "Contact us" : "Contáctanos");
@@ -85,11 +86,25 @@ export default function ServiceModal({ service, onClose, language = "es" }) {
         >
           ×
         </button>
-        <img
-          src={service.image}
-          alt={title}
-          className="w-full h-48 object-cover rounded mb-4"
-        />
+
+        {/* Mostrar vídeo si existe, sino imagen */}
+        {service.video ? (
+          <video
+            src={service.video}
+            className="w-full h-48 object-cover rounded mb-4"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : (
+          <img
+            src={service.image}
+            alt={title}
+            className="w-full h-48 object-cover rounded mb-4"
+          />
+        )}
+
         <h2 className="text-2xl font-bold mb-2 text-center text-gray-800">{title}</h2>
         <p className="text-gray-700 text-sm leading-relaxed text-justify mb-2">{description}</p>
 
@@ -103,7 +118,9 @@ export default function ServiceModal({ service, onClose, language = "es" }) {
 
         <div className="text-center mt-4 space-x-2">
           <a
-            href={`https://wa.me/13054172681?text=Hola,%20me%20interesa%20el%20servicio%20de%20${encodeURIComponent(title)}`}
+            href={`https://wa.me/13054172681?text=Hola,%20me%20interesa%20el%20servicio%20de%20${encodeURIComponent(
+              title
+            )}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full shadow button-rounded"
