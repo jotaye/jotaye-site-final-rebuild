@@ -24,4 +24,3 @@ export const aboutContent = {
     footer: "En Jotaye Group, construimos espacios... y confianza.",
   },
 };
-
