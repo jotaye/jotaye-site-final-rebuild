@@ -5,17 +5,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
-// Estas páginas debes tenerlas en `src/pages/` (o crearlas):
+// Asegúrate de que estos tres archivos existan en src/pages/
+// y exporten componentes React funcionales:
 // - Home.jsx
 // - Services.jsx
 // - ServiceDetail.jsx
-// Si aún no las tienes, revisa los ejemplos en respuestas anteriores.
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import ServiceDetail from "./pages/ServiceDetail";
 
 export default function App() {
-  const [lang, setLang] = useState("es"); // 'es' o 'en'
+  const [lang, setLang] = useState("es"); // Idioma inicial: "es" o "en"
 
   const toggleLang = (desired) => {
     setLang(desired);
@@ -23,27 +23,38 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      {/* Pasamos el idioma y toggle al Header */}
+      {/* Header recibe el idioma actual y la función para cambiarlo */}
       <Header language={lang} onLanguageChange={toggleLang} />
 
-      {/* Rutas principales */}
+      {/* Definición de rutas */}
       <main>
         <Routes>
+          {/* Página de inicio */}
           <Route path="/" element={<Home language={lang} />} />
+
+          {/* Listado de servicios */}
           <Route
             path="/services"
             element={<Services language={lang} />}
           />
+
+          {/* Detalle de un servicio específico (por slug) */}
           <Route
             path="/services/:slug"
             element={<ServiceDetail language={lang} />}
           />
-          {/* Si tuvieras página de contacto, agrégala aquí, por ejemplo:
-          <Route path="/contact" element={<ContactPage language={lang} />} />
+
+          {/* Si tienes otras páginas (por ejemplo, contacto), agrégalas aquí: */}
+          {/*
+          <Route
+            path="/contact"
+            element={<ContactPage language={lang} />}
+          />
           */}
         </Routes>
       </main>
 
+      {/* Footer recibe el idioma para mostrar texto traducido */}
       <Footer language={lang} />
     </BrowserRouter>
   );
