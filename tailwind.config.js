@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      // Por ejemplo, agregamos un degradado personalizado (opcional)
+      backgroundImage: {
+        "page-gradient": "linear-gradient(to bottom, #ffffff, #f3f4f6)"
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 };
