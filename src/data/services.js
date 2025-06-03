@@ -1,16 +1,40 @@
 // src/data/services.js
-
-const services = [
+export default [
   {
+    slug: "plomeria",
     title: { es: "Plomería", en: "Plumbing" },
     description: {
       es: "Instalaciones y reparaciones de tuberías.",
       en: "Pipe installations and repairs.",
     },
     image: "/assets/plomeria.webp",
-    video: "/assets/plomeria.mov", // Vídeo .mov para mayor interactividad
+    video: "/assets/plomeria.mov",
+    longDescription: {
+      es: `
+Somos especialistas en sistemas de plomería residencial y comercial. 
+Realizamos:
+- Instalación de tuberías de PEX y PVC.
+- Reparación de fugas ocultas.
+- Sustitución de válvulas de drenaje.
+- Instalación de garbage disposal y sistemas de agua caliente.
+      `,
+      en: `
+We are experts in residential and commercial plumbing systems. 
+We perform:
+- Installation of PEX and PVC piping.
+- Repair of hidden leaks.
+- Replacement of drain valves.
+- Garbage disposal and hot water systems installation.
+      `,
+    },
+    gallery: [
+      "/assets/plomeria1.webp",
+      "/assets/plomeria2.webp",
+      "/assets/plomeria3.webp",
+    ],
   },
   {
+    slug: "electricidad",
     title: { es: "Electricidad", en: "Electricity" },
     description: {
       es: "Instalaciones eléctricas residenciales y comerciales.",
@@ -18,17 +42,30 @@ const services = [
     },
     image: "/assets/electricidad.webp",
     video: "/assets/electricidad.mov",
-  },
-  {
-    title: { es: "Framing", en: "Framing" },
-    description: {
-      es: "Estructuras sólidas para muros y techos.",
-      en: "Solid structures for walls and roofs.",
+    longDescription: {
+      es: `
+Nuestros servicios eléctricos incluyen:
+- Cableado completo para nuevas construcciones.
+- Reparación de cortocircuitos y fallos.
+- Instalación de paneles solares residenciales.
+- Iluminación LED de alta eficiencia.
+      `,
+      en: `
+Our electrical services include:
+- Complete wiring for new builds.
+- Short circuit and fault repair.
+- Residential solar panel installation.
+- High-efficiency LED lighting.
+      `,
     },
-    image: "/assets/framing.webp",
-    video: "/assets/framing.mov",
+    gallery: [
+      "/assets/electricidad1.webp",
+      "/assets/electricidad2.webp",
+      "/assets/electricidad3.webp",
+    ],
   },
   {
+    slug: "drywall",
     title: { es: "Drywall", en: "Drywall" },
     description: {
       es: "Instalación y acabado de paneles de yeso.",
@@ -36,70 +73,27 @@ const services = [
     },
     image: "/assets/drywall.webp",
     video: "/assets/drywall.mov",
-  },
-  {
-    title: { es: "Pintura", en: "Painting" },
-    description: {
-      es: "Aplicación de pintura interior y exterior.",
-      en: "Interior and exterior painting services.",
+    longDescription: {
+      es: `
+Ofrecemos:
+- Montaje de estructuras metálicas.
+- Colocación de paneles de yeso de ½".
+- Texturizado y acabado para pintura.
+- Reparación de grietas y humedad en muros.
+      `,
+      en: `
+We offer:
+- Installation of metal studs.
+- Hanging ½" gypsum panels.
+- Texturing and finish for paint.
+- Crack and moisture repair in walls.
+      `,
     },
-    image: "/assets/pintura.webp",
-    video: "/assets/pintura.mov",
+    gallery: [
+      "/assets/drywall1.webp",
+      "/assets/drywall2.webp",
+      "/assets/drywall3.webp",
+    ],
   },
-  {
-    title: { es: "Finish", en: "Finish" },
-    description: {
-      es: "Acabados profesionales para detalles finos.",
-      en: "Professional finishes for fine details.",
-    },
-    image: "/assets/finish.webp",
-    video: "/assets/finish.mov",
-  },
-  {
-    title: { es: "Baseboard", en: "Baseboard" },
-    description: {
-      es: "Instalación de zócalos decorativos.",
-      en: "Installation of decorative baseboards.",
-    },
-    image: "/assets/baseboard.webp",
-    video: "/assets/baseboard.mov",
-  },
-  {
-    title: { es: "Demolición", en: "Demolition" },
-    description: {
-      es: "Demoliciones controladas y limpias.",
-      en: "Controlled and clean demolitions.",
-    },
-    image: "/assets/demolicion.webp",
-    video: "/assets/demolicion.mov",
-  },
-  {
-    title: { es: "Pisos", en: "Flooring" },
-    description: {
-      es: "Instalación de cerámica, porcelanato y vinil.",
-      en: "Ceramic, porcelain and vinyl flooring installation.",
-    },
-    image: "/assets/pisos.webp",
-    video: "/assets/pisos.mov",
-  },
-  {
-    title: { es: "Baños", en: "Bathrooms" },
-    description: {
-      es: "Remodelación completa de baños.",
-      en: "Complete bathroom remodeling.",
-    },
-    image: "/assets/banos.webp",
-    video: "/assets/banos.mov",
-  },
-  {
-    title: { es: "Cocinas", en: "Kitchens" },
-    description: {
-      es: "Diseño e instalación de cocinas modernas.",
-      en: "Modern kitchen design and installation.",
-    },
-    image: "/assets/cocinas.webp",
-    video: "/assets/cocinas.mov",
-  },
+  // Agrega los demás servicios de forma similar (pintura, framing, etc.)
 ];
-
-export default services;
