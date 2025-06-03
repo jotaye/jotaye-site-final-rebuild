@@ -16,13 +16,7 @@ import "swiper/css/pagination";
 import "./MainApp.css";
 
 import ServiceModal from "./components/ServiceModal";
-import About from "./components/About";
-import Services from "./components/Services";
-import Gallery from "./components/Gallery";
 import ContactForm from "./components/ContactForm";
-import Estimator from "./components/Estimator";
-import BookForm from "./components/BookForm";
-import TawkChat from "./components/TawkChat";
 import services from "./data/services";
 import flyer from "/assets/flayer-jotaye.webp";
 
@@ -55,13 +49,12 @@ const translations = {
     whatsapp: "WhatsApp",
     email: "Email",
     testimonialsTitle: "What our clients say",
-    testimonial1: "Excellent service and attention to detail. Highly recommended.",
+    testimonial1:
+      "Excellent service and attention to detail. Highly recommended.",
     testimonial2:
       "The team was punctual, professional, and left everything spotless.",
-    testimonial3: "They transformed my kitchen and bathroom — I loved the final result!",
-    mission: "Mission",
-    vision: "Vision",
-    goals: "Goals",
+    testimonial3:
+      "They transformed my kitchen and bathroom — I loved the final result!",
     copyright: "Jotaye Group LLC",
   },
   es: {
@@ -92,12 +85,12 @@ const translations = {
     whatsapp: "WhatsApp",
     email: "Correo",
     testimonialsTitle: "Lo que dicen nuestros clientes",
-    testimonial1: "Excelente servicio y atención al detalle. Muy recomendados.",
-    testimonial2: "El equipo fue puntual, profesional y dejaron todo impecable.",
-    testimonial3: "Transformaron mi cocina y baño, ¡me encantó el resultado final!",
-    mission: "Misión",
-    vision: "Visión",
-    goals: "Objetivos",
+    testimonial1:
+      "Excelente servicio y atención al detalle. Muy recomendados.",
+    testimonial2:
+      "El equipo fue puntual, profesional y dejaron todo impecable.",
+    testimonial3:
+      "Transformaron mi cocina y baño, ¡me encantó el resultado final!",
     copyright: "Jotaye Group LLC",
   },
 };
@@ -105,29 +98,27 @@ const translations = {
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
-  const [lang, setLang] = useState("es");
+  const [lang, setLang] = useState("en");
   const t = translations[lang];
 
   return (
     <div id="top" className="font-sans text-gray-800">
-      {/*========== HEADER ==========*/}
+      {/* HEADER */}
       <header className="bg-white/80 backdrop-blur-md shadow sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center md:items-stretch">
-          {/* Logo + Frase */}
+          {/* Escritorio: logo + frase */}
           <div className="flex-1 flex flex-row items-center justify-center md:justify-start">
-            <a href="#top" className="flex-shrink-0">
+            <a href="/" className="flex-shrink-0">
               <img
                 src="/assets/logo-header.webp"
                 alt="Jotaye Group LLC"
                 className="h-16 w-auto"
               />
             </a>
-            <p className="hidden md:block italic text-gray-600 ml-4">
-              {t.motto}
-            </p>
+            <p className="hidden md:block italic text-gray-600 ml-4">{t.motto}</p>
           </div>
 
-          {/* Enlaces Escritorio */}
+          {/* Menú en escritorio */}
           <nav className="hidden md:flex gap-2 items-center">
             {[
               { href: "#top", label: t.home },
@@ -165,7 +156,7 @@ export default function App() {
             )}
           </nav>
 
-          {/* Botones de Idioma Escritorio */}
+          {/* Botones de idioma en escritorio */}
           <div className="hidden md:flex items-center ml-4">
             <button
               onClick={() => setLang("en")}
@@ -185,7 +176,7 @@ export default function App() {
             </button>
           </div>
 
-          {/* Icono Hamburguesa Móvil */}
+          {/* Icono hamburguesa en móvil */}
           <button
             className="md:hidden ml-auto text-2xl"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -194,7 +185,7 @@ export default function App() {
             {menuOpen ? <FaTimes /> : <FaBars />}
           </button>
 
-          {/* Menú Móvil Desplegable */}
+          {/* Móvil: menú desplegable */}
           {menuOpen && (
             <div className="md:hidden w-full mt-4 space-y-2 text-center bg-white/90 backdrop-blur-md rounded-lg py-4">
               <p className="italic text-gray-600">{t.motto}</p>
@@ -255,7 +246,7 @@ export default function App() {
         </div>
       </header>
 
-      {/*========== MISIÓN – VISIÓN – OBJETIVOS ==========*/}
+      {/* MISIÓN – VISIÓN – OBJETIVOS */}
       <section className="py-12 text-center">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-gray-100 rounded-lg shadow card-hover fade-in">
@@ -273,11 +264,31 @@ export default function App() {
         </div>
       </section>
 
-      {/*========== SOBRE NOSOTROS ==========*/}
-      <About />
+      {/* SOBRE NOSOTROS */}
+      <section className="bg-white py-16">
+        <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow fade-in flex flex-col md:flex-row gap-6">
+          <div className="md:w-1/2">
+            <h3 className="text-2xl font-bold mb-4">{t.aboutTitle}</h3>
+            <p className="mb-4">{t.about1}</p>
+            <p className="mb-4">{t.about2}</p>
+            <p className="mb-4">{t.about3}</p>
+            <p className="italic">{t.about4}</p>
+          </div>
+          <div className="md:w-1/2 flex items-center justify-center">
+            <video
+              src="/assets/construccion1.mov"
+              className="w-full h-auto rounded-lg shadow object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          </div>
+        </div>
+      </section>
 
-      {/*========== NUESTROS SERVICIOS (Swiper con vídeos) ==========*/}
-      <section id="servicios" className="max-w-6xl mx-auto px-4 py-16">
+      {/* NUESTROS SERVICIOS (Swiper) */}
+      <main className="max-w-6xl mx-auto px-4 py-16" id="servicios">
         <h3 className="text-3xl font-bold text-center mb-12">{t.services}</h3>
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
@@ -298,7 +309,6 @@ export default function App() {
                 className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden cursor-pointer card-hover"
                 onClick={() => setSelectedService(service)}
               >
-                {/* Mostrar vídeo si existe, sino fallback a imagen */}
                 {service.video ? (
                   <video
                     src={service.video}
@@ -321,8 +331,7 @@ export default function App() {
               </div>
             </SwiperSlide>
           ))}
-
-          {/* Promoción especial */}
+          {/* Promoción especial como último slide */}
           <SwiperSlide>
             <div className="bg-white rounded-lg shadow overflow-hidden">
               <img
@@ -337,23 +346,14 @@ export default function App() {
             </div>
           </SwiperSlide>
         </Swiper>
-      </section>
+      </main>
 
-      {/*========== FORMULARIO DE COTIZACIÓN (ContactForm) ==========*/}
+      {/* FORMULARIO DE CONTACTO */}
       <section id="cotizacion" className="py-16 bg-gray-50">
         <ContactForm language={lang} />
       </section>
 
-      {/*========== GALERÍA ==========*/}
-      <Gallery />
-
-      {/*========== ESTIMADOR DE PRESUPUESTO ==========*/}
-      <Estimator />
-
-      {/*========== RESERVAS (BookForm) ==========*/}
-      <BookForm />
-
-      {/*========== CONTACTO RÁPIDO ==========*/}
+      {/* CONTACTO RÁPIDO */}
       <section id="contacto" className="py-16 text-center">
         <h3 className="text-3xl font-bold mb-6">{t.contactTitle}</h3>
         <div className="flex justify-center gap-4">
@@ -374,27 +374,25 @@ export default function App() {
         </div>
       </section>
 
-      {/*========== TESTIMONIOS ==========*/}
+      {/* TESTIMONIOS */}
       <section id="testimonios" className="py-16 bg-gray-50 text-center">
         <h3 className="text-3xl font-bold mb-8">{t.testimonialsTitle}</h3>
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-6">
-          {[t.testimonial1, t.testimonial2, t.testimonial3].map(
-            (text, idx) => (
-              <div
-                key={idx}
-                className="p-6 bg-white rounded-lg shadow fade-in"
-              >
-                <p className="italic mb-4">“{text}”</p>
-                <p className="font-semibold">
-                  {["Carlos M.", "Ana R.", "Luis F."][idx]}
-                </p>
-              </div>
-            )
-          )}
+          {[t.testimonial1, t.testimonial2, t.testimonial3].map((text, idx) => (
+            <div
+              key={idx}
+              className="p-6 bg-white rounded-lg shadow fade-in"
+            >
+              <p className="italic mb-4">“{text}”</p>
+              <p className="font-semibold">
+                {["Carlos M.", "Ana R.", "Luis F."][idx]}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/*========== FOOTER ==========*/}
+      {/* FOOTER */}
       <footer className="bg-[#1e293b] text-white py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
           <p className="mb-4 md:mb-0">
@@ -429,7 +427,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/*========== MODAL DE SERVICIO ==========*/}
+      {/* MODAL DE SERVICIO */}
       {selectedService && (
         <ServiceModal
           service={selectedService}
@@ -437,9 +435,6 @@ export default function App() {
           language={lang}
         />
       )}
-
-      {/*========== CHAT TAWK.TO (opcional) ==========*/}
-      <TawkChat />
     </div>
   );
 }
