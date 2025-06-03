@@ -6,8 +6,8 @@ const services = [
       es: "Instalaciones y reparaciones de tuberías.",
       en: "Pipe installations and repairs.",
     },
-    image: "/assets/plomería.jpg",       // Para fallback si no hay vídeo
-    video: "/assets/plomería.mov",       // Nuevo campo: vídeo .mov
+    image: "/assets/plomería.jpg",       // Fallback si no hay vídeo
+    video: "/assets/plomería.mov",       // Vídeo .mov para más interactividad
   },
   {
     title: { es: "Electricidad", en: "Electricity" },
@@ -26,6 +26,24 @@ const services = [
     },
     image: "/assets/framing.jpg",
     video: "/assets/framing.mov",
+  },
+  {
+    title: { es: "Drywall", en: "Drywall" },
+    description: {
+      es: "Colocación y acabado de paneles drywall.",
+      en: "Drywall panel installation and finishing.",
+    },
+    image: "/assets/drywall.jpg",
+    video: "/assets/drywall.mov",
+  },
+  {
+    title: { es: "Pintura", en: "Painting" },
+    description: {
+      es: "Pintura interior y exterior con acabados de calidad.",
+      en: "Interior and exterior painting with quality finishes.",
+    },
+    image: "/assets/pintura.jpg",
+    video: "/assets/pintura.mov",
   },
 ];
 
