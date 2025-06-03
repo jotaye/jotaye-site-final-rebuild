@@ -16,14 +16,14 @@ export default function Home({ language }) {
   }[lang];
 
   return (
-    <section className="py-16 text-center">
+    <div className="py-16 bg-gray-100 text-center">
       <h1 className="text-4xl font-bold mb-6">{t.welcome}</h1>
       <Link
         to="/services"
-        className="inline-block bg-orange-600 text-white px-6 py-3 rounded-full"
+        className="inline-block bg-orange-600 text-white px-6 py-3 rounded-full hover:bg-orange-700 transition"
       >
         {t.seeServices}
       </Link>
-    </section>
+    </div>
   );
 }
