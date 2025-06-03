@@ -1,12 +1,14 @@
 /* src/index.css */
+
+/* Tailwind base, components y utilidades */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Swiper CSS */
+/* Importación de estilos de Swiper (deben ir antes de otras reglas) */
 @import "swiper/css";
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 
-/* Nuestro CSS personalizado */
+/* Importación de nuestro CSS personalizado */
 @import "./MainApp.css";
