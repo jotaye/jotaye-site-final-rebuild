@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Header from "./components/Header";
+import TopSection from "./components/TopSection";
 import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
@@ -16,28 +16,25 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Header language={lang} onLanguageChange={toggleLang} />
+      {/* TopSection combina Hero + Header */}
+      <TopSection language={lang} onLanguageChange={toggleLang} />
 
-      <main>
-        <Routes>
-          {/* Página principal */}
-          <Route path="/" element={<Home language={lang} />} />
+      {/* Contenedor con padding-top igual a la altura de TopSection (h-64) */}
+      <div className="pt-64">
+        <main>
+          <Routes>
+            <Route path="/" element={<Home language={lang} />} />
+            <Route path="/services" element={<Services language={lang} />} />
+            <Route
+              path="/services/:slug"
+              element={<ServiceDetail language={lang} />}
+            />
+            <Route path="/contact" element={<Contact language={lang} />} />
+          </Routes>
+        </main>
 
-          {/* Listado de servicios */}
-          <Route path="/services" element={<Services language={lang} />} />
-
-          {/* Detalle de un servicio específico */}
-          <Route
-            path="/services/:slug"
-            element={<ServiceDetail language={lang} />}
-          />
-
-          {/* Nueva página de contacto */}
-          <Route path="/contact" element={<Contact language={lang} />} />
-        </Routes>
-      </main>
-
-      <Footer language={lang} />
+        <Footer language={lang} />
+      </div>
     </BrowserRouter>
   );
 }
