@@ -15,7 +15,6 @@ const mvgoItems = [
       es: "Jotaye Group LLC se fundó en 2015 con la misión de ofrecer soluciones de construcción innovadoras en el Sur de la Florida. Desde aquel año, hemos crecido basados en la confianza y satisfacción de nuestros clientes.",
       en: "Jotaye Group LLC was founded in 2015 with the mission to deliver innovative construction solutions in South Florida. Since then, we have grown on the trust and satisfaction of our clients."
     },
-    // Para el ítem “foundation” no hay vídeo, se mostrará solo texto centrado.
     video: null,
   },
   {
@@ -25,10 +24,9 @@ const mvgoItems = [
       en: "Mission"
     },
     description: {
-      es: "Brindar servicios de construcción con altos estándares de calidad, asegurando la satisfacción completa de cada cliente en cada proyecto.",
-      en: "To provide construction services with the highest quality standards, ensuring full client satisfaction in every project."
+      es: "Brindar servicios de construcción con altos estándares de calidad, asegurando la satisfacción completa de cada cliente en cada proyecto. Trabajamos codo a codo con cada cliente para entender sus necesidades exactas y traducirlas en resultados duraderos y estéticamente atractivos.",
+      en: "To provide construction services with the highest quality standards, ensuring full client satisfaction in every project. We work side by side with each client to understand their exact needs and translate them into lasting and aesthetically pleasing results."
     },
-    // Vídeo de Misión (coloca el archivo exacto en public/assets/)
     video: "/assets/mission.mov",
   },
   {
@@ -38,10 +36,9 @@ const mvgoItems = [
       en: "Vision"
     },
     description: {
-      es: "Convertirnos en la empresa líder en remodelación y construcción residencial en South Florida, gracias a nuestra innovación y ética de trabajo.",
-      en: "To become the leading residential remodeling and construction company in South Florida, thanks to our innovation and work ethic."
+      es: "Convertirnos en la empresa líder en remodelación y construcción residencial en South Florida, ofreciendo soluciones innovadoras, sostenibles y eficientes. Visualizamos un futuro en el que cada hogar y negocio cuente con espacios seguros, funcionales y de diseño excepcional.",
+      en: "To become the leading residential remodeling and construction company in South Florida, offering innovative, sustainable, and efficient solutions. We envision a future where every home and business boasts safe, functional, and exceptionally designed spaces."
     },
-    // Vídeo de Visión
     video: "/assets/vision.mov",
   },
   {
@@ -51,10 +48,9 @@ const mvgoItems = [
       en: "Goals"
     },
     description: {
-      es: "Alcanzar la excelencia en cada proyecto, cumpliendo plazos, presupuestos y brindando resultados duraderos que superen las expectativas.",
-      en: "To achieve excellence in every project, meeting deadlines, budgets, and delivering lasting results that exceed expectations."
+      es: "Alcanzar la excelencia en cada proyecto, cumpliendo con plazos y presupuestos acordados, garantizando mano de obra calificada y materiales de primera calidad. Buscamos superar expectativas y construir relaciones de largo plazo con nuestros clientes.",
+      en: "To achieve excellence in every project, meeting agreed timelines and budgets, ensuring qualified labor and top-quality materials. We aim to exceed expectations and build long-term relationships with our clients."
     },
-    // Vídeo de Objetivos
     video: "/assets/goals.mov",
   },
 ];
@@ -62,13 +58,13 @@ const mvgoItems = [
 const translations = {
   es: {
     contactHeading: "¿Listo para discutir tu próximo proyecto?",
-    contactWhatsapp: "WhatsApp",
-    contactEmail: "Correo",
+    whatsapp: "WhatsApp",
+    email: "Correo",
   },
   en: {
     contactHeading: "Ready to discuss your next project?",
-    contactWhatsapp: "WhatsApp",
-    contactEmail: "Email",
+    whatsapp: "WhatsApp",
+    email: "Email",
   },
 };
 
@@ -78,13 +74,13 @@ export default function Home({ language }) {
 
   return (
     <div>
-      {/* --- Hero con vídeo de fondo --- */}
+      {/* Hero con vídeo de fondo */}
       <Hero />
 
-      {/* --- Misión – Visión – Objetivos en zig-zag --- */}
+      {/* Misión – Visión – Objetivos en zig-zag */}
       <section className="py-16 bg-gray-100">
+        {/* Bloque inicial “Nuestra Historia” */}
         <div className="max-w-4xl mx-auto px-4 text-center mb-12">
-          {/* Solo el primer item “foundation” va centrado, sin zig-zag */}
           <h2 className="text-3xl font-bold mb-4">
             {lang === "es" ? mvgoItems[0].title.es : mvgoItems[0].title.en}
           </h2>
@@ -95,9 +91,10 @@ export default function Home({ language }) {
           </p>
         </div>
 
+        {/* Items de MVG (zig-zag con vídeo + texto) */}
         <div className="max-w-6xl mx-auto px-4 space-y-24">
           {mvgoItems.slice(1).map((item, idx) => {
-            const isEven = idx % 2 === 0; // 0,1,2 sobre slice
+            const isEven = idx % 2 === 0;
             return (
               <div
                 key={item.key}
@@ -105,9 +102,8 @@ export default function Home({ language }) {
                   isEven ? "" : "md:flex-row-reverse"
                 }`}
               >
-                {/* Columna de vídeo */}
                 <div className="md:w-1/2">
-                  {item.video ? (
+                  {item.video && (
                     <video
                       src={item.video}
                       className="w-full h-64 object-cover rounded-lg shadow-lg"
@@ -116,10 +112,8 @@ export default function Home({ language }) {
                       loop
                       playsInline
                     />
-                  ) : null}
+                  )}
                 </div>
-
-                {/* Columna de texto */}
                 <div className="md:w-1/2 text-center md:text-left">
                   <h3 className="text-2xl font-semibold mb-4">
                     {lang === "es" ? item.title.es : item.title.en}
@@ -136,7 +130,7 @@ export default function Home({ language }) {
         </div>
       </section>
 
-      {/* --- Llamado a la acción con formulario debajo --- */}
+      {/* Llamado a la acción con formulario */}
       <section className="py-16 bg-white text-center">
         <h2 className="text-3xl font-bold mb-8">{t.contactHeading}</h2>
         <div className="max-w-3xl mx-auto px-4">
@@ -144,7 +138,7 @@ export default function Home({ language }) {
         </div>
       </section>
 
-      {/* --- Pie de página con contacto mínimo (opcional si Footer ya existe) --- */}
+      {/* Pie de página mínimo con íconos */}
       <section className="py-8 bg-gray-100 text-center">
         <div className="flex justify-center items-center gap-6 text-2xl">
           <a
