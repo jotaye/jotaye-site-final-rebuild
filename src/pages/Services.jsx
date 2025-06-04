@@ -70,8 +70,6 @@ export default function Services({ language }) {
           })}
         </div>
       </section>
-
-      {/* Ya no hay carrusel aquí, pues se mostrará en la página de detalle */}
     </div>
   );
 }
