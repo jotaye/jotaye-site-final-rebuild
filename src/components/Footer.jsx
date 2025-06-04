@@ -1,5 +1,6 @@
 // src/components/Footer.jsx
 import React from "react";
+import { FaWhatsapp, FaInstagram, FaFacebook } from "react-icons/fa";
 
 export default function Footer({ language }) {
   const lang = language || "es";
@@ -9,31 +10,51 @@ export default function Footer({ language }) {
         "© " +
         new Date().getFullYear() +
         " Jotaye Group LLC. Todos los derechos reservados.",
-      privacy: "Política de Privacidad",
-      terms: "Términos y Condiciones",
     },
     en: {
       rights:
         "© " +
         new Date().getFullYear() +
         " Jotaye Group LLC. All rights reserved.",
-      privacy: "Privacy Policy",
-      terms: "Terms & Conditions",
     },
   }[lang];
 
   return (
     <footer className="bg-gray-800 text-gray-300 py-8">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-        <p className="text-sm mb-4 md:mb-0">{t.rights}</p>
-        <div className="flex space-x-4">
-          <a href="/privacy" className="hover:text-white transition text-sm">
-            {t.privacy}
+      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center space-y-6">
+        {/* Íconos de redes sociales (centrados) */}
+        <div className="flex space-x-8 text-2xl">
+          <a
+            href="https://wa.me/13054172681"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-green-500 hover:text-green-400 transition"
+            aria-label="WhatsApp"
+          >
+            <FaWhatsapp />
           </a>
-          <a href="/terms" className="hover:text-white transition text-sm">
-            {t.terms}
+          <a
+            href="https://instagram.com/jotayegroup"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-pink-500 hover:text-pink-400 transition"
+            aria-label="Instagram"
+          >
+            <FaInstagram />
+          </a>
+          <a
+            href="https://facebook.com/JotayeGroupLLC"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:text-blue-400 transition"
+            aria-label="Facebook"
+          >
+            <FaFacebook />
           </a>
         </div>
+
+        {/* Derechos reservados */}
+        <p className="text-sm">{t.rights}</p>
       </div>
     </footer>
   );
