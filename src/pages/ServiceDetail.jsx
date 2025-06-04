@@ -12,7 +12,6 @@ export default function ServiceDetail({ language }) {
   const { slug } = useParams();
   const lang = language || "es";
 
-  // Buscar el servicio seleccionado
   const service = services.find((s) => s.slug === slug);
   if (!service) {
     return (
@@ -32,7 +31,7 @@ export default function ServiceDetail({ language }) {
 
   return (
     <div className="bg-white">
-      {/* Sección principal del servicio */}
+      {/* Detalle del servicio */}
       <section className="py-16 bg-gray-100">
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-6">{service.title[lang]}</h2>
@@ -90,7 +89,7 @@ export default function ServiceDetail({ language }) {
         </div>
       </section>
 
-      {/* --- Carrusel DEBAJO DEL DETALLE --- */}
+      {/* Carrusel “Otros Servicios” debajo del detalle */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">
           <h3 className="text-3xl font-bold text-center mb-8">
