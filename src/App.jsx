@@ -16,13 +16,12 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      {/* El header (TopSection) siempre está fijo arriba, h-16 */}
+      {/* Header (TopSection) siempre es h-16 */}
       <TopSection language={lang} onLanguageChange={toggleLang} />
 
       {/*
-        Empujamos todo el contenido 4rem (h-16) hacia abajo: 
-        así no queda espacio en blanco extra y el <main> empieza justo
-        debajo del header.
+        Empujamos TODO el contenido 4 rem (h-16) hacia abajo,
+        de modo que comience justo debajo del header.
       */}
       <div className="pt-16">
         <main>
