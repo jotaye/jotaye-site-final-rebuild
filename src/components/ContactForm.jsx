@@ -1,94 +1,82 @@
 // src/components/ContactForm.jsx
 import React, { useState } from "react";
 
-export default function ContactForm({ language = "es" }) {
-  const [submitted, setSubmitted] = useState(false);
+export default function ContactForm({ language }) {
+  const lang = language || "es";
+  const t = {
+    es: {
+      name: "Nombre",
+      email: "Correo",
+      message: "Mensaje",
+      submit: "Enviar",
+    },
+    en: {
+      name: "Name",
+      email: "Email",
+      message: "Message",
+      submit: "Submit",
+    },
+  }[lang];
 
-  const texts = {
-    title: {
-      es: "Ponte en Contacto con Nosotros",
-      en: "Contact Us",
-    },
-    name: {
-      es: "Nombre completo",
-      en: "Full name",
-    },
-    email: {
-      es: "Correo electrónico",
-      en: "Email address",
-    },
-    phone: {
-      es: "Teléfono",
-      en: "Phone number",
-    },
-    message: {
-      es: "Describe tu proyecto",
-      en: "Describe your project",
-    },
-    submit: {
-      es: "Enviar Solicitud",
-      en: "Send Request",
-    },
-    thankyou: {
-      es: "¡Gracias por tu solicitud! Te contactaremos pronto.",
-      en: "Thank you for your request! We'll contact you soon.",
-    },
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Aquí podrías integrar tu lógica de envío (API, emailjs, etc.)
+    console.log("Form submitted:", formData);
+    alert(lang === "es" ? "¡Gracias por contactarnos!" : "Thanks for contacting us!");
+    setFormData({ name: "", email: "", message: "" });
   };
 
   return (
-    <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md border border-gray-100 fade-in">
-      <h3 className="text-2xl font-bold mb-4 text-center text-gray-800">
-        {texts.title[language]}
-      </h3>
-
-      {!submitted ? (
-        <form
-          action="https://formsubmit.co/jotayegroupllc@gmail.com"
-          method="POST"
-          onSubmit={() => setSubmitted(true)}
-          className="space-y-4"
-        >
-          <input
-            type="text"
-            name="name"
-            placeholder={texts.name[language]}
-            required
-            className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder={texts.email[language]}
-            required
-            className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
-          />
-          <input
-            type="tel"
-            name="phone"
-            placeholder={texts.phone[language]}
-            className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
-          />
-          <textarea
-            name="message"
-            rows={4}
-            placeholder={texts.message[language]}
-            required
-            className="w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
-          ></textarea>
-          <button
-            type="submit"
-            className="bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded transition font-semibold"
-          >
-            {texts.submit[language]}
-          </button>
-          <input type="hidden" name="_next" value="https://www.jotayegroupllc.com/gracias" />
-          <input type="hidden" name="_captcha" value="false" />
-        </form>
-      ) : (
-        <p className="text-green-600 text-center font-semibold">
-          {texts.thankyou[language]}
-        </p>
-      )}
-    </div>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div>
+        <label className="block text-gray-700 mb-2">{t.name}</label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-orange-500"
+        />
+      </div>
+      <div>
+        <label className="block text-gray-700 mb-2">{t.email}</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-orange-500"
+        />
+      </div>
+      <div>
+        <label className="block text-gray-700 mb-2">{t.message}</label>
+        <textarea
+          name="message"
+          rows="5"
+          value={formData.message}
+          onChange={handleChange}
+          required
+          className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:border-orange-500"
+        />
+      </div>
+      <button
+        type="submit"
+        className="bg-orange-600 text-white px-6 py-3 rounded hover:bg-orange-700 transition"
+      >
+        {t.submit}
+      </button>
+    </form>
   );
 }
