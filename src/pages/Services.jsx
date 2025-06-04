@@ -1,7 +1,6 @@
 // src/pages/Services.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import Hero from "../components/Hero";
 import services from "../data/services";
 
 export default function Services({ language }) {
@@ -9,9 +8,6 @@ export default function Services({ language }) {
 
   return (
     <div>
-      {/* Hero idéntico al de Home */}
-      <Hero />
-
       {/* Lista de servicios en zig-zag */}
       <section className="py-16 bg-gray-100">
         <div className="max-w-6xl mx-auto px-4 text-center mb-12">
@@ -30,7 +26,6 @@ export default function Services({ language }) {
                   isEven ? "" : "md:flex-row-reverse"
                 }`}
               >
-                {/* Video o imagen del servicio */}
                 <div className="md:w-1/2">
                   {service.video ? (
                     <video
@@ -49,8 +44,6 @@ export default function Services({ language }) {
                     />
                   )}
                 </div>
-
-                {/* Texto con título, descripción breve y botón “Leer más” */}
                 <div className="md:w-1/2 text-center md:text-left">
                   <h3 className="text-2xl font-semibold mb-4">
                     {service.title[lang]}
