@@ -16,10 +16,10 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      {/* TopSection (fijo en top) */}
+      {/* TopSection (fijo en la parte superior) */}
       <TopSection language={lang} onLanguageChange={toggleLang} />
 
-      {/* Espacio superior igual a la altura de TopSection (h-64) */}
+      {/* Contenedor principal con espacio superior igual a la altura de TopSection */}
       <div className="pt-64">
         <main>
           <Routes>
@@ -33,6 +33,7 @@ export default function App() {
           </Routes>
         </main>
 
+        {/* Footer con íconos centrados */}
         <Footer language={lang} />
       </div>
     </BrowserRouter>
