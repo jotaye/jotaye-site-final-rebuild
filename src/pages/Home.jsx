@@ -10,8 +10,8 @@ const mvgoItems = [
       en: "Our History",
     },
     description: {
-      es: "Jotaye Group LLC se fundó en 2015 con la misión de ofrecer soluciones de construcción innovadoras en el Sur de la Florida. Desde aquel año, hemos crecido basados en la confianza y satisfacción de nuestros clientes.",
-      en: "Jotaye Group LLC was founded in 2015 with the mission to deliver innovative construction solutions in South Florida. Since then, we have grown on the trust and satisfaction of our clients.",
+      es: "Jotaye Group LLC se fundó en 2022 con la misión de ofrecer soluciones de construcción innovadoras en el Sur de la Florida. Desde aquel año, hemos crecido basados en la confianza y satisfacción de nuestros clientes.",
+      en: "Jotaye Group LLC was founded in 2022 with the mission to deliver innovative construction solutions in South Florida. Since then, we have grown on the trust and satisfaction of our clients.",
     },
     video: null,
   },
