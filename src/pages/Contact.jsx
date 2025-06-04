@@ -7,7 +7,7 @@ const translations = {
   es: {
     heading: "Contacto",
     description:
-      "Si desea hablar sobre su próximo proyecto de construcción o realizar consultas sobre empleos futuros, no dude en completar el formulario de consulta (a continuación) o enviarnos un correo electrónico a ",
+      "Si desea hablar sobre su próximo proyecto de construcción, no dude en completar el formulario de consulta (a continuación) o enviarnos un correo electrónico a ",
     emailLabel: "jotayegroupllc@gmail.com",
     orText: " o de manera directa dando clic al icono de ",
     whatsappLabel: "WhatsApp",
@@ -16,7 +16,7 @@ const translations = {
   en: {
     heading: "Contact",
     description:
-      "If you’d like to discuss your next construction project or have questions about future employment, please fill out the form below or email us at ",
+      "If you’d like to discuss your next construction project, please fill out the form below or email us at ",
     emailLabel: "jotayegroupllc@gmail.com",
     orText: " or reach out directly by clicking the ",
     whatsappLabel: "WhatsApp icon",
