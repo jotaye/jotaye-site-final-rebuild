@@ -4,6 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function TopSection({ language, onLanguageChange }) {
+  // useLocation nos indicará en qué ruta estamos:
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -11,12 +12,13 @@ export default function TopSection({ language, onLanguageChange }) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    // Si no estamos en Home, forzamos isScrolled=true para que el header sea h-16 siempre
+    // Si no estamos en Home, forzamos isScrolled = true
     if (!isHome) {
       setIsScrolled(true);
       return;
     }
 
+    // Si estamos en Home, escuchamos scroll para encoger/agrandar
     const handleScroll = () => {
       if (window.scrollY > 80) {
         setIsScrolled(true);
@@ -25,7 +27,10 @@ export default function TopSection({ language, onLanguageChange }) {
       }
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [isHome]);
 
   const lang = language || "es";
@@ -39,39 +44,78 @@ export default function TopSection({ language, onLanguageChange }) {
       className={`
         fixed top-0 left-0 w-full z-30 flex flex-col items-center
         transition-[height,background-color] duration-300 ease-in-out
-        ${isScrolled
-          ? "h-16 bg-white shadow-md"
-          : isHome
-          ? "h-64 md:h-80 lg:h-96 bg-transparent"
-          : "h-16 bg-white shadow-md"
+        ${
+          // Si ya scrolleamos o NO somos Home, el header es pequeño con fondo blanco:
+          isScrolled || !isHome
+            ? "h-16 bg-white shadow-md"
+            : // Si somos Home y no hemos scrolleado, ocupamos toda la sección hero:
+              "h-64 md:h-80 lg:h-96 bg-transparent"
         }
       `}
     >
-      {/* Vídeo de fondo (solo si estamos en Home y no hemos scrolleado) */}
+      {/* ─────────────────────────────────────────────────────────────────────────────
+         Vídeo de fondo y overlay OSCURO: aparece solo en Home y antes de scrollear
+      ───────────────────────────────────────────────────────────────────────────── */}
       {isHome && !isScrolled && (
         <>
           <video
             src="/assets/construccion1.mov"
-            className="absolute inset-0 w-full h-full object-cover opacity-70"
+            className="absolute inset-0 w-full h-full object-cover opacity-100"
             autoPlay
             muted
             loop
             playsInline
           />
-          {/* Capa semitransparente oscura para aumentar contraste */}
-          <div className="absolute inset-0 bg-black/50" />
+          {/* Capa semitransparente de fondo negro para contraste */}
+          <div className="absolute inset-0 bg-black/40" />
         </>
       )}
 
-      {/* Header (logo + menú + idiomas + hamburguesa) */}
+      {/* ─────────────────────────────────────────────────────────────────────────────
+         LOGO SUPERPUESTO: 
+         - En Home y sin scrollear, lo mostramos centrado grande.
+         - Al hacer scroll (o en rutas distintas de “/”), lo reducimos y lo alineamos a la izquierda.
+      ───────────────────────────────────────────────────────────────────────────── */}
+      <div
+        className={`
+          absolute top-0 left-1/2 transform -translate-x-1/2 z-20 
+          transition-[width,height,top,left] duration-300 ease-in-out
+          ${
+            // Si estamos en Home y no hemos scrolleado: logo grande y centrado verticalmente
+            isHome && !isScrolled
+              ? "w-64 md:w-80 lg:w-96 h-auto mt-12"
+              : // Si hemos scrolleado o no somos Home: logo pequeño, alineado a la izquierda
+                "w-24 md:w-28 lg:w-32 h-auto mt-2 left-6 transform-none"
+          }
+        `}
+      >
+        <img
+          src="/assets/logo-header.svg"
+          alt="Jotaye Group LLC"
+          className="w-full h-auto"
+        />
+      </div>
+
+      {/* ─────────────────────────────────────────────────────────────────────────────
+         HEADER (contiene el <nav> y los botones de idioma) 
+      ───────────────────────────────────────────────────────────────────────────── */}
       <header
         className={`
           relative w-full z-40 flex items-center justify-between
           transition-[padding] duration-300 ease-in-out
-          ${isScrolled ? "py-2 px-6" : "py-4 px-6 md:py-6 md:px-8"}
+          ${
+            isScrolled || !isHome
+              ? "py-2 px-6"
+              : "py-4 px-6 md:py-6 md:px-8"
+          }
         `}
       >
-        {/* Logo siempre en la esquina izquierda */}
+        {/* ─────────────────────────────────────────────────────────────────────────
+           LOGO (ESQUINA IZQUIERDA) 
+           → Dado que ya tenemos un <img> del logo absolute superpuesto arriba, 
+             aquí podemos colocar un espacio reservado o incluso comentar el <img>.
+           → Para no duplicar, simplemente dejamos el “ancla” de Inicio sin <img> aquí.
+        ───────────────────────────────────────────────────────────────────────── */}
         <a
           href="/"
           onClick={(e) => {
@@ -80,24 +124,19 @@ export default function TopSection({ language, onLanguageChange }) {
           }}
           className="flex-shrink-0"
         >
-          <img
-            src="/assets/logo-header.svg"
-            alt="Jotaye Group LLC"
-            className={`
-              transition-[height] duration-300 ease-in-out
-              ${isScrolled ? "h-10 md:h-12 lg:h-14" : "h-16 md:h-20 lg:h-24"}
-            `}
-          />
+          {/* ⚠️ No insertamos <img> aquí. El logo se renderiza en la capa absolute arriba. */}
         </a>
 
-        {/* Menú de escritorio */}
+        {/* ─────────────────────────────────────────────────────────────────────────
+           MENÚ DE NAVEGACIÓN (escritorio)
+        ───────────────────────────────────────────────────────────────────────── */}
         <nav
           className={`
             hidden md:flex space-x-8 font-medium transition-colors duration-300 ease-in-out
-            ${isScrolled ? "text-gray-800" : "text-white"}
+            ${isScrolled || !isHome ? "text-gray-800" : "text-white"}
           `}
         >
-          {/* “Inicio/Home” recarga la página (forzando window.location) */}
+          {/* “Inicio” recarga entera */}
           <a
             href="/"
             onClick={(e) => {
@@ -105,12 +144,13 @@ export default function TopSection({ language, onLanguageChange }) {
               window.location.href = "/";
             }}
             className={`
-              ${isScrolled ? "hover:text-orange-600" : "hover:text-orange-300"}
+              ${isScrolled || !isHome ? "hover:text-orange-600" : "hover:text-orange-300"}
               transition
             `}
           >
             {t.home}
           </a>
+
           <NavLink
             to="/services"
             onClick={() => setMenuOpen(false)}
@@ -118,7 +158,7 @@ export default function TopSection({ language, onLanguageChange }) {
               isActive
                 ? "text-orange-600"
                 : `${
-                    isScrolled
+                    isScrolled || !isHome
                       ? "hover:text-orange-600"
                       : "hover:text-orange-300"
                   } transition`
@@ -133,7 +173,7 @@ export default function TopSection({ language, onLanguageChange }) {
               isActive
                 ? "text-orange-600"
                 : `${
-                    isScrolled
+                    isScrolled || !isHome
                       ? "hover:text-orange-600"
                       : "hover:text-orange-300"
                   } transition`
@@ -143,20 +183,22 @@ export default function TopSection({ language, onLanguageChange }) {
           </NavLink>
         </nav>
 
-        {/* Botones de idioma (escritorio) */}
+        {/* ─────────────────────────────────────────────────────────────────────────
+           BOTONES DE IDIOMA (escritorio)
+        ───────────────────────────────────────────────────────────────────────── */}
         <div
           className={`
             hidden md:flex space-x-2 transition-colors duration-300 ease-in-out
-            ${isScrolled ? "text-gray-800" : "text-white"}
+            ${isScrolled || !isHome ? "text-gray-800" : "text-white"}
           `}
         >
           <button
             onClick={() => onLanguageChange("en")}
             className={`
-              px-2 py-1 rounded text-sm
+              px-2 py-1 rounded text-sm 
               ${lang === "en"
                 ? "bg-orange-500 text-white"
-                : isScrolled
+                : isScrolled || !isHome
                 ? "bg-gray-200 text-gray-800"
                 : "bg-white/30 text-white"
               }
@@ -167,10 +209,10 @@ export default function TopSection({ language, onLanguageChange }) {
           <button
             onClick={() => onLanguageChange("es")}
             className={`
-              px-2 py-1 rounded text-sm
+              px-2 py-1 rounded text-sm 
               ${lang === "es"
                 ? "bg-orange-500 text-white"
-                : isScrolled
+                : isScrolled || !isHome
                 ? "bg-gray-200 text-gray-800"
                 : "bg-white/30 text-white"
               }
@@ -180,11 +222,13 @@ export default function TopSection({ language, onLanguageChange }) {
           </button>
         </div>
 
-        {/* Botón hamburguesa (móvil) */}
+        {/* ─────────────────────────────────────────────────────────────────────────
+           MENÚ HAMBURGUESA (móvil)
+        ───────────────────────────────────────────────────────────────────────── */}
         <button
           className={`
             md:hidden text-2xl transition-colors duration-300 ease-in-out
-            ${isScrolled ? "text-gray-800" : "text-white"}
+            ${isScrolled || !isHome ? "text-gray-800" : "text-white"}
           `}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
@@ -193,16 +237,18 @@ export default function TopSection({ language, onLanguageChange }) {
         </button>
       </header>
 
-      {/* Menú móvil desplegable */}
+      {/* ─────────────────────────────────────────────────────────────────────────────
+         MENÚ MÓVIL DESPLEGABLE
+      ───────────────────────────────────────────────────────────────────────────── */}
       {menuOpen && (
         <div
           className={`
             md:hidden w-full transition-opacity duration-300 ease-in-out 
-            ${isScrolled ? "bg-white/90 text-gray-800" : "bg-black/80 text-white"}
+            ${isScrolled || !isHome ? "bg-white/90 text-gray-800" : "bg-black/80 text-white"}
           `}
         >
           <div className="flex flex-col items-center space-y-6 py-4">
-            {/* “Inicio/Home” recarga la página */}
+            {/* “Inicio” recarga en móvil */}
             <a
               href="/"
               onClick={(e) => {
@@ -243,10 +289,10 @@ export default function TopSection({ language, onLanguageChange }) {
                   setMenuOpen(false);
                 }}
                 className={`
-                  px-3 py-1 rounded text-sm
+                  px-3 py-1 rounded text-sm 
                   ${lang === "en"
                     ? "bg-orange-500 text-white"
-                    : isScrolled
+                    : isScrolled || !isHome
                     ? "bg-gray-200 text-gray-800"
                     : "bg-white/30 text-white"
                   }
@@ -260,10 +306,10 @@ export default function TopSection({ language, onLanguageChange }) {
                   setMenuOpen(false);
                 }}
                 className={`
-                  px-3 py-1 rounded text-sm
+                  px-3 py-1 rounded text-sm 
                   ${lang === "es"
                     ? "bg-orange-500 text-white"
-                    : isScrolled
+                    : isScrolled || !isHome
                     ? "bg-gray-200 text-gray-800"
                     : "bg-white/30 text-white"
                   }
