@@ -16,11 +16,11 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      {/* TopSection (fijo en la parte superior) */}
+      {/* TopSection permanece fijo */}
       <TopSection language={lang} onLanguageChange={toggleLang} />
 
-      {/* Contenedor principal con espacio superior igual a la altura de TopSection */}
-      <div className="pt-64">
+      {/* Ajustamos padding-top según la altura real de TopSection en cada breakpoint */}
+      <div className="pt-64 md:pt-80 lg:pt-96">
         <main>
           <Routes>
             <Route path="/" element={<Home language={lang} />} />
@@ -33,7 +33,6 @@ export default function App() {
           </Routes>
         </main>
 
-        {/* Footer con íconos centrados */}
         <Footer language={lang} />
       </div>
     </BrowserRouter>
