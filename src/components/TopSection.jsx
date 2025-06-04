@@ -1,23 +1,21 @@
 // src/components/TopSection.jsx
 import React, { useState, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function TopSection({ language, onLanguageChange }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Detectar scroll para cambiar la apariencia
+  // Detectar scroll para activar/desactivar el "shrink"
   useEffect(() => {
     const handleScroll = () => {
-      // Si desplazamiento vertical mayor a 80px, activar "shrink"
       if (window.scrollY > 80) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -31,83 +29,88 @@ export default function TopSection({ language, onLanguageChange }) {
   return (
     <div
       className={`
-        fixed top-0 left-0 w-full z-30 
-        flex flex-col items-center 
+        fixed top-0 left-0 w-full z-30 flex flex-col items-center
         transition-[height,background-color] duration-300 ease-in-out
         ${isScrolled
-          ? "h-16 bg-white/90 shadow-md"
+          ? "h-16 bg-white shadow-md"
           : "h-64 md:h-80 lg:h-96 bg-transparent"
         }
       `}
+      style={{
+        // Mostrar siempre el logo-header.svg como fondo centrado
+        backgroundImage: "url('/assets/logo-header.svg')",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        // Antes del scroll, ocupa el ancho máximo; tras scroll, tamaño fijo
+        backgroundSize: isScrolled ? "120px" : "contain",
+      }}
     >
-      {/* Vídeo de fondo (solo si NO está “shrinked”) */}
-      {!isScrolled && (
-        <>
-          <video
-            src="/assets/construccion1.mov"
-            className="absolute inset-0 w-full h-full object-cover opacity-60"
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
-          {/* Capa semitransparente para contraste */}
-          <div className="absolute inset-0 bg-black/40"></div>
-        </>
-      )}
+      {/* Vídeo de fondo */}
+      <video
+        src="/assets/construccion1.mov"
+        className={`
+          absolute inset-0 w-full h-full object-cover
+          transition-opacity duration-300 ease-in-out
+          ${isScrolled ? "opacity-0" : "opacity-60"}
+        `}
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
 
-      {/* Contenido fijo (logo + menú) */}
+      {/* Header (menú + idiomas + hamburguesa) */}
       <header
         className={`
-          relative w-full z-40 
+          relative w-full z-40 flex items-center justify-between
           transition-[padding] duration-300 ease-in-out
-          flex items-center justify-between
-          ${isScrolled
-            ? "py-2 px-6"
-            : "py-4 px-6 md:py-6 md:px-8"
-          }
+          ${isScrolled ? "py-2 px-6" : "py-4 px-6 md:py-6 md:px-8"}
         `}
       >
-        {/* Logo SVG (mas grande cuando no está shrinked) */}
-        <Link to="/" onClick={() => setMenuOpen(false)}>
-          <img
-            src="/assets/logo-header.svg"
-            alt="Jotaye Group LLC"
-            className={`
-              transition-[height] duration-300 ease-in-out
-              ${isScrolled
-                ? "h-8 md:h-10 lg:h-12"
-                : "h-14 md:h-16 lg:h-20"
-              }
-            `}
-          />
-        </Link>
+        {/* “Inicio/Home” como <a> para recargar toda la página */}
+        <a
+          href="/"
+          onClick={() => {
+            window.location.href = "/";
+          }}
+          className="flex items-center"
+        >
+          {/* No incluimos <img> aquí, ya usamos el logo como background-image */}
+        </a>
 
         {/* Menú escritorio */}
         <nav
           className={`
-            hidden md:flex space-x-8 font-medium transition-opacity duration-300 ease-in-out
+            hidden md:flex space-x-8 font-medium transition-colors duration-300 ease-in-out
             ${isScrolled ? "text-gray-800" : "text-white"}
           `}
         >
-          <NavLink
-            to="/"
-            onClick={() => setMenuOpen(false)}
-            className={({ isActive }) =>
-              isActive
-                ? "text-orange-600"
-                : `${isScrolled ? "hover:text-orange-600" : "hover:text-orange-300"} transition`
-            }
+          {/* “Inicio/Home” recarga también */}
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "/";
+            }}
+            className={`
+              ${isScrolled ? "hover:text-orange-600" : "hover:text-orange-300"}
+              transition
+            `}
           >
             {t.home}
-          </NavLink>
+          </a>
+
           <NavLink
             to="/services"
             onClick={() => setMenuOpen(false)}
             className={({ isActive }) =>
               isActive
                 ? "text-orange-600"
-                : `${isScrolled ? "hover:text-orange-600" : "hover:text-orange-300"} transition`
+                : `${
+                    isScrolled
+                      ? "hover:text-orange-600"
+                      : "hover:text-orange-300"
+                  } transition`
             }
           >
             {t.services}
@@ -118,17 +121,21 @@ export default function TopSection({ language, onLanguageChange }) {
             className={({ isActive }) =>
               isActive
                 ? "text-orange-600"
-                : `${isScrolled ? "hover:text-orange-600" : "hover:text-orange-300"} transition`
+                : `${
+                    isScrolled
+                      ? "hover:text-orange-600"
+                      : "hover:text-orange-300"
+                  } transition`
             }
           >
             {t.contact}
           </NavLink>
         </nav>
 
-        {/* Botones idioma escritorio */}
+        {/* Botones de idioma (escritorio) */}
         <div
           className={`
-            hidden md:flex space-x-2 transition-opacity duration-300 ease-in-out
+            hidden md:flex space-x-2 transition-colors duration-300 ease-in-out
             ${isScrolled ? "" : "text-white"}
           `}
         >
@@ -179,22 +186,24 @@ export default function TopSection({ language, onLanguageChange }) {
       {menuOpen && (
         <div
           className={`
-            md:hidden w-full transition-[opacity] duration-300 ease-in-out 
+            md:hidden w-full transition-opacity duration-300 ease-in-out 
             ${isScrolled ? "bg-white/90 text-gray-800" : "bg-black/80 text-white"}
           `}
         >
           <div className="flex flex-col items-center space-y-6 py-4">
-            <NavLink
-              to="/"
-              onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-orange-600 text-xl font-medium"
-                  : "hover:text-orange-300 transition text-xl"
-              }
+            {/* “Inicio/Home” recarga también en móvil */}
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                setMenuOpen(false);
+                window.location.href = "/";
+              }}
+              className="hover:text-orange-300 transition text-xl"
             >
               {t.home}
-            </NavLink>
+            </a>
+
             <NavLink
               to="/services"
               onClick={() => setMenuOpen(false)}
