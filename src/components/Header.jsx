@@ -1,6 +1,6 @@
-// src/components/Header.jsx
+// src/components/Header.jsx (variante para recarga entera)
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Header({ language, onLanguageChange }) {
@@ -15,19 +15,20 @@ export default function Header({ language, onLanguageChange }) {
   return (
     <header className="bg-white/80 backdrop-blur-md shadow sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6">
-        {/* Logo */}
-        <Link to="/">
+        {/* Logo envuelto en <a href="/"> para recarga completa */}
+        <a href="/" onClick={() => setMenuOpen(false)}>
           <img
             src="/assets/logo-header.webp"
             alt="Jotaye Group LLC"
             className="h-12 w-auto"
           />
-        </Link>
+        </a>
 
         {/* Enlaces Escritorio */}
         <nav className="hidden md:flex space-x-8 text-gray-800 font-medium">
           <NavLink
             to="/"
+            onClick={() => setMenuOpen(false)}
             className={({ isActive }) =>
               isActive
                 ? "text-orange-600"
@@ -38,6 +39,7 @@ export default function Header({ language, onLanguageChange }) {
           </NavLink>
           <NavLink
             to="/services"
+            onClick={() => setMenuOpen(false)}
             className={({ isActive }) =>
               isActive
                 ? "text-orange-600"
@@ -48,6 +50,7 @@ export default function Header({ language, onLanguageChange }) {
           </NavLink>
           <NavLink
             to="/contact"
+            onClick={() => setMenuOpen(false)}
             className={({ isActive }) =>
               isActive
                 ? "text-orange-600"
