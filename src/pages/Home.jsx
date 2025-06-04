@@ -1,6 +1,5 @@
 // src/pages/Home.jsx
 import React from "react";
-import { FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook } from "react-icons/fa";
 import ContactForm from "../components/ContactForm";
 
 const mvgoItems = [
@@ -57,13 +56,9 @@ const mvgoItems = [
 const translations = {
   es: {
     contactHeading: "¿Listo para discutir tu próximo proyecto?",
-    whatsapp: "WhatsApp",
-    email: "Correo",
   },
   en: {
     contactHeading: "Ready to discuss your next project?",
-    whatsapp: "WhatsApp",
-    email: "Email",
   },
 };
 
@@ -131,46 +126,6 @@ export default function Home({ language }) {
         <h2 className="text-3xl font-bold mb-8">{t.contactHeading}</h2>
         <div className="max-w-3xl mx-auto px-4">
           <ContactForm language={lang} />
-        </div>
-      </section>
-
-      {/* Íconos de contacto al final */}
-      <section className="py-8 bg-gray-100 text-center">
-        <div className="flex justify-center items-center gap-6 text-2xl">
-          <a
-            href="https://wa.me/13054172681"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-green-500"
-            aria-label="WhatsApp"
-          >
-            <FaWhatsapp />
-          </a>
-          <a
-            href="mailto:jotayegroupllc@gmail.com"
-            className="text-blue-500"
-            aria-label="Email"
-          >
-            <FaEnvelope />
-          </a>
-          <a
-            href="https://instagram.com/jotayegroup"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-pink-500"
-            aria-label="Instagram"
-          >
-            <FaInstagram />
-          </a>
-          <a
-            href="https://facebook.com/JotayeGroupLLC"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-700"
-            aria-label="Facebook"
-          >
-            <FaFacebook />
-          </a>
         </div>
       </section>
     </div>
