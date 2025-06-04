@@ -1,14 +1,13 @@
 // src/pages/Home.jsx
 import React from "react";
 import Hero from "../components/Hero";
-import BookForm from "../components/BookForm";       // Ejemplo: formulario “Request a Visit”
-import ContactForm from "../components/ContactForm"; // Formulario de contacto real
-import MissionVision from "../components/MissionVision"; // Zig-zag Misión/Visión/Objetivos (si lo tienes)
+import BookForm from "../components/BookForm";       // Asegúrate de que exista este archivo
+import ContactForm from "../components/ContactForm"; // Asegúrate de que exista este archivo
 
 export default function Home({ language }) {
   const lang = language === "en" ? "en" : "es";
 
-  // Frase para el primer formulario (en Home), en dos líneas:
+  // Texto en dos líneas para el primer formulario (“BookForm”)
   const textBookForm = {
     es: (
       <>
@@ -26,19 +25,19 @@ export default function Home({ language }) {
     ),
   };
 
-  // Frase para el segundo formulario (Contacto), en dos líneas:
+  // Texto en dos líneas para el segundo formulario (“ContactForm”)
   const textContactForm = {
     es: (
       <>
-        ¿Listo para discutir tu próximo proyecto?
-        <br /> Contactanos ahora{" "}
+        ¿Listo para discutir
+        <br /> tu próximo proyecto?{" "}
         <span className="text-orange-600">Contáctanos ahora</span>
       </>
     ),
     en: (
       <>
-        Ready to discuss your next project?
-        <br /> Contact Us Now{" "}
+        Ready to discuss
+        <br /> your next project?{" "}
         <span className="text-orange-600">Contact us now</span>
       </>
     ),
@@ -46,24 +45,16 @@ export default function Home({ language }) {
 
   return (
     <>
-      {/* ──────────────────────────────────────── */}
-      {/* Hero (vídeo o banner) que se mostrará solo en “/” */}
-      {/* ──────────────────────────────────────── */}
+      {/* ────────────────────────────────────────────── */}
+      {/* 1) Hero (Vídeo/banner) – solo se muestra en Home */}
+      {/* ────────────────────────────────────────────── */}
       <Hero language={lang} />
 
-      {/* ──────────────────────────────────────── */}
-      {/* Sección de Misión / Visión / Objetivos (zig-zag) */}
-      {/* Si usas un componente que ya tienes para esto, solo impórtalo y muéstralo aquí */}
-      {/* ──────────────────────────────────────── */}
-      <MissionVision language={lang} />
-
       {/*
-        ────────────────────────────────────────────────
-        Primera sección de formulario (ej. “Request a Visit”)
+        ──────────────────────────────────────────────
+        2) Primera sección de formulario (“BookForm”)
         con texto en dos líneas justo arriba.
-        Aquí usamos BookForm como ejemplo. Si tu formulario se llama diferente,
-        reemplaza “BookForm” por el componente que corresponda.
-      ──────────────────────────────────────────────── */}
+      ────────────────────────────────────────────── */}
       <section className="py-16 bg-white">
         <div className="max-w-3xl mx-auto text-center px-4">
           <h2 className="text-3xl font-bold leading-snug">
@@ -71,16 +62,15 @@ export default function Home({ language }) {
           </h2>
         </div>
         <div className="mt-8">
-          {/* Aquí asumo que BookForm es el primer formulario que ya tenías en Home */}
           <BookForm language={lang} />
         </div>
       </section>
 
       {/*
-        ────────────────────────────────────────────────
-        Segunda sección de formulario: “Contacto”
-        con su texto en doble línea justo arriba.
-      ──────────────────────────────────────────────── */}
+        ──────────────────────────────────────────────
+        3) Segunda sección de formulario (“ContactForm”)
+        con texto en dos líneas justo arriba.
+      ────────────────────────────────────────────── */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto text-center px-4 mb-8">
           <h2 className="text-3xl font-bold leading-snug">
