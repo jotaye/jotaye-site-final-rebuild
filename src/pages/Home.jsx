@@ -68,9 +68,9 @@ export default function Home({ language }) {
 
   return (
     <div>
-      {/* Misión – Visión – Objetivos en zig-zag */}
+      {/* Sección: Historia, Misión, Visión, Objetivos (zig-zag) */}
       <section className="py-16 bg-gray-100">
-        {/* Historia (primer bloque centrado) */}
+        {/* Historia centralizada */}
         <div className="max-w-4xl mx-auto px-4 text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">
             {lang === "es" ? mvgoItems[0].title.es : mvgoItems[0].title.en}
@@ -82,7 +82,7 @@ export default function Home({ language }) {
           </p>
         </div>
 
-        {/* Ítems Misión, Visión, Objetivos */}
+        {/* Bloques de Misión, Visión y Objetivos */}
         <div className="max-w-6xl mx-auto px-4 space-y-24">
           {mvgoItems.slice(1).map((item, idx) => {
             const isEven = idx % 2 === 0;
