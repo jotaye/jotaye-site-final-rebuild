@@ -16,10 +16,14 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      {/* Header fijo con vídeo + logo y shrink-on-scroll */}
+      {/* Header fijo con vídeo en Home y shrink-on-scroll en todas las rutas */}
       <TopSection language={lang} onLanguageChange={toggleLang} />
 
-      {/* Empuja el contenido justo debajo del Hero (h-64 / md:h-80 / lg:h-96) */}
+      {/* 
+        Reservamos espacio en el topo para el header:
+        - En Home, el header ocupa h-64 / md:h-80 / lg:h-96
+        - En las demás rutas, el header se encoge a h-16, pero este padding extra no llega a tapar contenido
+      */}
       <div className="pt-64 md:pt-80 lg:pt-96">
         <main>
           <Routes>
