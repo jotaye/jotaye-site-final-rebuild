@@ -1,6 +1,11 @@
 // src/App.jsx
-import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
 import TopSection from "./components/TopSection";
 import Footer from "./components/Footer";
@@ -11,15 +16,32 @@ import ServiceDetail from "./pages/ServiceDetail";
 import Contact from "./pages/Contact";
 
 /**
- * Contenedor con padding dinámico:
- * - Si la ruta actual es "/", usa pt-64 md:pt-80 lg:pt-96 para empujar
- *   el contenido justo debajo del vídeo (h-64/md:h-80/lg:h-96).
- * - En otras rutas, usa pt-16 para que el contenido arranque bajo el header.
+ * Componente que fuerza scroll al tope (top: 0) cada vez que cambia la ruta.
+ * De esta forma:
+ * - Cuando navegas a /services/:slug, te lleva al inicio de esa página (no al final).
+ * - Cuando regresas a /, te posiciona en el tope, dejando window.scrollY = 0,
+ *   de modo que TopSection detecte !isScrolled y muestre el vídeo.
+ */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    // Forzamos ir al tope de la página (sin suavizado para que isScrolled quede en false inmediatamente).
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [pathname]);
+  return null;
+}
+
+/**
+ * Componente que aplica padding-top dinámico en función de la ruta:
+ * - Si estamos en "/", añade pt-64 md:pt-80 lg:pt-96 para dejar espacio al vídeo de Hero.
+ * - Si estamos en otra ruta, solo aplica pt-16 para dejar espacio al header.
  */
 function ContentWithPadding({ children }) {
-  const location = useLocation();
-  const isHome = location.pathname === "/";
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
 
+  // En Home, aplicamos pt-64 md:pt-80 lg:pt-96.
+  // En cualquier otra ruta, aplicamos pt-16.
   const paddingTop = isHome
     ? "pt-64 md:pt-80 lg:pt-96"
     : "pt-16";
@@ -33,9 +55,17 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      {/* El header (TopSection) se monta siempre arriba */}
+      {/* Cada vez que cambie la ruta, ScrollToTop hará scroll a (0,0). */}
+      <ScrollToTop />
+
+      {/* Header fijo arriba (h-16) */}
       <TopSection language={lang} onLanguageChange={toggleLang} />
 
+      {/* 
+        ContentWithPadding empuja todo el contenido hacia abajo:
+        - En "/" → pt-64 md:pt-80 lg:pt-96 para dejar espacio al vídeo hero.
+        - En otras rutas → pt-16 para dejar espacio al header y nada más.
+      */}
       <ContentWithPadding>
         <main>
           <Routes>
