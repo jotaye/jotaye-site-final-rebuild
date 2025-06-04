@@ -30,15 +30,15 @@ export default function Home({ language }) {
   const textContactForm = {
     es: (
       <>
-        ¿Listo para discutir
-        <br /> tu próximo proyecto?{" "}
+        ¿Listo para discutir tu próximo proyecto?
+        <br /> Contactanos ahora{" "}
         <span className="text-orange-600">Contáctanos ahora</span>
       </>
     ),
     en: (
       <>
-        Ready to discuss
-        <br /> your next project?{" "}
+        Ready to discuss your next project?
+        <br /> Contact Us Now{" "}
         <span className="text-orange-600">Contact us now</span>
       </>
     ),
