@@ -16,10 +16,10 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      {/* TopSection combina Hero + Header */}
+      {/* TopSection (fijo en top) */}
       <TopSection language={lang} onLanguageChange={toggleLang} />
 
-      {/* Contenedor con padding-top igual a la altura de TopSection (h-64) */}
+      {/* Espacio superior igual a la altura de TopSection (h-64) */}
       <div className="pt-64">
         <main>
           <Routes>
