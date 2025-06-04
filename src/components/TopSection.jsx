@@ -11,13 +11,12 @@ export default function TopSection({ language, onLanguageChange }) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    // Si no estamos en Home, forzamos isScrolled = true (header reducido)
+    // Si no estamos en Home, forzamos isScrolled=true para que el vídeo no se muestre.
     if (!isHome) {
       setIsScrolled(true);
       return;
     }
-
-    // Si estamos en Home, escuchamos el scroll para encoger/agrandar
+    // En Home, escuchamos scroll para ocultar/mostrar el vídeo:
     const handleScroll = () => {
       if (window.scrollY > 80) {
         setIsScrolled(true);
@@ -38,11 +37,10 @@ export default function TopSection({ language, onLanguageChange }) {
   return (
     <div className="fixed top-0 left-0 w-full z-30">
       {/*
-        ───────────────────────────────────────────────────
-        Si estamos en Home y NO hemos scrolleado, mostramos
-        el vídeo de fondo a la altura original (h-64 / md:h-80 / lg:h-96),
-        tal como lo tenías antes.
-      ─────────────────────────────────────────────────── */}
+        ────────────────────────────────────────────────────
+        Si estamos en Home y NO hemos scrolleado, renderizamos
+        el vídeo de fondo con altura fija (h-64 / md:h-80 / lg:h-96).
+      ──────────────────────────────────────────────────── */}
       {isHome && !isScrolled && (
         <div className="absolute inset-0 h-64 md:h-80 lg:h-96 w-full">
           <video
@@ -53,33 +51,25 @@ export default function TopSection({ language, onLanguageChange }) {
             loop
             playsInline
           />
-          {/* Capa oscura para contraste (ajusta bg-black/30, /40, etc. si quieres menos o más opacidad) */}
           <div className="absolute inset-0 bg-black/40" />
         </div>
       )}
 
       {/*
-        ───────────────────────────────────────────────────
-        HEADER (altura fija h-16 siempre). 
-        – Si estamos en Home sin scrollear, usamos bg-transparent.
-        – Si hemos scrolleado o no es Home, usamos bg-white + sombra.
-      ─────────────────────────────────────────────────── */}
+        ────────────────────────────────────────────────────
+        HEADER: siempre h-16 (4 rem), con fondo transparente en Home sin scroll,
+        o blanco+ombra en caso de scroll/otras rutas.
+      ──────────────────────────────────────────────────── */}
       <header
         className={`
           relative flex items-center justify-between px-6 h-16 transition-colors duration-300 ease-in-out
-          ${
-            isScrolled || !isHome
-              ? "bg-white shadow-md"
-              : "bg-transparent"
-          }
+          ${isScrolled || !isHome ? "bg-white shadow-md" : "bg-transparent"}
         `}
       >
         {/*
           ─────────────────────────────────────────────────
-          LOGO EN ESQUINA IZQUIERDA, tamaño dinámico:
-          – En Home y sin scroll: “logo central” (w-64 md:w-80 lg:w-96).
-          – En header reducido (scroll o ruta distinta): mantenemos un tamaño fijo menor (w-32).
-          Así recuperamos exactamente el tamaño que antes tenías como logo central.
+          LOGO en esquina izquierda, tamaño fijo w-32:
+          – Siempre w-32, en lugar de cambiar de tamaño dinámicamente.
         ───────────────────────────────────────────────── */}
         <a
           href="/"
@@ -92,14 +82,7 @@ export default function TopSection({ language, onLanguageChange }) {
           <img
             src="/assets/logo-header.svg"
             alt="Jotaye Group LLC"
-            className={`
-              transition-[width] duration-300 ease-in-out
-              ${
-                isHome && !isScrolled
-                  ? "w-64 md:w-80 lg:w-96"
-                  : "w-32"
-              }
-            `}
+            className="w-32 h-auto"
           />
         </a>
 
@@ -113,7 +96,6 @@ export default function TopSection({ language, onLanguageChange }) {
             ${isScrolled || !isHome ? "text-gray-800" : "text-white"}
           `}
         >
-          {/* “Inicio/Home” fuerza recarga completa */}
           <a
             href="/"
             onClick={(e) => {
@@ -127,7 +109,6 @@ export default function TopSection({ language, onLanguageChange }) {
           >
             {t.home}
           </a>
-
           <NavLink
             to="/services"
             onClick={() => setMenuOpen(false)}
@@ -202,7 +183,7 @@ export default function TopSection({ language, onLanguageChange }) {
 
         {/*
           ─────────────────────────────────────────────────
-          MENÚ HAMBURGUESA (móvil)
+          BOTÓN HAMBURGUESA (móvil)
         ───────────────────────────────────────────────── */}
         <button
           className={`
@@ -217,9 +198,9 @@ export default function TopSection({ language, onLanguageChange }) {
       </header>
 
       {/*
-        ───────────────────────────────────────────────────────────────
+        ────────────────────────────────────────────────────────
         MENÚ MÓVIL DESPLEGABLE
-      ─────────────────────────────────────────────────────────────── */}
+      ──────────────────────────────────────────────────────── */}
       {menuOpen && (
         <div
           className={`
@@ -228,7 +209,6 @@ export default function TopSection({ language, onLanguageChange }) {
           `}
         >
           <div className="flex flex-col items-center space-y-6 py-4">
-            {/* “Inicio/Home” recarga */}
             <a
               href="/"
               onClick={(e) => {
