@@ -13,7 +13,7 @@ export default function TopSection({ language, onLanguageChange }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden">
+    <div className="fixed top-0 left-0 w-full h-64 md:h-80 lg:h-96 overflow-hidden z-30">
       {/* Vídeo de fondo */}
       <video
         src="/assets/construccion1.mov"
@@ -28,19 +28,19 @@ export default function TopSection({ language, onLanguageChange }) {
       <div className="absolute inset-0 bg-black/40"></div>
 
       {/* Header combinado (logo + menú) sobre el vídeo */}
-      <header className="absolute top-0 left-0 w-full z-20">
+      <header className="absolute top-0 left-0 w-full z-40">
         <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6">
-          {/* Logo SVG */}
-          <Link to="/" onClick={() => setMenuOpen(false)} className="z-30">
+          {/* Logo SVG — aumentado de tamaño */}
+          <Link to="/" onClick={() => setMenuOpen(false)} className="z-50">
             <img
               src="/assets/logo-header.svg"
               alt="Jotaye Group LLC"
-              className="h-10 md:h-12 lg:h-14"
+              className="h-14 md:h-16 lg:h-20"
             />
           </Link>
 
           {/* Enlaces de navegación (escritorio) */}
-          <nav className="hidden md:flex space-x-8 text-white font-medium z-30">
+          <nav className="hidden md:flex space-x-8 text-white font-medium z-50">
             <NavLink
               to="/"
               onClick={() => setMenuOpen(false)}
@@ -77,7 +77,7 @@ export default function TopSection({ language, onLanguageChange }) {
           </nav>
 
           {/* Botones de idioma (escritorio) */}
-          <div className="hidden md:flex space-x-2 z-30">
+          <div className="hidden md:flex space-x-2 z-50">
             <button
               onClick={() => onLanguageChange("en")}
               className={`px-2 py-1 rounded text-sm ${
@@ -98,7 +98,7 @@ export default function TopSection({ language, onLanguageChange }) {
 
           {/* Botón hamburguesa (móvil) */}
           <button
-            className="md:hidden text-white text-2xl z-30"
+            className="md:hidden text-white text-2xl z-50"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
@@ -108,7 +108,7 @@ export default function TopSection({ language, onLanguageChange }) {
 
         {/* Menú desplegable (móvil) */}
         {menuOpen && (
-          <div className="md:hidden bg-black/70 backdrop-blur-md py-6">
+          <div className="md:hidden bg-black/80 backdrop-blur-md py-6">
             <div className="flex flex-col items-center space-y-6">
               <NavLink
                 to="/"
