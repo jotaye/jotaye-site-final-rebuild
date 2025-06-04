@@ -1,4 +1,3 @@
-// src/components/TopSection.jsx
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
@@ -11,13 +10,27 @@ export default function TopSection({ language, onLanguageChange }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // 1) Cada vez que cambia la ruta, si NO estamos en Home, marcamos isScrolled = true
+  //    para ocultar el vídeo inmediatamente. Si entramos en Home, no lo marcamos aquí.
   useEffect(() => {
-    // Si no estamos en Home, forzamos isScrolled=true para ocultar vídeo
     if (!isHome) {
       setIsScrolled(true);
-      return;
     }
-    // Si estamos en Home, escuchamos scroll para ocultar/mostrar vídeo
+  }, [isHome]);
+
+  // 2) Cada vez que estemos en Home, queremos “resetear” isScrolled a false
+  //    para que el vídeo vuelva a mostrarse. (Si la ruta cambia a "/" entonces isHome=true.)
+  useEffect(() => {
+    if (isHome) {
+      // Forzamos isScrolled=false al entrar en Home
+      setIsScrolled(false);
+    }
+  }, [isHome]);
+
+  // 3) En Home, además, escuchamos el scroll para ocultar/mostrar el vídeo dinámicamente
+  useEffect(() => {
+    if (!isHome) return;
+
     const handleScroll = () => {
       if (window.scrollY > 80) {
         setIsScrolled(true);
@@ -26,6 +39,8 @@ export default function TopSection({ language, onLanguageChange }) {
       }
     };
     window.addEventListener("scroll", handleScroll);
+
+    // Al desmontar o cambiar a otra ruta, limpiamos el listener
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHome]);
 
@@ -35,13 +50,14 @@ export default function TopSection({ language, onLanguageChange }) {
     en: { home: "Home", services: "Services", contact: "Contact" },
   }[lang];
 
+  // Cuando el usuario hace clic en el logo:
+  // - Si YA está en Home, hace scroll suave hasta arriba.
+  // - Si NO está en Home, navegamos a "/" (sin recargar por completo).
   const handleLogoClick = (e) => {
     e.preventDefault();
     if (isHome) {
-      // Si ya estamos en Home → scroll suave
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      // Si no estamos en Home → navegar a "/"
       navigate("/");
     }
     setMenuOpen(false);
@@ -50,8 +66,9 @@ export default function TopSection({ language, onLanguageChange }) {
   return (
     <div className="fixed top-0 left-0 w-full z-30">
       {/*
-        Vídeo de fondo en Home (solo cuando no hay scroll)
-        Altura fija: h-64 md:h-80 lg:h-96
+        Vídeo de fondo en Home:
+        – Solo cuando isHome===true y isScrolled===false.
+        – Altura fija: h-64 md:h-80 lg:h-96
       */}
       {isHome && !isScrolled && (
         <div className="absolute inset-0 h-64 md:h-80 lg:h-96 w-full">
@@ -68,9 +85,9 @@ export default function TopSection({ language, onLanguageChange }) {
       )}
 
       {/*
-        HEADER (altura fija h-16)
-        - Si isScrolled o no es Home → fondo blanco con sombra.
-        - Si isHome y !isScrolled → fondo transparente.
+        HEADER (siempre h-16):
+        – Si isScrolled===true o no estamos en Home, fondo blanco + sombra.
+        – Si isHome===true y isScrolled===false, fondo transparente.
       */}
       <header
         className={`
@@ -78,7 +95,7 @@ export default function TopSection({ language, onLanguageChange }) {
           ${isScrolled || !isHome ? "bg-white shadow-md" : "bg-transparent"}
         `}
       >
-        {/* LOGO en esquina izquierda, ancho fijo w-32 */}
+        {/* LOGO en esquina izquierda, width fijo w-32 */}
         <a href="/" onClick={handleLogoClick} className="flex-shrink-0">
           <img
             src="/assets/logo-header.svg"
