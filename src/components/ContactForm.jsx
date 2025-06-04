@@ -6,8 +6,8 @@ export default function ContactForm({ language = "es" }) {
 
   const texts = {
     title: {
-      es: "¿Listo para discutir tu próximo proyecto?",
-      en: "Ready to discuss your next project?",
+      es: "Ponte en Contacto con Nosotros",
+      en: "Contact Us",
     },
     name: {
       es: "Nombre completo",
