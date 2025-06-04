@@ -12,7 +12,7 @@ export default function ServiceDetail({ language }) {
   const { slug } = useParams();
   const lang = language || "es";
 
-  // Buscar el servicio actual
+  // Buscar el servicio seleccionado
   const service = services.find((s) => s.slug === slug);
   if (!service) {
     return (
@@ -90,7 +90,7 @@ export default function ServiceDetail({ language }) {
         </div>
       </section>
 
-      {/* --- Carrusel de Otros Servicios --- */}
+      {/* --- Carrusel DEBAJO DEL DETALLE --- */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4">
           <h3 className="text-3xl font-bold text-center mb-8">
@@ -110,7 +110,7 @@ export default function ServiceDetail({ language }) {
             }}
           >
             {services
-              .filter((s) => s.slug !== slug) // Excluir el actual
+              .filter((s) => s.slug !== slug)
               .map((other) => (
                 <SwiperSlide key={other.slug}>
                   <Link to={`/services/${other.slug}`}>
