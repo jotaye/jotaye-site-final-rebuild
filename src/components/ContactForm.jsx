@@ -6,8 +6,8 @@ export default function ContactForm({ language = "es" }) {
 
   const texts = {
     title: {
-      es: "Solicita tu Cotización",
-      en: "Request a Quote",
+      es: "¿Listo para discutir tu próximo proyecto?",
+      en: "Ready to discuss your next project?",
     },
     name: {
       es: "Nombre completo",
