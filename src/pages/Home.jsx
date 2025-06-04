@@ -55,10 +55,12 @@ const mvgoItems = [
 
 const translations = {
   es: {
-    contactHeading: "¿Listo para discutir tu próximo proyecto?",
+    contactHeadingLine1: "¿Listo para discutir",
+    contactHeadingLine2: "tu próximo proyecto?",
   },
   en: {
-    contactHeading: "Ready to discuss your next project?",
+    contactHeadingLine1: "Ready to discuss",
+    contactHeadingLine2: "your next project?",
   },
 };
 
@@ -121,9 +123,13 @@ export default function Home({ language }) {
         </div>
       </section>
 
-      {/* Llamado a la acción + Formulario */}
+      {/* Llamado a la acción + Formulario (texto en dos líneas) */}
       <section className="py-16 bg-white text-center">
-        <h2 className="text-3xl font-bold mb-8">{t.contactHeading}</h2>
+        <h2 className="text-3xl font-bold mb-8 leading-snug">
+          {t.contactHeadingLine1}
+          <br />
+          <span className="text-orange-600">{t.contactHeadingLine2}</span>
+        </h2>
         <div className="max-w-3xl mx-auto px-4">
           <ContactForm language={lang} />
         </div>
