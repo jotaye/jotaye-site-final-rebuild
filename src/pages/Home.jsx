@@ -55,10 +55,10 @@ const mvgoItems = [
 
 const translations = {
   es: {
-    contactHeading: "¿Listo para discutir tu próximo proyecto?",
+    contactHeading: "¿Listo para discutir tu próximo proyecto? contactanos ahora",
   },
   en: {
-    contactHeading: "Ready to discuss your next project?",
+    contactHeading: "Ready to discuss your next project? contact us now",
   },
 };
 
