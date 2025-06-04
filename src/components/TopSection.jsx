@@ -14,32 +14,32 @@ export default function TopSection({ language, onLanguageChange }) {
 
   return (
     <div className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden">
-      {/* --- Vídeo de fondo (Hero) --- */}
+      {/* Vídeo de fondo */}
       <video
         src="/assets/construccion1.mov"
-        className="absolute top-0 left-0 w-full h-full object-cover opacity-60"
+        className="absolute inset-0 w-full h-full object-cover opacity-60"
         autoPlay
         muted
         loop
         playsInline
       />
 
-      {/* --- Capa de color oscuro semitransparente (para contraste) --- */}
+      {/* Capa semitransparente para contraste */}
       <div className="absolute inset-0 bg-black/40"></div>
 
-      {/* --- Header sobre el vídeo/fondo --- */}
+      {/* Header combinado (logo + menú) sobre el vídeo */}
       <header className="absolute top-0 left-0 w-full z-20">
         <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6">
-          {/* --- Logo (reemplaza por tu imagen vectorizada cuando la tengas) --- */}
+          {/* Logo SVG */}
           <Link to="/" onClick={() => setMenuOpen(false)} className="z-30">
             <img
-              src="/assets/logo-header.webp"
+              src="/assets/logo-header.svg"
               alt="Jotaye Group LLC"
               className="h-10 md:h-12 lg:h-14"
             />
           </Link>
 
-          {/* --- Enlaces Escritorio --- */}
+          {/* Enlaces de navegación (escritorio) */}
           <nav className="hidden md:flex space-x-8 text-white font-medium z-30">
             <NavLink
               to="/"
@@ -76,7 +76,7 @@ export default function TopSection({ language, onLanguageChange }) {
             </NavLink>
           </nav>
 
-          {/* --- Botones de Idioma Escritorio --- */}
+          {/* Botones de idioma (escritorio) */}
           <div className="hidden md:flex space-x-2 z-30">
             <button
               onClick={() => onLanguageChange("en")}
@@ -96,7 +96,7 @@ export default function TopSection({ language, onLanguageChange }) {
             </button>
           </div>
 
-          {/* --- Icono Hamburguesa Móvil --- */}
+          {/* Botón hamburguesa (móvil) */}
           <button
             className="md:hidden text-white text-2xl z-30"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -106,7 +106,7 @@ export default function TopSection({ language, onLanguageChange }) {
           </button>
         </div>
 
-        {/* --- Menú Móvil desplegable --- */}
+        {/* Menú desplegable (móvil) */}
         {menuOpen && (
           <div className="md:hidden bg-black/70 backdrop-blur-md py-6">
             <div className="flex flex-col items-center space-y-6">
@@ -143,7 +143,6 @@ export default function TopSection({ language, onLanguageChange }) {
               >
                 {t.contact}
               </NavLink>
-              {/* --- Botones de Idioma Móvil --- */}
               <div className="flex space-x-4 mt-4">
                 <button
                   onClick={() => {
@@ -151,7 +150,9 @@ export default function TopSection({ language, onLanguageChange }) {
                     setMenuOpen(false);
                   }}
                   className={`px-3 py-1 rounded text-sm ${
-                    lang === "en" ? "bg-orange-500 text-white" : "bg-white/30 text-white"
+                    lang === "en"
+                      ? "bg-orange-500 text-white"
+                      : "bg-white/30 text-white"
                   }`}
                 >
                   EN
@@ -162,7 +163,9 @@ export default function TopSection({ language, onLanguageChange }) {
                     setMenuOpen(false);
                   }}
                   className={`px-3 py-1 rounded text-sm ${
-                    lang === "es" ? "bg-orange-500 text-white" : "bg-white/30 text-white"
+                    lang === "es"
+                      ? "bg-orange-500 text-white"
+                      : "bg-white/30 text-white"
                   }`}
                 >
                   ES
@@ -172,11 +175,6 @@ export default function TopSection({ language, onLanguageChange }) {
           </div>
         )}
       </header>
-
-      {/* --- (opcional) Centrar contenido “Jotaye Group LLC” en el centro del vídeo, si quisieras agregar texto adicional aquí. */}
-      {/* <div className="absolute inset-0 flex items-center justify-center z-10">
-        <img src="/assets/tu-nuevo-logo-vector.png" alt="Jotaye Group LLC" className="h-16 md:h-20 lg:h-24" />
-      </div> */}
     </div>
   );
 }
