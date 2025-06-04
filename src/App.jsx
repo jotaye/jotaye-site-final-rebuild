@@ -16,10 +16,10 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      {/* TopSection permanece fijo */}
+      {/* Header fijo con vídeo + logo y shrink-on-scroll */}
       <TopSection language={lang} onLanguageChange={toggleLang} />
 
-      {/* Ajustamos padding-top según la altura real de TopSection en cada breakpoint */}
+      {/* Empuja el contenido justo debajo del Hero (h-64 / md:h-80 / lg:h-96) */}
       <div className="pt-64 md:pt-80 lg:pt-96">
         <main>
           <Routes>
@@ -33,6 +33,7 @@ export default function App() {
           </Routes>
         </main>
 
+        {/* Footer con redes sociales y texto de derechos */}
         <Footer language={lang} />
       </div>
     </BrowserRouter>
