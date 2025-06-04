@@ -4,7 +4,6 @@ import { NavLink, useLocation } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function TopSection({ language, onLanguageChange }) {
-  // useLocation nos indicará en qué ruta estamos:
   const location = useLocation();
   const isHome = location.pathname === "/";
 
@@ -12,13 +11,13 @@ export default function TopSection({ language, onLanguageChange }) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    // Si no estamos en Home, forzamos isScrolled = true
+    // Si no estamos en Home, forzamos isScrolled = true para que el header solo tome h-16
     if (!isHome) {
       setIsScrolled(true);
       return;
     }
 
-    // Si estamos en Home, escuchamos scroll para encoger/agrandar
+    // Si estamos en Home, escuchamos al scroll para ocultar/mostrar vídeo
     const handleScroll = () => {
       if (window.scrollY > 80) {
         setIsScrolled(true);
@@ -27,10 +26,7 @@ export default function TopSection({ language, onLanguageChange }) {
       }
     };
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [isHome]);
 
   const lang = language || "es";
@@ -40,82 +36,46 @@ export default function TopSection({ language, onLanguageChange }) {
   }[lang];
 
   return (
-    <div
-      className={`
-        fixed top-0 left-0 w-full z-30 flex flex-col items-center
-        transition-[height,background-color] duration-300 ease-in-out
-        ${
-          // Si ya scrolleamos o NO somos Home, el header es pequeño con fondo blanco:
-          isScrolled || !isHome
-            ? "h-16 bg-white shadow-md"
-            : // Si somos Home y no hemos scrolleado, ocupamos toda la sección hero:
-              "h-64 md:h-80 lg:h-96 bg-transparent"
-        }
-      `}
-    >
-      {/* ─────────────────────────────────────────────────────────────────────────────
-         Vídeo de fondo y overlay OSCURO: aparece solo en Home y antes de scrollear
-      ───────────────────────────────────────────────────────────────────────────── */}
+    <div className="fixed top-0 left-0 w-full z-30">
+      {/* ───────────────────────────────────────────────────
+         Si estamos en Home y NO hemos scrolleado, mostramos
+         el vídeo a pantalla completa (100vh). Cuando
+         scrollea, desaparece y queda solo el header.
+      ─────────────────────────────────────────────────── */}
       {isHome && !isScrolled && (
-        <>
+        <div className="absolute inset-0 h-screen w-full">
           <video
             src="/assets/construccion1.mov"
-            className="absolute inset-0 w-full h-full object-cover opacity-100"
+            className="object-cover w-full h-full"
             autoPlay
             muted
             loop
             playsInline
           />
-          {/* Capa semitransparente de fondo negro para contraste */}
+          {/* Capa oscura para contraste (opacidad al gusto) */}
           <div className="absolute inset-0 bg-black/40" />
-        </>
+        </div>
       )}
 
-      {/* ─────────────────────────────────────────────────────────────────────────────
-         LOGO SUPERPUESTO: 
-         - En Home y sin scrollear, lo mostramos centrado grande.
-         - Al hacer scroll (o en rutas distintas de “/”), lo reducimos y lo alineamos a la izquierda.
-      ───────────────────────────────────────────────────────────────────────────── */}
-      <div
-        className={`
-          absolute top-0 left-1/2 transform -translate-x-1/2 z-20 
-          transition-[width,height,top,left] duration-300 ease-in-out
-          ${
-            // Si estamos en Home y no hemos scrolleado: logo grande y centrado verticalmente
-            isHome && !isScrolled
-              ? "w-64 md:w-80 lg:w-96 h-auto mt-12"
-              : // Si hemos scrolleado o no somos Home: logo pequeño, alineado a la izquierda
-                "w-24 md:w-28 lg:w-32 h-auto mt-2 left-6 transform-none"
-          }
-        `}
-      >
-        <img
-          src="/assets/logo-header.svg"
-          alt="Jotaye Group LLC"
-          className="w-full h-auto"
-        />
-      </div>
-
-      {/* ─────────────────────────────────────────────────────────────────────────────
-         HEADER (contiene el <nav> y los botones de idioma) 
-      ───────────────────────────────────────────────────────────────────────────── */}
+      {/* ───────────────────────────────────────────────────
+         HEADER (altura fija h-16 siempre). 
+         – Tiene fondo transparente si estamos en Home sin scrollear;
+         – Se vuelve blanco con sombra si scrolleamos o no es Home.
+      ─────────────────────────────────────────────────── */}
       <header
         className={`
-          relative w-full z-40 flex items-center justify-between
-          transition-[padding] duration-300 ease-in-out
+          relative flex items-center justify-between px-6 h-16 transition-colors duration-300 ease-in-out
           ${
             isScrolled || !isHome
-              ? "py-2 px-6"
-              : "py-4 px-6 md:py-6 md:px-8"
+              ? "bg-white shadow-md"
+              : "bg-transparent"
           }
         `}
       >
-        {/* ─────────────────────────────────────────────────────────────────────────
-           LOGO (ESQUINA IZQUIERDA) 
-           → Dado que ya tenemos un <img> del logo absolute superpuesto arriba, 
-             aquí podemos colocar un espacio reservado o incluso comentar el <img>.
-           → Para no duplicar, simplemente dejamos el “ancla” de Inicio sin <img> aquí.
-        ───────────────────────────────────────────────────────────────────────── */}
+        {/* ─────────────────────────────────────────────────
+           LOGO EN ESQUINA IZQUIERDA, tamaño fijo (w-32) 
+           – El usuario pidió ese tamaño exacto para el header.
+        ───────────────────────────────────────────────── */}
         <a
           href="/"
           onClick={(e) => {
@@ -124,19 +84,23 @@ export default function TopSection({ language, onLanguageChange }) {
           }}
           className="flex-shrink-0"
         >
-          {/* ⚠️ No insertamos <img> aquí. El logo se renderiza en la capa absolute arriba. */}
+          <img
+            src="/assets/logo-header.svg"
+            alt="Jotaye Group LLC"
+            className="w-32 h-auto"
+          />
         </a>
 
-        {/* ─────────────────────────────────────────────────────────────────────────
-           MENÚ DE NAVEGACIÓN (escritorio)
-        ───────────────────────────────────────────────────────────────────────── */}
+        {/* ─────────────────────────────────────────────────
+           MENÚ DE NAVEGACIÓN (escritorio) 
+        ───────────────────────────────────────────────── */}
         <nav
           className={`
             hidden md:flex space-x-8 font-medium transition-colors duration-300 ease-in-out
             ${isScrolled || !isHome ? "text-gray-800" : "text-white"}
           `}
         >
-          {/* “Inicio” recarga entera */}
+          {/* “Inicio/Home” fuerza recarga completa */}
           <a
             href="/"
             onClick={(e) => {
@@ -150,7 +114,6 @@ export default function TopSection({ language, onLanguageChange }) {
           >
             {t.home}
           </a>
-
           <NavLink
             to="/services"
             onClick={() => setMenuOpen(false)}
@@ -183,9 +146,9 @@ export default function TopSection({ language, onLanguageChange }) {
           </NavLink>
         </nav>
 
-        {/* ─────────────────────────────────────────────────────────────────────────
-           BOTONES DE IDIOMA (escritorio)
-        ───────────────────────────────────────────────────────────────────────── */}
+        {/* ─────────────────────────────────────────────────
+           BOTONES DE IDIOMA (escritorio) 
+        ───────────────────────────────────────────────── */}
         <div
           className={`
             hidden md:flex space-x-2 transition-colors duration-300 ease-in-out
@@ -222,9 +185,9 @@ export default function TopSection({ language, onLanguageChange }) {
           </button>
         </div>
 
-        {/* ─────────────────────────────────────────────────────────────────────────
-           MENÚ HAMBURGUESA (móvil)
-        ───────────────────────────────────────────────────────────────────────── */}
+        {/* ─────────────────────────────────────────────────
+           MENÚ HAMBURGUESA (móvil) 
+        ───────────────────────────────────────────────── */}
         <button
           className={`
             md:hidden text-2xl transition-colors duration-300 ease-in-out
@@ -237,9 +200,9 @@ export default function TopSection({ language, onLanguageChange }) {
         </button>
       </header>
 
-      {/* ─────────────────────────────────────────────────────────────────────────────
-         MENÚ MÓVIL DESPLEGABLE
-      ───────────────────────────────────────────────────────────────────────────── */}
+      {/* ───────────────────────────────────────────────────────────────
+         MENÚ MÓVIL DESPLEGABLE 
+      ─────────────────────────────────────────────────────────────── */}
       {menuOpen && (
         <div
           className={`
@@ -248,7 +211,7 @@ export default function TopSection({ language, onLanguageChange }) {
           `}
         >
           <div className="flex flex-col items-center space-y-6 py-4">
-            {/* “Inicio” recarga en móvil */}
+            {/* “Inicio/Home” recarga */}
             <a
               href="/"
               onClick={(e) => {
