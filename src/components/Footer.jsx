@@ -4,20 +4,10 @@ import { FaWhatsapp, FaInstagram, FaFacebook } from "react-icons/fa";
 
 export default function Footer({ language }) {
   const lang = language || "es";
-  const t = {
-    es: {
-      rights:
-        "© " +
-        new Date().getFullYear() +
-        " Jotaye Group LLC. Todos los derechos reservados.",
-    },
-    en: {
-      rights:
-        "© " +
-        new Date().getFullYear() +
-        " Jotaye Group LLC. All rights reserved.",
-    },
-  }[lang];
+  const textoDerechos =
+    lang === "es"
+      ? `© ${new Date().getFullYear()} Jotaye Group LLC. Todos los derechos reservados.`
+      : `© ${new Date().getFullYear()} Jotaye Group LLC. All rights reserved.`;
 
   return (
     <footer className="bg-gray-800 text-gray-300 py-8">
@@ -54,7 +44,7 @@ export default function Footer({ language }) {
         </div>
 
         {/* Derechos reservados */}
-        <p className="text-sm">{t.rights}</p>
+        <p className="text-sm">{textoDerechos}</p>
       </div>
     </footer>
   );
