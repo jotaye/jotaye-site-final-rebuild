@@ -1,6 +1,6 @@
 // src/App.jsx
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import TopSection from "./components/TopSection";
 import Footer from "./components/Footer";
@@ -16,13 +16,13 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      {/* El header (TopSection) siempre está fijo en la parte superior */}
+      {/* El header (TopSection) siempre está fijo arriba, h-16 */}
       <TopSection language={lang} onLanguageChange={toggleLang} />
 
-      {/* 
-        Empujamos TODO el contenido de la app hacia abajo solo 4rem (h-16), 
-        de modo que el <main> comience inmediatamente debajo del header fijo.
-        Así nunca queda un “hueco extra” en blanco: el header ya ocupa 4rem de alto.
+      {/*
+        Empujamos todo el contenido 4rem (h-16) hacia abajo: 
+        así no queda espacio en blanco extra y el <main> empieza justo
+        debajo del header.
       */}
       <div className="pt-16">
         <main>
