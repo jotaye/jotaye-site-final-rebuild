@@ -87,7 +87,7 @@ export default function Home({ language }) {
           </p>
         </div>
 
-        {/* Misión, Visión, Objetivos en zig-zag */}
+        {/* Ítems Misión, Visión, Objetivos */}
         <div className="max-w-6xl mx-auto px-4 space-y-24">
           {mvgoItems.slice(1).map((item, idx) => {
             const isEven = idx % 2 === 0;
