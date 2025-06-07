@@ -1,3 +1,4 @@
+// src/components/TopSection.jsx
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
@@ -10,38 +11,24 @@ export default function TopSection({ language, onLanguageChange }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // 1) Cada vez que cambia la ruta, si NO estamos en Home, marcamos isScrolled = true
-  //    para ocultar el vídeo inmediatamente. Si entramos en Home, no lo marcamos aquí.
+  // 1) Forzar ocultar vídeo en rutas distintas de Home
   useEffect(() => {
-    if (!isHome) {
-      setIsScrolled(true);
-    }
+    if (!isHome) setIsScrolled(true);
   }, [isHome]);
 
-  // 2) Cada vez que estemos en Home, queremos “resetear” isScrolled a false
-  //    para que el vídeo vuelva a mostrarse. (Si la ruta cambia a "/" entonces isHome=true.)
+  // 2) Resetear isScrolled a false al entrar en Home
   useEffect(() => {
-    if (isHome) {
-      // Forzamos isScrolled=false al entrar en Home
-      setIsScrolled(false);
-    }
+    if (isHome) setIsScrolled(false);
   }, [isHome]);
 
-  // 3) En Home, además, escuchamos el scroll para ocultar/mostrar el vídeo dinámicamente
+  // 3) Escuchar scroll solo en Home
   useEffect(() => {
     if (!isHome) return;
-
-    const handleScroll = () => {
-      if (window.scrollY > 80) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 80);
     };
-    window.addEventListener("scroll", handleScroll);
-
-    // Al desmontar o cambiar a otra ruta, limpiamos el listener
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, [isHome]);
 
   const lang = language || "es";
@@ -50,9 +37,6 @@ export default function TopSection({ language, onLanguageChange }) {
     en: { home: "Home", services: "Services", contact: "Contact" },
   }[lang];
 
-  // Cuando el usuario hace clic en el logo:
-  // - Si YA está en Home, hace scroll suave hasta arriba.
-  // - Si NO está en Home, navegamos a "/" (sin recargar por completo).
   const handleLogoClick = (e) => {
     e.preventDefault();
     if (isHome) {
@@ -64,12 +48,8 @@ export default function TopSection({ language, onLanguageChange }) {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-30">
-      {/*
-        Vídeo de fondo en Home:
-        – Solo cuando isHome===true y isScrolled===false.
-        – Altura fija: h-64 md:h-80 lg:h-96
-      */}
+    <div className="fixed inset-x-0 top-0 z-50">
+      {/* Vídeo hero en Home */}
       {isHome && !isScrolled && (
         <div className="absolute inset-0 h-64 md:h-80 lg:h-96 w-full">
           <video
@@ -84,18 +64,15 @@ export default function TopSection({ language, onLanguageChange }) {
         </div>
       )}
 
-      {/*
-        HEADER (siempre h-16):
-        – Si isScrolled===true o no estamos en Home, fondo blanco + sombra.
-        – Si isHome===true y isScrolled===false, fondo transparente.
-      */}
+      {/* Header siempre absoluto y encima del vídeo */}
       <header
         className={`
-          relative flex items-center justify-between px-6 h-16 transition-colors duration-300 ease-in-out
+          absolute top-0 left-0 w-full flex items-center justify-between
+          px-4 sm:px-6 lg:px-8 h-16 transition-colors duration-300 ease-in-out
           ${isScrolled || !isHome ? "bg-white shadow-md" : "bg-transparent"}
         `}
       >
-        {/* LOGO en esquina izquierda, width fijo w-32 */}
+        {/* Logo */}
         <a href="/" onClick={handleLogoClick} className="flex-shrink-0">
           <img
             src="/assets/logo-header.svg"
@@ -104,10 +81,10 @@ export default function TopSection({ language, onLanguageChange }) {
           />
         </a>
 
-        {/* MENÚ ESCRITORIO */}
+        {/* Menú escritorio */}
         <nav
           className={`
-            hidden md:flex space-x-8 font-medium transition-colors duration-300 ease-in-out
+            hidden md:flex space-x-8 font-medium transition-colors duration-300
             ${isScrolled || !isHome ? "text-gray-800" : "text-white"}
           `}
         >
@@ -115,16 +92,12 @@ export default function TopSection({ language, onLanguageChange }) {
             href="/"
             onClick={(e) => {
               e.preventDefault();
-              if (isHome) {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              } else {
-                navigate("/");
-              }
+              if (isHome) window.scrollTo({ top: 0, behavior: "smooth" });
+              else navigate("/");
             }}
-            className={`
-              ${isScrolled || !isHome ? "hover:text-orange-600" : "hover:text-orange-300"}
-              transition
-            `}
+            className={`transition ${
+              isScrolled || !isHome ? "hover:text-orange-600" : "hover:text-orange-300"
+            }`}
           >
             {t.home}
           </a>
@@ -160,49 +133,44 @@ export default function TopSection({ language, onLanguageChange }) {
           </NavLink>
         </nav>
 
-        {/* BOTONES DE IDIOMA ESCRITORIO */}
+        {/* Botones de idioma escritorio */}
         <div
           className={`
-            hidden md:flex space-x-2 transition-colors duration-300 ease-in-out
+            hidden md:flex space-x-2 transition-colors duration-300
             ${isScrolled || !isHome ? "text-gray-800" : "text-white"}
           `}
         >
           <button
             onClick={() => onLanguageChange("en")}
-            className={`
-              px-2 py-1 rounded text-sm 
-              ${lang === "en"
+            className={`px-2 py-1 rounded text-sm ${
+              lang === "en"
                 ? "bg-orange-500 text-white"
                 : isScrolled || !isHome
                 ? "bg-gray-200 text-gray-800"
                 : "bg-white/30 text-white"
-              }
-            `}
+            }`}
           >
             EN
           </button>
           <button
             onClick={() => onLanguageChange("es")}
-            className={`
-              px-2 py-1 rounded text-sm 
-              ${lang === "es"
+            className={`px-2 py-1 rounded text-sm ${
+              lang === "es"
                 ? "bg-orange-500 text-white"
                 : isScrolled || !isHome
                 ? "bg-gray-200 text-gray-800"
                 : "bg-white/30 text-white"
-              }
-            `}
+            }`}
           >
             ES
           </button>
         </div>
 
-        {/* ÍCONO HAMBURGUESA MÓVIL */}
+        {/* Botón hamburguesa móvil */}
         <button
-          className={`
-            md:hidden text-2xl transition-colors duration-300 ease-in-out
-            ${isScrolled || !isHome ? "text-gray-800" : "text-white"}
-          `}
+          className={`md:hidden text-2xl transition-colors duration-300 ${
+            isScrolled || !isHome ? "text-gray-800" : "text-white"
+          }`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -210,15 +178,12 @@ export default function TopSection({ language, onLanguageChange }) {
         </button>
       </header>
 
-      {/*
-        MENÚ MÓVIL DESPLEGABLE
-      */}
+      {/* Menú móvil desplegable */}
       {menuOpen && (
         <div
-          className={`
-            md:hidden w-full transition-opacity duration-300 ease-in-out 
-            ${isScrolled || !isHome ? "bg-white/90 text-gray-800" : "bg-black/80 text-white"}
-          `}
+          className={`md:hidden w-full absolute top-16 z-40 transition-opacity duration-300 ${
+            isScrolled || !isHome ? "bg-white/90 text-gray-800" : "bg-black/80 text-white"
+          }`}
         >
           <div className="flex flex-col items-center space-y-6 py-4">
             <a
@@ -226,13 +191,10 @@ export default function TopSection({ language, onLanguageChange }) {
               onClick={(e) => {
                 e.preventDefault();
                 setMenuOpen(false);
-                if (isHome) {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                } else {
-                  navigate("/");
-                }
+                if (isHome) window.scrollTo({ top: 0, behavior: "smooth" });
+                else navigate("/");
               }}
-              className="hover:text-orange-300 transition text-xl"
+              className="transition hover:text-orange-300 text-xl"
             >
               {t.home}
             </a>
@@ -242,7 +204,7 @@ export default function TopSection({ language, onLanguageChange }) {
               className={({ isActive }) =>
                 isActive
                   ? "text-orange-600 text-xl font-medium"
-                  : "hover:text-orange-300 transition text-xl"
+                  : "transition hover:text-orange-300 text-xl"
               }
             >
               {t.services}
@@ -253,7 +215,7 @@ export default function TopSection({ language, onLanguageChange }) {
               className={({ isActive }) =>
                 isActive
                   ? "text-orange-600 text-xl font-medium"
-                  : "hover:text-orange-300 transition text-xl"
+                  : "transition hover:text-orange-300 text-xl"
               }
             >
               {t.contact}
@@ -264,15 +226,13 @@ export default function TopSection({ language, onLanguageChange }) {
                   onLanguageChange("en");
                   setMenuOpen(false);
                 }}
-                className={`
-                  px-3 py-1 rounded text-sm 
-                  ${lang === "en"
+                className={`px-3 py-1 rounded text-sm ${
+                  lang === "en"
                     ? "bg-orange-500 text-white"
                     : isScrolled || !isHome
                     ? "bg-gray-200 text-gray-800"
                     : "bg-white/30 text-white"
-                  }
-                `}
+                }`}
               >
                 EN
               </button>
@@ -281,15 +241,13 @@ export default function TopSection({ language, onLanguageChange }) {
                   onLanguageChange("es");
                   setMenuOpen(false);
                 }}
-                className={`
-                  px-3 py-1 rounded text-sm 
-                  ${lang === "es"
+                className={`px-3 py-1 rounded text-sm ${
+                  lang === "es"
                     ? "bg-orange-500 text-white"
                     : isScrolled || !isHome
                     ? "bg-gray-200 text-gray-800"
                     : "bg-white/30 text-white"
-                  }
-                `}
+                }`}
               >
                 ES
               </button>
