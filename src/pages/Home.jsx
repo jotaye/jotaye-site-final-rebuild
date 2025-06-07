@@ -10,8 +10,8 @@ const mvgoItems = [
       en: "Our History",
     },
     description: {
-      es: "Jotaye Group LLC se fundó en 2015 con la misión de ofrecer soluciones de construcción innovadoras en el Sur de la Florida. Desde aquel año, hemos crecido basados en la confianza y satisfacción de nuestros clientes.",
-      en: "Jotaye Group LLC was founded in 2015 with the mission to deliver innovative construction solutions in South Florida. Since then, we have grown on the trust and satisfaction of our clients.",
+      es: "Jotaye Group LLC se fundó en 2022 con la misión de ofrecer soluciones de construcción innovadoras en el Sur de la Florida. Desde aquel año, hemos crecido basados en la confianza y satisfacción de nuestros clientes.",
+      en: "Jotaye Group LLC was founded in 2022 with the mission to deliver innovative construction solutions in South Florida. Since then, we have grown on the trust and satisfaction of our clients.",
     },
     video: null,
   },
@@ -55,12 +55,12 @@ const mvgoItems = [
 
 const translations = {
   es: {
-    contactHeadingLine1: "¿Listo para discutir tu próximo proyecto?",
-    contactHeadingLine2: "Contactanos Ahora",
+    contactHeadingLine1: "¿Listo para discutir",
+    contactHeadingLine2: "tu próximo proyecto?",
   },
   en: {
-    contactHeadingLine1: "Ready to discussyour next project?",
-    contactHeadingLine2: "Contact Us Now",
+    contactHeadingLine1: "Ready to discuss",
+    contactHeadingLine2: "your next project?",
   },
 };
 
@@ -71,13 +71,13 @@ export default function Home({ language }) {
   return (
     <div>
       {/* Sección: Historia, Misión, Visión, Objetivos (zig-zag) */}
-      <section className="py-16 bg-gray-100">
+      <section className="py-16 bg-gray-800">
         {/* Historia centralizada */}
         <div className="max-w-4xl mx-auto px-4 text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-3xl font-bold mb-4 text-gray-100">
             {lang === "es" ? mvgoItems[0].title.es : mvgoItems[0].title.en}
           </h2>
-          <p className="text-gray-700">
+          <p className="text-gray-300">
             {lang === "es"
               ? mvgoItems[0].description.es
               : mvgoItems[0].description.en}
@@ -108,10 +108,10 @@ export default function Home({ language }) {
                   )}
                 </div>
                 <div className="md:w-1/2 text-center md:text-left">
-                  <h3 className="text-2xl font-semibold mb-4">
+                  <h3 className="text-2xl font-semibold mb-4 text-gray-100">
                     {lang === "es" ? item.title.es : item.title.en}
                   </h3>
-                  <p className="text-gray-700">
+                  <p className="text-gray-300">
                     {lang === "es"
                       ? item.description.es
                       : item.description.en}
@@ -124,11 +124,11 @@ export default function Home({ language }) {
       </section>
 
       {/* Llamado a la acción + Formulario (texto en dos líneas) */}
-      <section className="py-16 bg-white text-center">
-        <h2 className="text-3xl font-bold mb-8 leading-snug">
+      <section className="py-16 bg-gray-700 text-center">
+        <h2 className="text-3xl font-bold mb-8 leading-snug text-gray-100">
           {t.contactHeadingLine1}
           <br />
-          <span className="text-orange-600">{t.contactHeadingLine2}</span>
+          <span className="text-orange-400">{t.contactHeadingLine2}</span>
         </h2>
         <div className="max-w-3xl mx-auto px-4">
           <ContactForm language={lang} />
