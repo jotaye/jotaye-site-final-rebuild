@@ -8,77 +8,69 @@ import {
 } from "react-router-dom";
 
 import TopSection from "./components/TopSection";
-import Footer from "./components/Footer";
-
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import ServiceDetail from "./pages/ServiceDetail";
 import Contact from "./pages/Contact";
+import Footer from "./components/Footer";
 
 /**
- * Componente que fuerza scroll al tope (top: 0) cada vez que cambia la ruta.
- * De esta forma:
- * - Cuando navegas a /services/:slug, te lleva al inicio de esa página (no al final).
- * - Cuando regresas a /, te posiciona en el tope, dejando window.scrollY = 0,
- *   de modo que TopSection detecte !isScrolled y muestre el vídeo.
+ * Fuerza scroll-to-top cada vez que cambia de ruta.
  */
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
-    // Forzamos ir al tope de la página (sin suavizado para que isScrolled quede en false inmediatamente).
     window.scrollTo({ top: 0, behavior: "auto" });
   }, [pathname]);
   return null;
 }
 
 /**
- * Componente que aplica padding-top dinámico en función de la ruta:
- * - Si estamos en "/", añade pt-64 md:pt-80 lg:pt-96 para dejar espacio al vídeo de Hero.
- * - Si estamos en otra ruta, solo aplica pt-16 para dejar espacio al header.
+ * Ajusta el padding-top según ruta:
+ * - En Home: espacio para vídeo hero (h-64 md:h-80 lg:h-96).
+ * - En otras rutas: espacio para header (h-16).
  */
 function ContentWithPadding({ children }) {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
-
-  // En Home, aplicamos pt-64 md:pt-80 lg:pt-96.
-  // En cualquier otra ruta, aplicamos pt-16.
-  const paddingTop = isHome
+  const padding = isHome
     ? "pt-64 md:pt-80 lg:pt-96"
     : "pt-16";
-
-  return <div className={paddingTop}>{children}</div>;
+  return <div className={padding}>{children}</div>;
 }
 
 export default function App() {
-  const [lang, setLang] = useState("es");
-  const toggleLang = (desired) => setLang(desired);
+  const [language, setLanguage] = useState("es");
+
+  // Si en móvil (<768px), forzar inglés por defecto
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setLanguage("en");
+    }
+  }, []);
 
   return (
     <BrowserRouter>
-      {/* Cada vez que cambie la ruta, ScrollToTop hará scroll a (0,0). */}
       <ScrollToTop />
 
-      {/* Header fijo arriba (h-16) */}
-      <TopSection language={lang} onLanguageChange={toggleLang} />
+      <TopSection
+        language={language}
+        onLanguageChange={setLanguage}
+      />
 
-      {/* 
-        ContentWithPadding empuja todo el contenido hacia abajo:
-        - En "/" → pt-64 md:pt-80 lg:pt-96 para dejar espacio al vídeo hero.
-        - En otras rutas → pt-16 para dejar espacio al header y nada más.
-      */}
       <ContentWithPadding>
         <main>
           <Routes>
-            <Route path="/" element={<Home language={lang} />} />
-            <Route path="/services" element={<Services language={lang} />} />
+            <Route path="/" element={<Home language={language} />} />
+            <Route path="/services" element={<Services language={language} />} />
             <Route
               path="/services/:slug"
-              element={<ServiceDetail language={lang} />}
+              element={<ServiceDetail language={language} />}
             />
-            <Route path="/contact" element={<Contact language={lang} />} />
+            <Route path="/contact" element={<Contact language={language} />} />
           </Routes>
         </main>
-        <Footer language={lang} />
+        <Footer language={language} />
       </ContentWithPadding>
     </BrowserRouter>
   );
