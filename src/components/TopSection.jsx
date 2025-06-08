@@ -1,5 +1,5 @@
 // src/components/TopSection.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 
@@ -11,22 +11,38 @@ export default function TopSection({ language, onLanguageChange }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // 1) Forzar ocultar vídeo en rutas distintas de Home
-  useEffect(() => {
-    if (!isHome) setIsScrolled(true);
-  }, [isHome]);
+  // --- Lazy-load del Hero video ---
+  const heroRef = useRef(null);
+  const [loadVideo, setLoadVideo] = useState(false);
 
-  // 2) Resetear isScrolled a false al entrar en Home
-  useEffect(() => {
-    if (isHome) setIsScrolled(false);
-  }, [isHome]);
-
-  // 3) Escuchar scroll solo en Home
   useEffect(() => {
     if (!isHome) return;
-    const onScroll = () => {
-      setIsScrolled(window.scrollY > 80);
-    };
+    if ("IntersectionObserver" in window) {
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setLoadVideo(true);
+            obs.disconnect();
+          }
+        },
+        { rootMargin: "200px" }
+      );
+      if (heroRef.current) obs.observe(heroRef.current);
+      return () => obs.disconnect();
+    } else {
+      // Fallback: cargamos inmediatamente
+      setLoadVideo(true);
+    }
+  }, [isHome]);
+
+  // --- Scroll y vídeo/hide logic ---
+  useEffect(() => {
+    if (!isHome) {
+      setIsScrolled(true);
+      return;
+    }
+    setIsScrolled(false);
+    const onScroll = () => setIsScrolled(window.scrollY > 80);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHome]);
@@ -39,32 +55,44 @@ export default function TopSection({ language, onLanguageChange }) {
 
   const handleLogoClick = (e) => {
     e.preventDefault();
-    if (isHome) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      navigate("/");
-    }
+    if (isHome) window.scrollTo({ top: 0, behavior: "smooth" });
+    else navigate("/");
     setMenuOpen(false);
   };
 
   return (
     <div className="fixed inset-x-0 top-0 z-50">
-      {/* Vídeo hero en Home */}
-      {isHome && !isScrolled && (
-        <div className="absolute inset-0 h-64 md:h-80 lg:h-96 w-full">
-          <video
-            src="/assets/construccion1.mov"
+      {/* Hero container (para el observer) */}
+      {isHome && (
+        <div
+          ref={heroRef}
+          className="absolute inset-0 h-64 md:h-80 lg:h-96 w-full"
+        >
+          {/* Poster de baja resolución */}
+          <img
+            src="/assets/construccion1-poster.jpg"
+            alt="Construcción en proceso"
             className="object-cover w-full h-full"
-            autoPlay
-            muted
-            loop
-            playsInline
           />
-          <div className="absolute inset-0 bg-black/40" />
+
+          {/* Vídeo se inyecta solo cuando loadVideo===true */}
+          {loadVideo && (
+            <>
+              <video
+                src="/assets/construccion1.mov"
+                className="absolute inset-0 object-cover w-full h-full"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+              <div className="absolute inset-0 bg-black/40" />
+            </>
+          )}
         </div>
       )}
 
-      {/* Header siempre absoluto y encima del vídeo */}
+      {/* HEADER */}
       <header
         className={`
           absolute top-0 left-0 w-full flex items-center justify-between
@@ -81,7 +109,7 @@ export default function TopSection({ language, onLanguageChange }) {
           />
         </a>
 
-        {/* Menú escritorio */}
+        {/* Nav escritorio */}
         <nav
           className={`
             hidden md:flex space-x-8 font-medium transition-colors duration-300
@@ -96,44 +124,22 @@ export default function TopSection({ language, onLanguageChange }) {
               else navigate("/");
             }}
             className={`transition ${
-              isScrolled || !isHome ? "hover:text-orange-600" : "hover:text-orange-300"
+              isScrolled || !isHome
+                ? "hover:text-orange-600"
+                : "hover:text-orange-300"
             }`}
           >
             {t.home}
           </a>
-          <NavLink
-            to="/services"
-            onClick={() => setMenuOpen(false)}
-            className={({ isActive }) =>
-              isActive
-                ? "text-orange-600"
-                : `${
-                    isScrolled || !isHome
-                      ? "hover:text-orange-600"
-                      : "hover:text-orange-300"
-                  } transition`
-            }
-          >
+          <NavLink to="/services" onClick={() => setMenuOpen(false)}>
             {t.services}
           </NavLink>
-          <NavLink
-            to="/contact"
-            onClick={() => setMenuOpen(false)}
-            className={({ isActive }) =>
-              isActive
-                ? "text-orange-600"
-                : `${
-                    isScrolled || !isHome
-                      ? "hover:text-orange-600"
-                      : "hover:text-orange-300"
-                  } transition`
-            }
-          >
+          <NavLink to="/contact" onClick={() => setMenuOpen(false)}>
             {t.contact}
           </NavLink>
         </nav>
 
-        {/* Botones de idioma escritorio */}
+        {/* Idioma escritorio */}
         <div
           className={`
             hidden md:flex space-x-2 transition-colors duration-300
@@ -166,7 +172,7 @@ export default function TopSection({ language, onLanguageChange }) {
           </button>
         </div>
 
-        {/* Botón hamburguesa móvil */}
+        {/* Móvil: hamburguesa */}
         <button
           className={`md:hidden text-2xl transition-colors duration-300 ${
             isScrolled || !isHome ? "text-gray-800" : "text-white"
@@ -178,11 +184,13 @@ export default function TopSection({ language, onLanguageChange }) {
         </button>
       </header>
 
-      {/* Menú móvil desplegable */}
+      {/* Móvil: menú desplegable */}
       {menuOpen && (
         <div
           className={`md:hidden w-full absolute top-16 z-40 transition-opacity duration-300 ${
-            isScrolled || !isHome ? "bg-white/90 text-gray-800" : "bg-black/80 text-white"
+            isScrolled || !isHome
+              ? "bg-white/90 text-gray-800"
+              : "bg-black/80 text-white"
           }`}
         >
           <div className="flex flex-col items-center space-y-6 py-4">
@@ -198,26 +206,10 @@ export default function TopSection({ language, onLanguageChange }) {
             >
               {t.home}
             </a>
-            <NavLink
-              to="/services"
-              onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-orange-600 text-xl font-medium"
-                  : "transition hover:text-orange-300 text-xl"
-              }
-            >
+            <NavLink to="/services" onClick={() => setMenuOpen(false)}>
               {t.services}
             </NavLink>
-            <NavLink
-              to="/contact"
-              onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-orange-600 text-xl font-medium"
-                  : "transition hover:text-orange-300 text-xl"
-              }
-            >
+            <NavLink to="/contact" onClick={() => setMenuOpen(false)}>
               {t.contact}
             </NavLink>
             <div className="flex space-x-4 mt-4">
