@@ -5,15 +5,10 @@ import ContactForm from "../components/ContactForm";
 const translations = {
   es: {
     heading: "Si desea hablar sobre su próximo proyecto, complete nuestro formulario",
-    emailLine: "O escríbanos a jotayegroupllc@gmail.com",
-    whatsappLine: "o contáctenos por WhatsApp",
-  },
+   },
   en: {
     heading: "If you’d like to discuss your next project, please complete our form",
-    emailLine: "Or email us at jotayegroupllc@gmail.com",
-    whatsappLine: "or reach us via WhatsApp",
-  },
-};
+   };
 
 export default function Contact({ language }) {
   const lang = language || "es";
