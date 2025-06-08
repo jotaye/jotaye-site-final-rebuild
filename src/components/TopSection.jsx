@@ -11,10 +11,11 @@ export default function TopSection({ language, onLanguageChange }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // --- Lazy-load del Hero video ---
+  // Para lazy-load del vídeo
   const heroRef = useRef(null);
   const [loadVideo, setLoadVideo] = useState(false);
 
+  // Observador para cargar vídeo cuando el hero entra en pantalla
   useEffect(() => {
     if (!isHome) return;
     if ("IntersectionObserver" in window) {
@@ -30,12 +31,11 @@ export default function TopSection({ language, onLanguageChange }) {
       if (heroRef.current) obs.observe(heroRef.current);
       return () => obs.disconnect();
     } else {
-      // Fallback: cargamos inmediatamente
       setLoadVideo(true);
     }
   }, [isHome]);
 
-  // --- Scroll y vídeo/hide logic ---
+  // Scroll logic: hide hero en scroll > 80, o fuera de Home
   useEffect(() => {
     if (!isHome) {
       setIsScrolled(true);
@@ -62,20 +62,20 @@ export default function TopSection({ language, onLanguageChange }) {
 
   return (
     <div className="fixed inset-x-0 top-0 z-50">
-      {/* Hero container (para el observer) */}
-      {isHome && (
+      {/* Hero: sólo en Home Y no scrolleado */}
+      {isHome && !isScrolled && (
         <div
           ref={heroRef}
           className="absolute inset-0 h-64 md:h-80 lg:h-96 w-full"
         >
-          {/* Poster de baja resolución */}
+          {/* Poster ligero */}
           <img
             src="/assets/construccion1-poster.jpg"
             alt="Construcción en proceso"
             className="object-cover w-full h-full"
           />
 
-          {/* Vídeo se inyecta solo cuando loadVideo===true */}
+          {/* Vídeo lazy-loaded */}
           {loadVideo && (
             <>
               <video
@@ -92,7 +92,7 @@ export default function TopSection({ language, onLanguageChange }) {
         </div>
       )}
 
-      {/* HEADER */}
+      {/* Header siempre encima del vídeo */}
       <header
         className={`
           absolute top-0 left-0 w-full flex items-center justify-between
@@ -109,7 +109,7 @@ export default function TopSection({ language, onLanguageChange }) {
           />
         </a>
 
-        {/* Nav escritorio */}
+        {/* Menú escritorio */}
         <nav
           className={`
             hidden md:flex space-x-8 font-medium transition-colors duration-300
@@ -131,10 +131,34 @@ export default function TopSection({ language, onLanguageChange }) {
           >
             {t.home}
           </a>
-          <NavLink to="/services" onClick={() => setMenuOpen(false)}>
+          <NavLink
+            to="/services"
+            onClick={() => setMenuOpen(false)}
+            className={({ isActive }) =>
+              isActive
+                ? "text-orange-600"
+                : `${
+                    isScrolled || !isHome
+                      ? "hover:text-orange-600"
+                      : "hover:text-orange-300"
+                  } transition`
+            }
+          >
             {t.services}
           </NavLink>
-          <NavLink to="/contact" onClick={() => setMenuOpen(false)}>
+          <NavLink
+            to="/contact"
+            onClick={() => setMenuOpen(false)}
+            className={({ isActive }) =>
+              isActive
+                ? "text-orange-600"
+                : `${
+                    isScrolled || !isHome
+                      ? "hover:text-orange-600"
+                      : "hover:text-orange-300"
+                  } transition`
+            }
+          >
             {t.contact}
           </NavLink>
         </nav>
@@ -172,7 +196,7 @@ export default function TopSection({ language, onLanguageChange }) {
           </button>
         </div>
 
-        {/* Móvil: hamburguesa */}
+        {/* Botón hamburguesa móvil */}
         <button
           className={`md:hidden text-2xl transition-colors duration-300 ${
             isScrolled || !isHome ? "text-gray-800" : "text-white"
@@ -184,7 +208,7 @@ export default function TopSection({ language, onLanguageChange }) {
         </button>
       </header>
 
-      {/* Móvil: menú desplegable */}
+      {/* Menú móvil desplegable */}
       {menuOpen && (
         <div
           className={`md:hidden w-full absolute top-16 z-40 transition-opacity duration-300 ${
