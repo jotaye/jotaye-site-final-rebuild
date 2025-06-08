@@ -1,6 +1,8 @@
 // src/pages/Home.jsx
 import React from "react";
 import ContactForm from "../components/ContactForm";
+import Testimonials from "../components/Testimonials";
+import FAQ from "../components/FAQ";
 
 const mvgoItems = [
   {
@@ -10,8 +12,8 @@ const mvgoItems = [
       en: "Our History",
     },
     description: {
-      es: "Jotaye Group LLC se fundó en 2022 con la misión de ofrecer soluciones de construcción innovadoras en el Sur de la Florida. Desde aquel año, hemos crecido basados en la confianza y satisfacción de nuestros clientes.",
-      en: "Jotaye Group LLC was founded in 2022 with the mission to deliver innovative construction solutions in South Florida. Since then, we have grown on the trust and satisfaction of our clients.",
+      es: "Jotaye Group LLC se fundó en 2015 con la misión de ofrecer soluciones de construcción innovadoras en el Sur de la Florida. Desde aquel año, hemos crecido basados en la confianza y satisfacción de nuestros clientes.",
+      en: "Jotaye Group LLC was founded in 2015 with the mission to deliver innovative construction solutions in South Florida. Since then, we have grown on the trust and satisfaction of our clients.",
     },
     video: null,
   },
@@ -70,9 +72,8 @@ export default function Home({ language }) {
 
   return (
     <div>
-      {/* Sección: Historia, Misión, Visión, Objetivos (zig-zag) */}
-      <section className="py-16 bg-gray-800">
-        {/* Historia centralizada */}
+      {/* Historia / Misión / Visión / Objetivos */}
+      <section className="py-16 bg-gray-800 text-gray-200">
         <div className="max-w-4xl mx-auto px-4 text-center mb-12">
           <h2 className="text-3xl font-bold mb-4 text-gray-100">
             {lang === "es" ? mvgoItems[0].title.es : mvgoItems[0].title.en}
@@ -83,8 +84,6 @@ export default function Home({ language }) {
               : mvgoItems[0].description.en}
           </p>
         </div>
-
-        {/* Bloques de Misión, Visión y Objetivos */}
         <div className="max-w-6xl mx-auto px-4 space-y-24">
           {mvgoItems.slice(1).map((item, idx) => {
             const isEven = idx % 2 === 0;
@@ -112,9 +111,7 @@ export default function Home({ language }) {
                     {lang === "es" ? item.title.es : item.title.en}
                   </h3>
                   <p className="text-gray-300">
-                    {lang === "es"
-                      ? item.description.es
-                      : item.description.en}
+                    {lang === "es" ? item.description.es : item.description.en}
                   </p>
                 </div>
               </div>
@@ -123,8 +120,14 @@ export default function Home({ language }) {
         </div>
       </section>
 
-      {/* Llamado a la acción + Formulario (texto en dos líneas) */}
-      <section className="py-16 bg-gray-700 text-center">
+      {/* Testimonios */}
+      <Testimonials language={lang} />
+
+      {/* FAQ */}
+      <FAQ language={lang} />
+
+      {/* Llamado a la acción + Formulario */}
+      <section className="py-16 bg-gray-700 text-center text-gray-200">
         <h2 className="text-3xl font-bold mb-8 leading-snug text-gray-100">
           {t.contactHeadingLine1}
           <br />
